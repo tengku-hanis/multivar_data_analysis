@@ -1,16 +1,8 @@
----
-output:
-  pdf_document: default
-  html_document: default
-bibliography: missing-data.bib
-nocite: '@*'
----
-
 # Missing data
 
 ## Introduction
 
-### Background 
+### Background
 
 Missing data data is quite a common issue in research. The causes of missing data should always be investigated and more data should be collected if possible. There are three types of missing data:
 
@@ -18,13 +10,9 @@ Missing data data is quite a common issue in research. The causes of missing dat
 2.  Missing at random (MAR)\
 3.  Missing not at random (MNAR)
 
-<center>
+![Illustration of missing data mechanism for the three types of missing data. X represents an observed variable, Y represents a variable with part of missing values that have been observed, Z represents a cause of missing values and R represents a variable with part of missing values that have been missing.](NAtype.png){width="65%"}
 
-![Illustration of missing data mechanism for the three types of missing data. X represents an observed variable, Y represents a variable with part of missing values that have been observed, Z represents a cause of missing values and R represents a variable with part of missing values that have been missing.](NAtype.png){width=65%}
-
-</center>
-
-Missing data (*R*) is classified as MCAR if the cause of missing data (*Z*) is unrelated to the data (*Y*). For example, medical records that is lost due to flood and laboratory equipment malfunction. In other words, the data is missing totally by chance. We can relate this example to the figure above, the cause, *Z* is not related to the data itself that have been observed, *Y*, but only related to the data that is missing, *R*. MCAR is ideal and more convenient, though MAR is more common and realistic. 
+Missing data (*R*) is classified as MCAR if the cause of missing data (*Z*) is unrelated to the data (*Y*). For example, medical records that is lost due to flood and laboratory equipment malfunction. In other words, the data is missing totally by chance. We can relate this example to the figure above, the cause, *Z* is not related to the data itself that have been observed, *Y*, but only related to the data that is missing, *R*. MCAR is ideal and more convenient, though MAR is more common and realistic.
 
 Missing data (*R*) is said to be MAR if the cause of missing data (*Z*) is related to other observed value (*X*), but not to the variable itself (*Y*). For example, an older person is more likely complete a survey compared to the younger person. So, the missingness is related to age, a variable that has been observed. Similarly, if information on income is more likely to be missing for older individuals as they are more cautious to reveal a sensitive information as opposed to younger individuals. Thus, the missingness is related to age, which should be a variable that we have information on. So, this missingness is considered as MAR. Another example of MAR is missing a certain variable due to the old medical form do not request this information. However, a new updated medical form request this information. As the missingness is not related the variable itself and we have the information whether the patients use an old or a new medical form, we can classify this missingness as MAR. We can see from all the examples that the cause of missing data, *Z* is related to other variable, *X*, but not to the variable itself, *Y* as illustrated in the figure.
 
@@ -85,7 +73,7 @@ True indicates a presence of missing values in our data. Thus, we can further ex
 
 ## Exploring missing data
 
-The total percentage of missing values in our data is 10.7%. 
+The total percentage of missing values in our data is 10.7%.
 
 ```{r}
 prop_miss(coroNA)
@@ -113,8 +101,8 @@ md.pattern(coroNA, rotate.names = TRUE)
 
 Additionally, we can assess the correlation:
 
-1. Between variables with missing values\
-2. Between variables with missing values and variable with non-missing values
+1.  Between variables with missing values\
+2.  Between variables with missing values and variable with non-missing values
 
 First, we need to take variables with missing values only. Then, we code a missing value with 1 and non-missing value with 0.
 
@@ -131,7 +119,7 @@ We assess the correlation between variables with missing values.
 cor(dummyNA) %>% round(digits = 2)
 ```
 
-There is no strong correlation between variables with missing values. We can conclude that the missing values in one variable is not related to the missing values in another variable. 
+There is no strong correlation between variables with missing values. We can conclude that the missing values in one variable is not related to the missing values in another variable.
 
 The second correlation is between variables with missing values and variable with non-missing values. First, we need to change the categorical variable into a numeric value to get a correlation for all the variables.
 
@@ -152,16 +140,16 @@ mcar_test(coroNA)
 
 We going to cover four approaches to handling missing data:
 
-1. Listwise deletion\
-2. Simple imputation:\
+1.  Listwise deletion\
+2.  Simple imputation:\
     -   Mean substitution\
     -   Median substitution\
     -   Mode substitution\
-3. Single imputation:\
-    - Regression imputation\
-    - Stochastic regression imputation\
-    - Decision tree imputation\
-4. Multiple imputation
+3.  Single imputation:\
+    -   Regression imputation\
+    -   Stochastic regression imputation\
+    -   Decision tree imputation\
+4.  Multiple imputation
 
 Each approach has their own caveats which we will cover in each section below.
 
@@ -180,7 +168,7 @@ As shown in the information above (at the bottom), 136 rows or observations were
 
 A simple imputation includes mean, median and mode substitution is a relatively easy approach. In this approach, the missing values is replaced by a mean or median for numerical variable, and mode for categorical variable. This simple imputation approach only appropriate if missing data is MCAR and the amount of missing data is relatively small.
 
-1. Mean substitution
+1.  Mean substitution
 
 `replace_na` will replace the missing values in age with its mean.
 
@@ -192,7 +180,7 @@ mean_sub <-
 summary(mean_sub)
 ```
 
-2. Median substitution
+2.  Median substitution
 
 `replace_na` will replace the missing values in age with its median.
 
@@ -204,7 +192,7 @@ med_sub <-
 summary(med_sub)
 ```
 
-3. Mode substitution
+3.  Mode substitution
 
 We need to find the mode, the most frequent level or group in the variable. In race variable, it is malay.
 
@@ -237,7 +225,7 @@ ini <- mice(coroNA %>% select(-id), m = 1, maxit = 0)
 ini
 ```
 
-By default, `mice()` use predictive mean matching (pmm) for a numerical variable, binary logistic regression (logreg) for a categorical variable with two levels and multinomial or polytomous logistic regression (polyreg) for a categorical variable with more than two level. `mice()` will not assign any method for variable with non-missing values by default (denote by "" in the section of imputation method above). 
+By default, `mice()` use predictive mean matching (pmm) for a numerical variable, binary logistic regression (logreg) for a categorical variable with two levels and multinomial or polytomous logistic regression (polyreg) for a categorical variable with more than two level. `mice()` will not assign any method for variable with non-missing values by default (denote by "" in the section of imputation method above).
 
 We going to change the method for numerical variable (age and chol) to a linear regression.
 
@@ -249,11 +237,11 @@ meth
 
 `mice()` function contains a few arguments:
 
-- `m`: number of imputed sets (will be used in the multiple imputation later)\
-- `method`: to specify a method of imputation\
-- `predictorMatrix`: to specify predictors for imputation\
-- `printFlag`: print history on the R console\
-- `seed`: random number for reproducibility
+-   `m`: number of imputed sets (will be used in the multiple imputation later)\
+-   `method`: to specify a method of imputation\
+-   `predictorMatrix`: to specify predictors for imputation\
+-   `printFlag`: print history on the R console\
+-   `seed`: random number for reproducibility
 
 ```{r}
 regImp <- mice(coroNA %>% select(-id), m = 1, method = meth, printFlag = F, seed = 123)
@@ -262,9 +250,9 @@ regImp
 
 Here, we can see the summary of our imputation model:
 
-1. Number of multiple imputation\
-2. Imputation methods\
-3. PredictorMatrix
+1.  Number of multiple imputation\
+2.  Imputation methods\
+3.  PredictorMatrix
 
 We can further assess the full predictor matrix from the model.
 
@@ -278,12 +266,12 @@ As an example, to impute missing values in age, all of the variables are used as
 
 $$
 \hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_kx_k
-$$
+$$ 
 So, the above equation for imputed age variable in the first row of the predictor matrix will be:
 
 $$
 age = \beta_0 + \beta_1(race) + \beta_2(chol) + \beta_3(cad) + \beta_4(sbp) + \beta_5(dbp) + \beta_6(bmi) + \beta_6(gender)
-$$
+$$ 
 Although it seems that we impute all the missing values in each variable simultaneously, in actuality each imputation model will run separately. So, in our data, on top of the imputation model for age, we have another imputation models for race and chol variables. Fortunately, we do not have to concern much about which variable to be used as a predictor as `mice()` will automatically select the useful predictors for each variables with missing values. Further information on how `mice` do this automatic selection can assessed by typing `quickpred()` in the RStudio console.
 
 We can asses the imputed dataset as follows:
@@ -415,9 +403,9 @@ pool(lr_mi) %>%
 
 Additionally, a model comparison can be done as well. There are three methods available for the model comparison:
 
-1. `D1()`: multivariate Wald test\
-2. `D2()`: pools test statistics from each analysis of the imputed datasets\
-3. `D3()`: likelihood-ratio test statistics
+1.  `D1()`: multivariate Wald test\
+2.  `D2()`: pools test statistics from each analysis of the imputed datasets\
+3.  `D3()`: likelihood-ratio test statistics
 
 `D2()` is less powerful compared to the other two methods.
 
@@ -433,7 +421,7 @@ summary(D2(lr_mi, lr_mi2))
 summary(D3(lr_mi, lr_mi2))
 ```
 
-Also, we get a similar result from the remaining two methods for the model comparison. However, this may not always be the case. Generally, `D1()` and `D3()` are preferred and equally good for a sample size more than 200. However, for a small sample size (n < 200), `D1()` is better. Besides, `D2()` should be used with cautious especially in large datasets with many missing values as it may produce a false positive estimate.
+Also, we get a similar result from the remaining two methods for the model comparison. However, this may not always be the case. Generally, `D1()` and `D3()` are preferred and equally good for a sample size more than 200. However, for a small sample size (n \< 200), `D1()` is better. Besides, `D2()` should be used with cautious especially in large datasets with many missing values as it may produce a false positive estimate.
 
 ## Presentation
 
@@ -443,6 +431,7 @@ Also, we get a similar result from the remaining two methods for the model compa
 tbl_regression(lr_mi2)
 ```
 
-
-## References
-
+---
+nocite: |
+  @heyman2019, @buuren2018, @Zhang2015, @Schafer2002, @kang2013
+---
