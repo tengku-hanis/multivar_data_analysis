@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Missing data | Data Analysis in Medicine and Health using R</title>
+  <meta name="description" content="Chapter 12 Missing data | Data Analysis in Medicine and Health using R" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Missing data | Data Analysis in Medicine and Health using R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/drki_musa/dataanalysis/" />
+  
+  
+  <meta name="github-repo" content="drkamarul/multivar_data_analysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Missing data | Data Analysis in Medicine and Health using R" />
+  
+  
+  
+
+<meta name="author" content="Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mukhtar" />
+
+
+<meta name="date" content="2022-01-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="survival-analysis.html"/>
+<link rel="next" href="references-5.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Analysis in Medicine and Health using R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html"><i class="fa fa-check"></i><b>1</b> Introduction to R, RStudio and RStudio Cloud</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#rstudio-cloud"><i class="fa fa-check"></i><b>1.1</b> RStudio Cloud</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#the-rstudio-cloud-registration"><i class="fa fa-check"></i><b>1.1.1</b> The RStudio Cloud Registration</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#register-and-log-in"><i class="fa fa-check"></i><b>1.1.2</b> Register and log in</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#point-and-click-r-gui"><i class="fa fa-check"></i><b>1.2</b> Point and click R GUI</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#rstudio-server"><i class="fa fa-check"></i><b>1.3</b> RStudio Server</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-r-and-rstudio-on-your-local-machine"><i class="fa fa-check"></i><b>1.4</b> Installing R and RStudio on Your Local Machine</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-r"><i class="fa fa-check"></i><b>1.4.1</b> Installing R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-rstudio-ide"><i class="fa fa-check"></i><b>1.4.2</b> Installing RStudio IDE</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#checking-r-and-rstudio-installations"><i class="fa fa-check"></i><b>1.4.3</b> Checking R and RStudio Installations</a></li>
+<li class="chapter" data-level="1.4.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installation-of-miktex-texlive-and-mactex"><i class="fa fa-check"></i><b>1.4.4</b> Installation of MiKTeX, TeXLive and MacTex</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#starting-your-rstudio"><i class="fa fa-check"></i><b>1.5</b> Starting your RStudio</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#console-tab"><i class="fa fa-check"></i><b>1.5.1</b> Console tab</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#files-plots-packages-help-and-viewer-pane"><i class="fa fa-check"></i><b>1.5.2</b> Files, Plots, Packages, Help and Viewer Pane</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#environment-history-connection-and-build-pane"><i class="fa fa-check"></i><b>1.5.3</b> Environment, History, Connection and Build Pane</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#source-pane"><i class="fa fa-check"></i><b>1.5.4</b> Source Pane</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html"><i class="fa fa-check"></i><b>2</b> R Scripts and R Packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#open-a-new-r-script"><i class="fa fa-check"></i><b>2.1</b> Open a new R script</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#our-first-r-script"><i class="fa fa-check"></i><b>2.1.1</b> Our first R script</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#function-argument-and-parameters"><i class="fa fa-check"></i><b>2.1.2</b> Function, Argument and Parameters</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#need-more-help"><i class="fa fa-check"></i><b>2.1.3</b> Need more help?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#packages-on-cran"><i class="fa fa-check"></i><b>2.2.1</b> Packages on CRAN</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#check-if-the-package-you-need-is-available-in-your-r-library"><i class="fa fa-check"></i><b>2.2.2</b> Check if the package you need is available in your R library</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#install-an-r-package"><i class="fa fa-check"></i><b>2.2.3</b> Install an R package</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#directory"><i class="fa fa-check"></i><b>2.3</b> Directory</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#starting-your-r-job"><i class="fa fa-check"></i><b>2.3.1</b> Starting your R job</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#create-new-project"><i class="fa fa-check"></i><b>2.3.2</b> Create new project</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#where-is-my-data"><i class="fa fa-check"></i><b>2.3.3</b> Where is my data?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#upload-data-to-rstudio-cloud"><i class="fa fa-check"></i><b>2.4</b> Upload data to RStudio Cloud</a></li>
+<li class="chapter" data-level="2.5" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#more-resources-on-rstudio-cloud"><i class="fa fa-check"></i><b>2.5</b> More resources on RStudio Cloud</a></li>
+<li class="chapter" data-level="2.6" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#need-help"><i class="fa fa-check"></i><b>2.6</b> Need help?</a></li>
+<li class="chapter" data-level="2.7" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#bookdown"><i class="fa fa-check"></i><b>2.7</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rstudio-project.html"><a href="rstudio-project.html"><i class="fa fa-check"></i><b>3</b> RStudio Project</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-project.html"><a href="rstudio-project.html#objectives"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="rstudio-project.html"><a href="rstudio-project.html#dataset-repository-on-github"><i class="fa fa-check"></i><b>3.2</b> Dataset repository on GitHub</a></li>
+<li class="chapter" data-level="3.3" data-path="rstudio-project.html"><a href="rstudio-project.html#rstudio-project-on-rstudio-cloud"><i class="fa fa-check"></i><b>3.3</b> RStudio project on RStudio Cloud</a></li>
+<li class="chapter" data-level="3.4" data-path="rstudio-project.html"><a href="rstudio-project.html#rstudio-project-on-local-machine"><i class="fa fa-check"></i><b>3.4</b> RStudio project on local machine</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#history-and-objectives-of-data-visualization"><i class="fa fa-check"></i><b>4.2</b> History and objectives of Data Visualization</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#ingredients-for-good-graphics"><i class="fa fa-check"></i><b>4.3</b> Ingredients for Good Graphics</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#graphics-packages-in-r"><i class="fa fa-check"></i><b>4.4</b> Graphics Packages in R</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#the-ggplot2-package"><i class="fa fa-check"></i><b>4.5</b> The <strong>ggplot2</strong> Package</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#preparation"><i class="fa fa-check"></i><b>4.6</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-visualization.html"><a href="data-visualization.html#create-a-new-rstudio-project"><i class="fa fa-check"></i><b>4.6.1</b> Create a New RStudio Project</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-visualization.html"><a href="data-visualization.html#important-questions-when-making-graphs"><i class="fa fa-check"></i><b>4.6.2</b> Important Questions when Making Graphs</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-visualization.html"><a href="data-visualization.html#read-data"><i class="fa fa-check"></i><b>4.6.3</b> Read Data</a></li>
+<li class="chapter" data-level="4.6.4" data-path="data-visualization.html"><a href="data-visualization.html#load-the-library"><i class="fa fa-check"></i><b>4.6.4</b> Load the Library</a></li>
+<li class="chapter" data-level="4.6.5" data-path="data-visualization.html"><a href="data-visualization.html#read-dataset"><i class="fa fa-check"></i><b>4.6.5</b> Read Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#basic-plots"><i class="fa fa-check"></i><b>4.7</b> Basic Plots</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#adding-another-variable"><i class="fa fa-check"></i><b>4.8</b> Adding another variable</a></li>
+<li class="chapter" data-level="4.9" data-path="data-visualization.html"><a href="data-visualization.html#making-subplots"><i class="fa fa-check"></i><b>4.9</b> Making Subplots</a></li>
+<li class="chapter" data-level="4.10" data-path="data-visualization.html"><a href="data-visualization.html#overlaying-plots"><i class="fa fa-check"></i><b>4.10</b> Overlaying Plots</a></li>
+<li class="chapter" data-level="4.11" data-path="data-visualization.html"><a href="data-visualization.html#combining-different-plots"><i class="fa fa-check"></i><b>4.11</b> Combining Different Plots</a></li>
+<li class="chapter" data-level="4.12" data-path="data-visualization.html"><a href="data-visualization.html#statistical-transformation"><i class="fa fa-check"></i><b>4.12</b> Statistical Transformation</a></li>
+<li class="chapter" data-level="4.13" data-path="data-visualization.html"><a href="data-visualization.html#customizing-title"><i class="fa fa-check"></i><b>4.13</b> Customizing Title</a></li>
+<li class="chapter" data-level="4.14" data-path="data-visualization.html"><a href="data-visualization.html#adjusting-axes"><i class="fa fa-check"></i><b>4.14</b> Adjusting Axes</a></li>
+<li class="chapter" data-level="4.15" data-path="data-visualization.html"><a href="data-visualization.html#choosing-themes"><i class="fa fa-check"></i><b>4.15</b> Choosing Themes</a></li>
+<li class="chapter" data-level="4.16" data-path="data-visualization.html"><a href="data-visualization.html#saving-plots"><i class="fa fa-check"></i><b>4.16</b> Saving Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#definition-of-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> Definition of data wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#data-wrangling-with-dplyr-package"><i class="fa fa-check"></i><b>5.2</b> Data wrangling with <strong>dplyr</strong> package</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-package"><i class="fa fa-check"></i><b>5.2.1</b> <strong>dplyr</strong> package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#common-procedures-for-doing-data-transformation"><i class="fa fa-check"></i><b>5.3</b> Common procedures for doing data transformation</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#some-dplyr-functions"><i class="fa fa-check"></i><b>5.4</b> Some <strong>dplyr</strong> functions</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#create-a-new-project-or-set-your-working-directory"><i class="fa fa-check"></i><b>5.5</b> Create a new project or set your working directory</a></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-libraries"><i class="fa fa-check"></i><b>5.6</b> Load the libraries</a></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#datasets"><i class="fa fa-check"></i><b>5.7</b> Datasets</a></li>
+<li class="chapter" data-level="5.8" data-path="data-wrangling.html"><a href="data-wrangling.html#select-variables-generate-new-variable-and-rename-variable"><i class="fa fa-check"></i><b>5.8</b> Select variables, generate new variable and rename variable</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="data-wrangling.html"><a href="data-wrangling.html#select-variables-using-dplyrselect"><i class="fa fa-check"></i><b>5.8.1</b> Select variables using <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-wrangling.html"><a href="data-wrangling.html#generate-new-variable-using-mutate"><i class="fa fa-check"></i><b>5.8.2</b> Generate new variable using <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.8.3" data-path="data-wrangling.html"><a href="data-wrangling.html#rename-variable-using-rename"><i class="fa fa-check"></i><b>5.8.3</b> Rename variable using <code>rename()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-wrangling.html"><a href="data-wrangling.html#sorting-data-and-select-observation"><i class="fa fa-check"></i><b>5.9</b> Sorting data and select observation</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="data-wrangling.html"><a href="data-wrangling.html#sorting-data-using-arrange"><i class="fa fa-check"></i><b>5.9.1</b> Sorting data using <code>arrange()</code></a></li>
+<li class="chapter" data-level="5.9.2" data-path="data-wrangling.html"><a href="data-wrangling.html#select-observation-using-filter"><i class="fa fa-check"></i><b>5.9.2</b> Select observation using <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="data-wrangling.html"><a href="data-wrangling.html#group-data-and-get-summary-statistics"><i class="fa fa-check"></i><b>5.10</b> Group data and get summary statistics</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-data-using-group_by"><i class="fa fa-check"></i><b>5.10.1</b> Group data using <code>group_by()</code></a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-wrangling.html"><a href="data-wrangling.html#summary-statistic-using-summarize"><i class="fa fa-check"></i><b>5.10.2</b> Summary statistic using <code>summarize()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="data-wrangling.html"><a href="data-wrangling.html#more-complicated-dplyr-verbs"><i class="fa fa-check"></i><b>5.11</b> More complicated <strong>dplyr</strong> verbs</a></li>
+<li class="chapter" data-level="5.12" data-path="data-wrangling.html"><a href="data-wrangling.html#data-transformation-for-categorical-variables"><i class="fa fa-check"></i><b>5.12</b> Data transformation for categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="data-wrangling.html"><a href="data-wrangling.html#forcats-package"><i class="fa fa-check"></i><b>5.12.1</b> <strong>forcats</strong> package</a></li>
+<li class="chapter" data-level="5.12.2" data-path="data-wrangling.html"><a href="data-wrangling.html#conversion-from-numeric-to-factor-variables"><i class="fa fa-check"></i><b>5.12.2</b> Conversion from numeric to factor variables</a></li>
+<li class="chapter" data-level="5.12.3" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding-variables"><i class="fa fa-check"></i><b>5.12.3</b> Recoding variables</a></li>
+<li class="chapter" data-level="5.12.4" data-path="data-wrangling.html"><a href="data-wrangling.html#changing-the-level-of-categorical-variable"><i class="fa fa-check"></i><b>5.12.4</b> Changing the level of categorical variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="data-wrangling.html"><a href="data-wrangling.html#summary"><i class="fa fa-check"></i><b>5.13</b> Summary</a></li>
+<li class="chapter" data-level="5.14" data-path="data-wrangling.html"><a href="data-wrangling.html#self-practice"><i class="fa fa-check"></i><b>5.14</b> Self-practice</a></li>
+<li class="chapter" data-level="5.15" data-path="data-wrangling.html"><a href="data-wrangling.html#references"><i class="fa fa-check"></i><b>5.15</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#motivation"><i class="fa fa-check"></i><b>6.1</b> Motivation</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#what-is-r-markdown"><i class="fa fa-check"></i><b>6.1.1</b> What is R Markdown?</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#why-should-we-bother-learning-r-markdown"><i class="fa fa-check"></i><b>6.1.2</b> Why should we bother learning R Markdown?</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#sources-to-learn-r-markdown"><i class="fa fa-check"></i><b>6.1.3</b> Sources to learn R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>6.2</b> R Markdown Basics</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#install-rmarkdown-package"><i class="fa fa-check"></i><b>6.2.1</b> Install <code>rmarkdown</code> package</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#install-latex-package-for-pdf"><i class="fa fa-check"></i><b>6.2.2</b> Install LaTeX package for PDF</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#new-.rmd-file"><i class="fa fa-check"></i><b>6.2.3</b> New .Rmd file</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#knit-it"><i class="fa fa-check"></i><b>6.2.4</b> Knit it!</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#yaml-header"><i class="fa fa-check"></i><b>6.2.5</b> YAML header</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>6.2.6</b> Code chunks</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#header-levels"><i class="fa fa-check"></i><b>6.2.7</b> Header levels</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#exercise-1"><i class="fa fa-check"></i><b>6.2.8</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#table"><i class="fa fa-check"></i><b>6.3</b> Table</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#basic-table"><i class="fa fa-check"></i><b>6.3.1</b> Basic table</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#table-from-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Table (from data frame)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#more-on-table"><i class="fa fa-check"></i><b>6.3.3</b> More on table</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#plot-figure-and-image"><i class="fa fa-check"></i><b>6.4</b> Plot, figure and image</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#plot-caption-fig.cap"><i class="fa fa-check"></i><b>6.4.1</b> Plot caption – <code>fig.cap</code></a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#plot-size-fig.heightin-inch"><i class="fa fa-check"></i><b>6.4.2</b> Plot size – <code>fig.height</code>(in inch)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#plot-size-fig.width-in-inch"><i class="fa fa-check"></i><b>6.4.3</b> Plot size – <code>fig.width</code> (in inch)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="r-markdown.html"><a href="r-markdown.html#plot-aspect-ratio-fig.asp"><i class="fa fa-check"></i><b>6.4.4</b> Plot aspect ratio – <code>fig.asp</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="r-markdown.html"><a href="r-markdown.html#image"><i class="fa fa-check"></i><b>6.5</b> Image</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="r-markdown.html"><a href="r-markdown.html#exercise-2"><i class="fa fa-check"></i><b>6.5.1</b> Exercise 2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="r-markdown.html"><a href="r-markdown.html#inline-output"><i class="fa fa-check"></i><b>6.6</b> Inline output</a></li>
+<li class="chapter" data-level="6.7" data-path="r-markdown.html"><a href="r-markdown.html#equation"><i class="fa fa-check"></i><b>6.7</b> Equation</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="r-markdown.html"><a href="r-markdown.html#mathematical-equation"><i class="fa fa-check"></i><b>6.7.1</b> Mathematical equation</a></li>
+<li class="chapter" data-level="6.7.2" data-path="r-markdown.html"><a href="r-markdown.html#inline-equation"><i class="fa fa-check"></i><b>6.7.2</b> Inline equation</a></li>
+<li class="chapter" data-level="6.7.3" data-path="r-markdown.html"><a href="r-markdown.html#display-equation"><i class="fa fa-check"></i><b>6.7.3</b> Display equation</a></li>
+<li class="chapter" data-level="6.7.4" data-path="r-markdown.html"><a href="r-markdown.html#exercise-3"><i class="fa fa-check"></i><b>6.7.4</b> Exercise 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html"><i class="fa fa-check"></i><b>7</b> Exploratory data analysis (EDA)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#motivation-1"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#questions-to-ask-before-making-graphs"><i class="fa fa-check"></i><b>7.2</b> Questions to ask before making graphs</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#eda-using-ggplot2-package"><i class="fa fa-check"></i><b>7.3</b> EDA using ggplot2 package</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#usage-of-ggplot2"><i class="fa fa-check"></i><b>7.3.1</b> Usage of <strong>ggplot2</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#loading-the-library"><i class="fa fa-check"></i><b>7.4</b> Loading the library</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#the-dataset"><i class="fa fa-check"></i><b>7.5</b> The dataset</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.6</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#statistics"><i class="fa fa-check"></i><b>7.6.1</b> Statistics</a></li>
+<li class="chapter" data-level="7.6.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#plots"><i class="fa fa-check"></i><b>7.6.2</b> Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#one-variable-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>7.7</b> One variable: Distribution of a categorical variable</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#bar-chart"><i class="fa fa-check"></i><b>7.7.1</b> Bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#one-variable-distribution-of-a-numerical-variable"><i class="fa fa-check"></i><b>7.8</b> One variable: Distribution of a numerical variable</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#histogram"><i class="fa fa-check"></i><b>7.8.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.8.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#density-curve"><i class="fa fa-check"></i><b>7.8.2</b> Density curve</a></li>
+<li class="chapter" data-level="7.8.3" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#histogram-and-density-curve-together"><i class="fa fa-check"></i><b>7.8.3</b> Histogram and density curve together</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#two-variables-plotting-a-numerical-and-a-categorical-variable"><i class="fa fa-check"></i><b>7.9</b> Two variables: Plotting a numerical and a categorical variable</a>
+<ul>
+<li class="chapter" data-level="7.9.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#overlaying-histogramss-and-boxplot"><i class="fa fa-check"></i><b>7.9.1</b> Overlaying histogramss and boxplot</a></li>
+<li class="chapter" data-level="7.9.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#faceting-the-plots"><i class="fa fa-check"></i><b>7.9.2</b> Faceting the plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.10" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#line-plot"><i class="fa fa-check"></i><b>7.10</b> Line plot</a></li>
+<li class="chapter" data-level="7.11" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#plotting-means-and-error-bars"><i class="fa fa-check"></i><b>7.11</b> Plotting means and error bars</a></li>
+<li class="chapter" data-level="7.12" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#scatterplot-with-fit-line"><i class="fa fa-check"></i><b>7.12</b> Scatterplot with fit line</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>8</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-slr"><i class="fa fa-check"></i><b>8.1</b> Simple linear regression (SLR)</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="linear-regression.html"><a href="linear-regression.html#about-slr"><i class="fa fa-check"></i><b>8.1.1</b> About SLR</a></li>
+<li class="chapter" data-level="8.1.2" data-path="linear-regression.html"><a href="linear-regression.html#analysis"><i class="fa fa-check"></i><b>8.1.2</b> Analysis</a></li>
+<li class="chapter" data-level="8.1.3" data-path="linear-regression.html"><a href="linear-regression.html#data-exploration"><i class="fa fa-check"></i><b>8.1.3</b> Data exploration</a></li>
+<li class="chapter" data-level="8.1.4" data-path="linear-regression.html"><a href="linear-regression.html#univariable"><i class="fa fa-check"></i><b>8.1.4</b> Univariable</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-mlr"><i class="fa fa-check"></i><b>8.2</b> Multiple linear regression (MLR)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="linear-regression.html"><a href="linear-regression.html#about-mlr"><i class="fa fa-check"></i><b>8.2.1</b> About MLR</a></li>
+<li class="chapter" data-level="8.2.2" data-path="linear-regression.html"><a href="linear-regression.html#analysis-1"><i class="fa fa-check"></i><b>8.2.2</b> Analysis</a></li>
+<li class="chapter" data-level="8.2.3" data-path="linear-regression.html"><a href="linear-regression.html#multicollinearity-mc"><i class="fa fa-check"></i><b>8.2.3</b> Multicollinearity, MC</a></li>
+<li class="chapter" data-level="8.2.4" data-path="linear-regression.html"><a href="linear-regression.html#interaction"><i class="fa fa-check"></i><b>8.2.4</b> Interaction, *</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="linear-regression.html"><a href="linear-regression.html#model-fit-assessment-residuals"><i class="fa fa-check"></i><b>8.3</b> Model fit assessment: Residuals</a>
+<ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#histogram-1"><i class="fa fa-check"></i>Histogram</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#scatter-plots"><i class="fa fa-check"></i>Scatter plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="linear-regression.html"><a href="linear-regression.html#interpretation-1"><i class="fa fa-check"></i><b>8.4</b> Interpretation</a></li>
+<li class="chapter" data-level="8.5" data-path="linear-regression.html"><a href="linear-regression.html#model-equation-1"><i class="fa fa-check"></i><b>8.5</b> Model equation</a></li>
+<li class="chapter" data-level="8.6" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>8.6</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html"><i class="fa fa-check"></i><b>9</b> Binary Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#background"><i class="fa fa-check"></i><b>9.1.1</b> Background</a></li>
+<li class="chapter" data-level="9.1.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#objectives-1"><i class="fa fa-check"></i><b>9.1.2</b> Objectives</a></li>
+<li class="chapter" data-level="9.1.3" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#further-readings"><i class="fa fa-check"></i><b>9.1.3</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#dataset"><i class="fa fa-check"></i><b>9.2</b> Dataset</a></li>
+<li class="chapter" data-level="9.3" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#the-logit-and-logistic-models"><i class="fa fa-check"></i><b>9.3</b> The logit and logistic models</a></li>
+<li class="chapter" data-level="9.4" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#prepare-environment-for-analysis"><i class="fa fa-check"></i><b>9.4</b> Prepare environment for analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#creating-a-rstudio-project"><i class="fa fa-check"></i><b>9.4.1</b> Creating a RStudio project</a></li>
+<li class="chapter" data-level="9.4.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#loading-libraries"><i class="fa fa-check"></i><b>9.4.2</b> Loading libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#read-data-1"><i class="fa fa-check"></i><b>9.5</b> Read data</a></li>
+<li class="chapter" data-level="9.6" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#explore-data"><i class="fa fa-check"></i><b>9.6</b> Explore data</a></li>
+<li class="chapter" data-level="9.7" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#estimate-the-regression-parameters"><i class="fa fa-check"></i><b>9.7</b> Estimate the regression parameters</a></li>
+<li class="chapter" data-level="9.8" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#simple-binary-logistic-regression"><i class="fa fa-check"></i><b>9.8</b> Simple binary logistic regression</a></li>
+<li class="chapter" data-level="9.9" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#multiple-binary-logistic-regression"><i class="fa fa-check"></i><b>9.9</b> Multiple binary logistic regression</a></li>
+<li class="chapter" data-level="9.10" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#convert-the-log-odds-to-odds-ratio"><i class="fa fa-check"></i><b>9.10</b> Convert the log odds to odds ratio</a></li>
+<li class="chapter" data-level="9.11" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#making-inference"><i class="fa fa-check"></i><b>9.11</b> Making inference</a></li>
+<li class="chapter" data-level="9.12" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#model-comparison"><i class="fa fa-check"></i><b>9.12</b> Model comparison</a></li>
+<li class="chapter" data-level="9.13" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#adding-an-interaction-term"><i class="fa fa-check"></i><b>9.13</b> Adding an interaction term</a></li>
+<li class="chapter" data-level="9.14" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#prediction-from-binary-logistic-regression"><i class="fa fa-check"></i><b>9.14</b> Prediction from binary logistic regression</a>
+<ul>
+<li class="chapter" data-level="9.14.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#predict-the-log-odds"><i class="fa fa-check"></i><b>9.14.1</b> Predict the log odds</a></li>
+<li class="chapter" data-level="9.14.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#predict-the-probabilities"><i class="fa fa-check"></i><b>9.14.2</b> Predict the probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="9.15" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#model-fitness"><i class="fa fa-check"></i><b>9.15</b> Model fitness</a></li>
+<li class="chapter" data-level="9.16" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#presentation"><i class="fa fa-check"></i><b>9.16</b> Presentation</a></li>
+<li class="chapter" data-level="9.17" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#references-1"><i class="fa fa-check"></i><b>9.17</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>10</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="poisson-regression.html"><a href="poisson-regression.html#introduction-2"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-regression.html"><a href="poisson-regression.html#preliminaries"><i class="fa fa-check"></i><b>10.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-regression.html"><a href="poisson-regression.html#load-libraries"><i class="fa fa-check"></i><b>10.2.1</b> Load libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-regression.html"><a href="poisson-regression.html#simple-poisson-regression-models"><i class="fa fa-check"></i><b>10.3</b> Simple Poisson regression models</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#count-data"><i class="fa fa-check"></i><b>10.3.1</b> Count data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="poisson-regression.html"><a href="poisson-regression.html#rate-data"><i class="fa fa-check"></i><b>10.4</b> Rate data</a></li>
+<li class="chapter" data-level="10.5" data-path="poisson-regression.html"><a href="poisson-regression.html#multiple-poisson-regression-model"><i class="fa fa-check"></i><b>10.5</b> Multiple Poisson regression model</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="poisson-regression.html"><a href="poisson-regression.html#univariable-1"><i class="fa fa-check"></i><b>10.5.1</b> Univariable</a></li>
+<li class="chapter" data-level="10.5.2" data-path="poisson-regression.html"><a href="poisson-regression.html#multivariable-1"><i class="fa fa-check"></i><b>10.5.2</b> Multivariable</a></li>
+<li class="chapter" data-level="10.5.3" data-path="poisson-regression.html"><a href="poisson-regression.html#interaction-1"><i class="fa fa-check"></i><b>10.5.3</b> Interaction</a></li>
+<li class="chapter" data-level="10.5.4" data-path="poisson-regression.html"><a href="poisson-regression.html#final-model"><i class="fa fa-check"></i><b>10.5.4</b> Final model</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="poisson-regression.html"><a href="poisson-regression.html#references-2"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis.html"><a href="survival-analysis.html#introduction-3"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="survival-analysis.html"><a href="survival-analysis.html#background-1"><i class="fa fa-check"></i><b>11.1.1</b> Background</a></li>
+<li class="chapter" data-level="11.1.2" data-path="survival-analysis.html"><a href="survival-analysis.html#types-of-survival-analysis"><i class="fa fa-check"></i><b>11.1.2</b> Types of survival analysis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="survival-analysis.html"><a href="survival-analysis.html#objectives-2"><i class="fa fa-check"></i><b>11.1.3</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="survival-analysis.html"><a href="survival-analysis.html#prepare-environment-for-analysis-1"><i class="fa fa-check"></i><b>11.2</b> Prepare environment for analysis</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="survival-analysis.html"><a href="survival-analysis.html#rstudio-project-1"><i class="fa fa-check"></i><b>11.2.1</b> RStudio project</a></li>
+<li class="chapter" data-level="11.2.2" data-path="survival-analysis.html"><a href="survival-analysis.html#packages-1"><i class="fa fa-check"></i><b>11.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="survival-analysis.html"><a href="survival-analysis.html#data"><i class="fa fa-check"></i><b>11.3</b> Data</a></li>
+<li class="chapter" data-level="11.4" data-path="survival-analysis.html"><a href="survival-analysis.html#exploratory-data"><i class="fa fa-check"></i><b>11.4</b> Exploratory data</a></li>
+<li class="chapter" data-level="11.5" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-survival-estimates"><i class="fa fa-check"></i><b>11.5</b> Kaplan-Meier survival estimates</a></li>
+<li class="chapter" data-level="11.6" data-path="survival-analysis.html"><a href="survival-analysis.html#plot-the-survival-probability"><i class="fa fa-check"></i><b>11.6</b> Plot the survival probability</a></li>
+<li class="chapter" data-level="11.7" data-path="survival-analysis.html"><a href="survival-analysis.html#comparing-kaplan-meier-estimates-across-groups"><i class="fa fa-check"></i><b>11.7</b> Comparing Kaplan-Meier estimates across groups</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#log-rank-test"><i class="fa fa-check"></i><b>11.7.1</b> Log-rank test</a></li>
+<li class="chapter" data-level="11.7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#peto-peto-test"><i class="fa fa-check"></i><b>11.7.2</b> peto-peto test</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="survival-analysis.html"><a href="survival-analysis.html#semi-parametric-models-in-survival-analysis"><i class="fa fa-check"></i><b>11.8</b> Semi-parametric models in survival analysis</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazard-regression"><i class="fa fa-check"></i><b>11.8.1</b> Cox proportional hazard regression</a></li>
+<li class="chapter" data-level="11.8.2" data-path="survival-analysis.html"><a href="survival-analysis.html#advantages-of-the-cox-proportional-hazard-regression"><i class="fa fa-check"></i><b>11.8.2</b> Advantages of the Cox proportional hazard regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="survival-analysis.html"><a href="survival-analysis.html#estimation-from-cox-proportional-hazards-regression"><i class="fa fa-check"></i><b>11.9</b> Estimation from Cox proportional hazards regression</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="survival-analysis.html"><a href="survival-analysis.html#simple-cox-ph-regression"><i class="fa fa-check"></i><b>11.9.1</b> Simple Cox PH regression</a></li>
+<li class="chapter" data-level="11.9.2" data-path="survival-analysis.html"><a href="survival-analysis.html#multiple-cox-ph-regression"><i class="fa fa-check"></i><b>11.9.2</b> Multiple Cox PH regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.10" data-path="survival-analysis.html"><a href="survival-analysis.html#inference"><i class="fa fa-check"></i><b>11.10</b> Inference</a></li>
+<li class="chapter" data-level="11.11" data-path="survival-analysis.html"><a href="survival-analysis.html#adding-interaction-in-the-model"><i class="fa fa-check"></i><b>11.11</b> Adding interaction in the model</a></li>
+<li class="chapter" data-level="11.12" data-path="survival-analysis.html"><a href="survival-analysis.html#the-proportional-hazard-assumption"><i class="fa fa-check"></i><b>11.12</b> The proportional hazard assumption</a>
+<ul>
+<li class="chapter" data-level="11.12.1" data-path="survival-analysis.html"><a href="survival-analysis.html#risk-constant-over-time"><i class="fa fa-check"></i><b>11.12.1</b> Risk constant over time</a></li>
+<li class="chapter" data-level="11.12.2" data-path="survival-analysis.html"><a href="survival-analysis.html#test-for-ph-assumption"><i class="fa fa-check"></i><b>11.12.2</b> Test for PH assumption</a></li>
+<li class="chapter" data-level="11.12.3" data-path="survival-analysis.html"><a href="survival-analysis.html#plots-to-assess-ph-assumption"><i class="fa fa-check"></i><b>11.12.3</b> Plots to assess PH assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="11.13" data-path="survival-analysis.html"><a href="survival-analysis.html#model-checking"><i class="fa fa-check"></i><b>11.13</b> Model checking</a>
+<ul>
+<li class="chapter" data-level="11.13.1" data-path="survival-analysis.html"><a href="survival-analysis.html#prediction-from-cox-ph-model"><i class="fa fa-check"></i><b>11.13.1</b> Prediction from Cox PH model</a></li>
+<li class="chapter" data-level="11.13.2" data-path="survival-analysis.html"><a href="survival-analysis.html#residuas-from-cox-ph-model"><i class="fa fa-check"></i><b>11.13.2</b> Residuas from Cox PH model</a></li>
+<li class="chapter" data-level="11.13.3" data-path="survival-analysis.html"><a href="survival-analysis.html#influential-observations"><i class="fa fa-check"></i><b>11.13.3</b> Influential observations</a></li>
+</ul></li>
+<li class="chapter" data-level="11.14" data-path="survival-analysis.html"><a href="survival-analysis.html#plot-the-adjusted-survival"><i class="fa fa-check"></i><b>11.14</b> Plot the adjusted survival</a></li>
+<li class="chapter" data-level="11.15" data-path="survival-analysis.html"><a href="survival-analysis.html#presentation-and-interpretation"><i class="fa fa-check"></i><b>11.15</b> Presentation and interpretation</a></li>
+<li class="chapter" data-level="11.16" data-path="survival-analysis.html"><a href="survival-analysis.html#references-3"><i class="fa fa-check"></i><b>11.16</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>12</b> Missing data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="missing-data.html"><a href="missing-data.html#introduction-4"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="missing-data.html"><a href="missing-data.html#background-2"><i class="fa fa-check"></i><b>12.1.1</b> Background</a></li>
+<li class="chapter" data-level="12.1.2" data-path="missing-data.html"><a href="missing-data.html#objectives-3"><i class="fa fa-check"></i><b>12.1.2</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="missing-data.html"><a href="missing-data.html#preliminaries-1"><i class="fa fa-check"></i><b>12.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="missing-data.html"><a href="missing-data.html#packages-2"><i class="fa fa-check"></i><b>12.2.1</b> Packages</a></li>
+<li class="chapter" data-level="12.2.2" data-path="missing-data.html"><a href="missing-data.html#dataset-1"><i class="fa fa-check"></i><b>12.2.2</b> Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="missing-data.html"><a href="missing-data.html#exploring-missing-data"><i class="fa fa-check"></i><b>12.3</b> Exploring missing data</a></li>
+<li class="chapter" data-level="12.4" data-path="missing-data.html"><a href="missing-data.html#handling-missing-data"><i class="fa fa-check"></i><b>12.4</b> Handling missing data</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="missing-data.html"><a href="missing-data.html#listwise-deletion"><i class="fa fa-check"></i><b>12.4.1</b> Listwise deletion</a></li>
+<li class="chapter" data-level="12.4.2" data-path="missing-data.html"><a href="missing-data.html#simple-imputation"><i class="fa fa-check"></i><b>12.4.2</b> Simple imputation</a></li>
+<li class="chapter" data-level="12.4.3" data-path="missing-data.html"><a href="missing-data.html#single-imputation"><i class="fa fa-check"></i><b>12.4.3</b> Single imputation</a></li>
+<li class="chapter" data-level="12.4.4" data-path="missing-data.html"><a href="missing-data.html#multiple-imputation"><i class="fa fa-check"></i><b>12.4.4</b> Multiple imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="missing-data.html"><a href="missing-data.html#presentation-1"><i class="fa fa-check"></i><b>12.5</b> Presentation</a></li>
+<li class="chapter" data-level="12.6" data-path="missing-data.html"><a href="missing-data.html#references-4"><i class="fa fa-check"></i><b>12.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Medicine and Health using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="missing-data" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Missing data</h1>
+<div id="introduction-4" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Introduction</h2>
+<div id="background-2" class="section level3" number="12.1.1">
+<h3><span class="header-section-number">12.1.1</span> Background</h3>
+<p>Missing data data is quite a common issue in research. The causes of missing data should always be investigated and more data should be collected if possible. There are three types of missing data:</p>
+<ol style="list-style-type: decimal">
+<li>Missing completely at random (MCAR)<br />
+</li>
+<li>Missing at random (MAR)<br />
+</li>
+<li>Missing not at random (MNAR)</li>
+</ol>
+<center>
+<div class="figure">
+<img src="NAtype.png" style="width:65.0%" alt="" />
+<p class="caption">Illustration of missing data mechanism for the three types of missing data. X represents an observed variable, Y represents a variable with part of missing values that have been observed, Z represents a cause of missing values and R represents a variable with part of missing values that have been missing.</p>
+</div>
+</center>
+<p>Missing data (<em>R</em>) is classified as MCAR if the cause of missing data (<em>Z</em>) is unrelated to the data (<em>Y</em>). For example, medical records that is lost due to flood and laboratory equipment malfunction. In other words, the data is missing totally by chance. We can relate this example to the figure above, the cause, <em>Z</em> is not related to the data itself that have been observed, <em>Y</em>, but only related to the data that is missing, <em>R</em>. MCAR is ideal and more convenient, though MAR is more common and realistic.</p>
+<p>Missing data (<em>R</em>) is said to be MAR if the cause of missing data (<em>Z</em>) is related to other observed value (<em>X</em>), but not to the variable itself (<em>Y</em>). For example, an older person is more likely complete a survey compared to the younger person. So, the missingness is related to age, a variable that has been observed. Similarly, if information on income is more likely to be missing for older individuals as they are more cautious to reveal a sensitive information as opposed to younger individuals. Thus, the missingness is related to age, which should be a variable that we have information on. So, this missingness is considered as MAR. Another example of MAR is missing a certain variable due to the old medical form do not request this information. However, a new updated medical form request this information. As the missingness is not related the variable itself and we have the information whether the patients use an old or a new medical form, we can classify this missingness as MAR. We can see from all the examples that the cause of missing data, <em>Z</em> is related to other variable, <em>X</em>, but not to the variable itself, <em>Y</em> as illustrated in the figure.</p>
+<p>Lastly, the missing data (<em>R</em>) is considered MNAR if the cause of missing data (<em>Z</em>) is related to the variable itself (<em>Y</em>) and to other variables (<em>X</em>) as well. Also, the missingness is considered MNAR if the causes completely unknown to us. In other words, we can not logically deduce that the missing data fit MCAR or MAR types. For example, missing a weight information for an obese individuals as the normal weighing scale may not able to weigh the individuals. Thus, the missing weight values (<em>R</em>) is considered MNAR as the missingness is related the variable itself (<em>Y</em>). However, we can never be sure of this without a further investigation about the mechanism of missingnness and its causes. MNAR is the most problematic type among the three. There are a few approaches to differentiate between MCAR and MAR-MNAR. However, an approach to differentiate between MAR and MNAR has yet to be proposed. Thus, we need to use a logical reasoning to differentiate between the two types.</p>
+</div>
+<div id="objectives-3" class="section level3" number="12.1.2">
+<h3><span class="header-section-number">12.1.2</span> Objectives</h3>
+<p>At the end of the chapter, the reader will be able to:</p>
+<ul>
+<li>To perform a simple imputation<br />
+</li>
+<li>To perform a single imputation<br />
+</li>
+<li>To perform a multiple imputation</li>
+</ul>
+</div>
+</div>
+<div id="preliminaries-1" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Preliminaries</h2>
+<div id="packages-2" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Packages</h3>
+<p>We will use these packages:</p>
+<ul>
+<li><code>mice</code>: for the single and multiple imputation<br />
+</li>
+<li><code>VIM</code>: for missing data exploration<br />
+</li>
+<li><code>naniar</code>: for missing data exploration<br />
+</li>
+<li><code>tidyverse</code>: for data wrangling and manipulation<br />
+</li>
+<li><code>gtsummary</code>: to provide a nice result in a table</li>
+</ul>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="missing-data.html#cb602-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb602-2"><a href="missing-data.html#cb602-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(VIM)</span>
+<span id="cb602-3"><a href="missing-data.html#cb602-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb602-4"><a href="missing-data.html#cb602-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb602-5"><a href="missing-data.html#cb602-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code></pre></div>
+</div>
+<div id="dataset-1" class="section level3" number="12.2.2">
+<h3><span class="header-section-number">12.2.2</span> Dataset</h3>
+<p>We going to use the coronary dataset that we used previously in linear regression chapter. However, this dataset have been altered to generate a missing values in it.</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="missing-data.html#cb603-1" aria-hidden="true" tabindex="-1"></a>coroNA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data&#39;</span>, <span class="st">&quot;coronaryNA.csv&quot;</span>))</span></code></pre></div>
+<p>Next, we going to transform the all the character variables into a factor. <code>mutate_if()</code> will recognise all character variables and transform it into a factor.</p>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="missing-data.html#cb604-1" aria-hidden="true" tabindex="-1"></a>coroNA <span class="ot">&lt;-</span> </span>
+<span id="cb604-2"><a href="missing-data.html#cb604-2" aria-hidden="true" tabindex="-1"></a>  coroNA <span class="sc">%&gt;%</span> </span>
+<span id="cb604-3"><a href="missing-data.html#cb604-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span>
+<span id="cb604-4"><a href="missing-data.html#cb604-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coroNA)</span></code></pre></div>
+<pre><code>##       age             race         chol             id             cad     
+##  Min.   :33.00   chinese:31   Min.   :4.000   Min.   :   1.0   cad   : 37  
+##  1st Qu.:43.00   indian :45   1st Qu.:5.362   1st Qu.: 901.5   no cad:163  
+##  Median :48.00   malay  :49   Median :6.050   Median :2243.5               
+##  Mean   :48.02   NA&#39;s   :75   Mean   :6.114   Mean   :2218.3               
+##  3rd Qu.:53.00                3rd Qu.:6.875   3rd Qu.:3346.8               
+##  Max.   :62.00                Max.   :9.350   Max.   :4696.0               
+##  NA&#39;s   :85                   NA&#39;s   :33                                   
+##       sbp             dbp              bmi          gender   
+##  Min.   : 88.0   Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.:115.0   1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median :126.0   Median : 80.00   Median :37.80              
+##  Mean   :130.2   Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.:144.0   3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :187.0   Max.   :120.00   Max.   :45.03              
+## </code></pre>
+<p>Missing data in R is denoted by <code>NA</code>. Further information about <code>NA</code> can be assessed by typing <code>?NA</code> in the RStudio console. As seen above, the three variables; age, race and chol have missing values. We can further confirm this using a <code>anyNA()</code>.</p>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="missing-data.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anyNA</span>(coroNA)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>True indicates a presence of missing values in our data. Thus, we can further explore the missing values in our data.</p>
+</div>
+</div>
+<div id="exploring-missing-data" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> Exploring missing data</h2>
+<p>The total percentage of missing values in our data is 10.7%.</p>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="missing-data.html#cb608-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop_miss</span>(coroNA)</span></code></pre></div>
+<pre><code>## [1] 0.1072222</code></pre>
+<p>Percentage of missing data by variable:</p>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="missing-data.html#cb610-1" aria-hidden="true" tabindex="-1"></a><span class="fu">miss_var_summary</span>(coroNA)</span></code></pre></div>
+<pre><code>## # A tibble: 9 x 3
+##   variable n_miss pct_miss
+##   &lt;chr&gt;     &lt;int&gt;    &lt;dbl&gt;
+## 1 age          85     42.5
+## 2 race         75     37.5
+## 3 chol         33     16.5
+## 4 id            0      0  
+## 5 cad           0      0  
+## 6 sbp           0      0  
+## 7 dbp           0      0  
+## 8 bmi           0      0  
+## 9 gender        0      0</code></pre>
+<p>Both <code>prop_miss()</code> and <code>miss_var_summary()</code> are from <code>naniar</code> package. Subsequently, We can explore the pattern of missing data using <code>aggr()</code> function from <code>VIM</code>. The <code>numbers</code> and <code>prop</code> arguments indicate that we want the missing information on the y-axis of the plot to be in number not proportion.</p>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="missing-data.html#cb612-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggr</span>(coroNA, <span class="at">numbers =</span> <span class="cn">TRUE</span>, <span class="at">prop =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="11_missingData_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The labels on x-axis are according to the column names in the dataset. In term of pattern of missingness, about 43 observation are missing age values alone.</p>
+<p>Similarly, the pattern of missing data can be explore through <code>md.pattern()</code> from <code>mice</code> package. The <code>rotate.names</code> argument set to true to specify the direction of the variable names on top of the plot horizontally.</p>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="missing-data.html#cb613-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md.pattern</span>(coroNA, <span class="at">rotate.names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="11_missingData_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre><code>##    id cad sbp dbp bmi gender chol race age    
+## 64  1   1   1   1   1      1    1    1   1   0
+## 43  1   1   1   1   1      1    1    1   0   1
+## 28  1   1   1   1   1      1    1    0   1   1
+## 32  1   1   1   1   1      1    1    0   0   2
+## 12  1   1   1   1   1      1    0    1   1   1
+## 6   1   1   1   1   1      1    0    1   0   2
+## 11  1   1   1   1   1      1    0    0   1   2
+## 4   1   1   1   1   1      1    0    0   0   3
+##     0   0   0   0   0      0   33   75  85 193</code></pre>
+<p>Additionally, we can assess the correlation:</p>
+<ol style="list-style-type: decimal">
+<li>Between variables with missing values<br />
+</li>
+<li>Between variables with missing values and variable with non-missing values</li>
+</ol>
+<p>First, we need to take variables with missing values only. Then, we code a missing value with 1 and non-missing value with 0.</p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="missing-data.html#cb615-1" aria-hidden="true" tabindex="-1"></a>dummyNA <span class="ot">&lt;-</span> </span>
+<span id="cb615-2"><a href="missing-data.html#cb615-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">abs</span>(<span class="fu">is.na</span>(coroNA))) <span class="sc">%&gt;%</span> </span>
+<span id="cb615-3"><a href="missing-data.html#cb615-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, race, chol) <span class="co"># pick variable with missing values only</span></span>
+<span id="cb615-4"><a href="missing-data.html#cb615-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dummyNA)</span></code></pre></div>
+<pre><code>##   age race chol
+## 1   0    0    0
+## 2   0    0    0
+## 3   0    0    0
+## 4   1    0    0
+## 5   1    0    0
+## 6   0    0    0</code></pre>
+<p>We assess the correlation between variables with missing values.</p>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="missing-data.html#cb617-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dummyNA) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##        age race  chol
+## age   1.00 0.09 -0.11
+## race  0.09 1.00  0.07
+## chol -0.11 0.07  1.00</code></pre>
+<p>There is no strong correlation between variables with missing values. We can conclude that the missing values in one variable is not related to the missing values in another variable.</p>
+<p>The second correlation is between variables with missing values and variable with non-missing values. First, we need to change the categorical variable into a numeric value to get a correlation for all the variables.</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="missing-data.html#cb619-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">mutate_if</span>(is.factor, as.numeric), dummyNA, <span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb619-2"><a href="missing-data.html#cb619-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning in cor(coroNA %&gt;% mutate_if(is.factor, as.numeric), dummyNA, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero</code></pre>
+<pre><code>##          age  race  chol
+## age       NA  0.04  0.04
+## race    0.02    NA  0.01
+## chol   -0.11 -0.06    NA
+## id      0.01 -0.06 -0.07
+## cad     0.02  0.05 -0.17
+## sbp    -0.07  0.04  0.17
+## dbp    -0.04  0.04  0.17
+## bmi     0.13 -0.08 -0.76
+## gender  0.07  0.03 -0.07</code></pre>
+<p>We can safely ignore the warning generated in the result. Variables on the left side are variable with non-missing values and variables on the top of the columns are variables with missing values. There is a high correlation (-0.76) between bmi and chol indicating values of chol are more likely to be missing at lower values of bmi.</p>
+<p>Lastly, we can do a Little’s test to determine if the missing data is MCAR or other types. The null hypothesis is the missing data is MCAR. Thus, a higher p value indicates probability of missing data is MCAR. The test shows that the missingness in our data is either MAR or MNAR.</p>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="missing-data.html#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcar_test</span>(coroNA)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 4
+##   statistic    df  p.value missing.patterns
+##       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;            &lt;int&gt;
+## 1      158.    51 8.25e-13                8</code></pre>
+</div>
+<div id="handling-missing-data" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> Handling missing data</h2>
+<p>We going to cover four approaches to handling missing data:</p>
+<ol style="list-style-type: decimal">
+<li>Listwise deletion<br />
+</li>
+<li>Simple imputation:<br />
+
+<ul>
+<li>Mean substitution<br />
+</li>
+<li>Median substitution<br />
+</li>
+<li>Mode substitution<br />
+</li>
+</ul></li>
+<li>Single imputation:<br />
+
+<ul>
+<li>Regression imputation<br />
+</li>
+<li>Stochastic regression imputation<br />
+</li>
+<li>Decision tree imputation<br />
+</li>
+</ul></li>
+<li>Multiple imputation</li>
+</ol>
+<p>Each approach has their own caveats which we will cover in each section below.</p>
+<div id="listwise-deletion" class="section level3" number="12.4.1">
+<h3><span class="header-section-number">12.4.1</span> Listwise deletion</h3>
+<p>Listwise or case deletion is the default setting in R. By default, R will exclude all the rows with missing data.</p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="missing-data.html#cb624-1" aria-hidden="true" tabindex="-1"></a>lw <span class="ot">&lt;-</span> <span class="fu">lm</span>(dbp <span class="sc">~</span> ., <span class="at">data =</span> coroNA)</span>
+<span id="cb624-2"><a href="missing-data.html#cb624-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lw)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dbp ~ ., data = coroNA)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -16.7770  -3.8094  -0.0874   3.5889  13.3479 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 34.6358468 20.5615343   1.684   0.0979 .  
+## age         -0.2764718  0.2139740  -1.292   0.2018    
+## raceindian   4.6080430  2.9423909   1.566   0.1232    
+## racemalay   -0.1318924  2.6075792  -0.051   0.9598    
+## chol         0.7174697  0.8142408   0.881   0.3821    
+## id           0.0000390  0.0006004   0.065   0.9484    
+## cadno cad   -1.2884879  2.2026942  -0.585   0.5610    
+## sbp          0.5390141  0.0502732  10.722 5.48e-15 ***
+## bmi         -0.4189575  0.4086179  -1.025   0.3098    
+## genderwoman  2.3084961  1.6749082   1.378   0.1738    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.218 on 54 degrees of freedom
+##   (136 observations deleted due to missingness)
+## Multiple R-squared:  0.7581, Adjusted R-squared:  0.7177 
+## F-statistic:  18.8 on 9 and 54 DF,  p-value: 1.05e-13</code></pre>
+<p>As shown in the information above (at the bottom), 136 rows or observations were excluded due to missingness. Listwise deletion approach able to produce an unbiased result only when the missing data is MCAR and the amount of missing data is relatively small.</p>
+</div>
+<div id="simple-imputation" class="section level3" number="12.4.2">
+<h3><span class="header-section-number">12.4.2</span> Simple imputation</h3>
+<p>A simple imputation includes mean, median and mode substitution is a relatively easy approach. In this approach, the missing values is replaced by a mean or median for numerical variable, and mode for categorical variable. This simple imputation approach only appropriate if missing data is MCAR and the amount of missing data is relatively small.</p>
+<ol style="list-style-type: decimal">
+<li>Mean substitution</li>
+</ol>
+<p><code>replace_na</code> will replace the missing values in age with its mean.</p>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="missing-data.html#cb626-1" aria-hidden="true" tabindex="-1"></a>mean_sub <span class="ot">&lt;-</span> </span>
+<span id="cb626-2"><a href="missing-data.html#cb626-2" aria-hidden="true" tabindex="-1"></a>  coroNA <span class="sc">%&gt;%</span> </span>
+<span id="cb626-3"><a href="missing-data.html#cb626-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">replace_na</span>(age, <span class="fu">mean</span>(age, <span class="at">na.rm =</span> T)))</span>
+<span id="cb626-4"><a href="missing-data.html#cb626-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb626-5"><a href="missing-data.html#cb626-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mean_sub)</span></code></pre></div>
+<pre><code>##       age             race         chol             id             cad     
+##  Min.   :33.00   chinese:31   Min.   :4.000   Min.   :   1.0   cad   : 37  
+##  1st Qu.:46.00   indian :45   1st Qu.:5.362   1st Qu.: 901.5   no cad:163  
+##  Median :48.02   malay  :49   Median :6.050   Median :2243.5               
+##  Mean   :48.02   NA&#39;s   :75   Mean   :6.114   Mean   :2218.3               
+##  3rd Qu.:49.00                3rd Qu.:6.875   3rd Qu.:3346.8               
+##  Max.   :62.00                Max.   :9.350   Max.   :4696.0               
+##                               NA&#39;s   :33                                   
+##       sbp             dbp              bmi          gender   
+##  Min.   : 88.0   Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.:115.0   1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median :126.0   Median : 80.00   Median :37.80              
+##  Mean   :130.2   Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.:144.0   3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :187.0   Max.   :120.00   Max.   :45.03              
+## </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Median substitution</li>
+</ol>
+<p><code>replace_na</code> will replace the missing values in age with its median.</p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="missing-data.html#cb628-1" aria-hidden="true" tabindex="-1"></a>med_sub <span class="ot">&lt;-</span> </span>
+<span id="cb628-2"><a href="missing-data.html#cb628-2" aria-hidden="true" tabindex="-1"></a>  coroNA <span class="sc">%&gt;%</span> </span>
+<span id="cb628-3"><a href="missing-data.html#cb628-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">replace_na</span>(age, <span class="fu">median</span>(age, <span class="at">na.rm =</span> T)))</span>
+<span id="cb628-4"><a href="missing-data.html#cb628-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb628-5"><a href="missing-data.html#cb628-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(med_sub)</span></code></pre></div>
+<pre><code>##       age             race         chol             id             cad     
+##  Min.   :33.00   chinese:31   Min.   :4.000   Min.   :   1.0   cad   : 37  
+##  1st Qu.:46.00   indian :45   1st Qu.:5.362   1st Qu.: 901.5   no cad:163  
+##  Median :48.00   malay  :49   Median :6.050   Median :2243.5               
+##  Mean   :48.01   NA&#39;s   :75   Mean   :6.114   Mean   :2218.3               
+##  3rd Qu.:49.00                3rd Qu.:6.875   3rd Qu.:3346.8               
+##  Max.   :62.00                Max.   :9.350   Max.   :4696.0               
+##                               NA&#39;s   :33                                   
+##       sbp             dbp              bmi          gender   
+##  Min.   : 88.0   Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.:115.0   1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median :126.0   Median : 80.00   Median :37.80              
+##  Mean   :130.2   Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.:144.0   3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :187.0   Max.   :120.00   Max.   :45.03              
+## </code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Mode substitution</li>
+</ol>
+<p>We need to find the mode, the most frequent level or group in the variable. In race variable, it is malay.</p>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="missing-data.html#cb630-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(coroNA<span class="sc">$</span>race)</span></code></pre></div>
+<pre><code>## 
+## chinese  indian   malay 
+##      31      45      49</code></pre>
+<p><code>replace_na</code> will replace the missing values in race with its mode.</p>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="missing-data.html#cb632-1" aria-hidden="true" tabindex="-1"></a>mode_sub <span class="ot">&lt;-</span> </span>
+<span id="cb632-2"><a href="missing-data.html#cb632-2" aria-hidden="true" tabindex="-1"></a>  coroNA <span class="sc">%&gt;%</span> </span>
+<span id="cb632-3"><a href="missing-data.html#cb632-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">race =</span> <span class="fu">replace_na</span>(race, <span class="st">&quot;malay&quot;</span>))</span>
+<span id="cb632-4"><a href="missing-data.html#cb632-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb632-5"><a href="missing-data.html#cb632-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mode_sub)</span></code></pre></div>
+<pre><code>##       age             race          chol             id             cad     
+##  Min.   :33.00   chinese: 31   Min.   :4.000   Min.   :   1.0   cad   : 37  
+##  1st Qu.:43.00   indian : 45   1st Qu.:5.362   1st Qu.: 901.5   no cad:163  
+##  Median :48.00   malay  :124   Median :6.050   Median :2243.5               
+##  Mean   :48.02                 Mean   :6.114   Mean   :2218.3               
+##  3rd Qu.:53.00                 3rd Qu.:6.875   3rd Qu.:3346.8               
+##  Max.   :62.00                 Max.   :9.350   Max.   :4696.0               
+##  NA&#39;s   :85                    NA&#39;s   :33                                   
+##       sbp             dbp              bmi          gender   
+##  Min.   : 88.0   Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.:115.0   1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median :126.0   Median : 80.00   Median :37.80              
+##  Mean   :130.2   Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.:144.0   3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :187.0   Max.   :120.00   Max.   :45.03              
+## </code></pre>
+</div>
+<div id="single-imputation" class="section level3" number="12.4.3">
+<h3><span class="header-section-number">12.4.3</span> Single imputation</h3>
+<p>In single imputation, missing data is imputed by any methods producing a single set of a complete dataset. In facts, the simple imputation approaches (mean, median and mode) are part of single imputation techniques. Single imputation is better compared to the previous techniques that we have covered so far. This approach incorporate more information from other variables to impute the missing values. However, this approach produce a result with a small standard error, which reflect a false precision in the result. Additionally, a single imputation approach do not take into account uncertainty about the missing data (except for stochastic regression imputation). Additionally, this approach is applicable if the missing data is at least MAR.</p>
+<ol style="list-style-type: decimal">
+<li>Regression imputation</li>
+</ol>
+<p>We will do a linear regression imputation for numerical variables (age and chol) and multinomial or polytomous logistic regression for categorical variable (since race has three levels; malay, chinese and indian).</p>
+<p>We run <code>mice()</code> with <code>maxit = 0</code> (zero iteration) to get a model specification and further removed id variable as it is not useful for the analysis. Here, we do not actually run the imputation yet as the iteration is zero (<code>maxit = 0</code>).</p>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="missing-data.html#cb634-1" aria-hidden="true" tabindex="-1"></a>ini <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">1</span>, <span class="at">maxit =</span> <span class="dv">0</span>) </span>
+<span id="cb634-2"><a href="missing-data.html#cb634-2" aria-hidden="true" tabindex="-1"></a>ini</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##       age      race      chol       cad       sbp       dbp       bmi    gender 
+##     &quot;pmm&quot; &quot;polyreg&quot;     &quot;pmm&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>By default, <code>mice()</code> use predictive mean matching (pmm) for a numerical variable, binary logistic regression (logreg) for a categorical variable with two levels and multinomial or polytomous logistic regression (polyreg) for a categorical variable with more than two level. <code>mice()</code> will not assign any method for variable with non-missing values by default (denote by “” in the section of imputation method above).</p>
+<p>We going to change the method for numerical variable (age and chol) to a linear regression.</p>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="missing-data.html#cb636-1" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> ini<span class="sc">$</span>method</span>
+<span id="cb636-2"><a href="missing-data.html#cb636-2" aria-hidden="true" tabindex="-1"></a>meth[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;norm.predict&quot;</span></span>
+<span id="cb636-3"><a href="missing-data.html#cb636-3" aria-hidden="true" tabindex="-1"></a>meth</span></code></pre></div>
+<pre><code>##            age           race           chol            cad            sbp 
+## &quot;norm.predict&quot;      &quot;polyreg&quot; &quot;norm.predict&quot;             &quot;&quot;             &quot;&quot; 
+##            dbp            bmi         gender 
+##             &quot;&quot;             &quot;&quot;             &quot;&quot;</code></pre>
+<p><code>mice()</code> function contains a few arguments:</p>
+<ul>
+<li><code>m</code>: number of imputed sets (will be used in the multiple imputation later)<br />
+</li>
+<li><code>method</code>: to specify a method of imputation<br />
+</li>
+<li><code>predictorMatrix</code>: to specify predictors for imputation<br />
+</li>
+<li><code>printFlag</code>: print history on the R console<br />
+</li>
+<li><code>seed</code>: random number for reproducibility</li>
+</ul>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="missing-data.html#cb638-1" aria-hidden="true" tabindex="-1"></a>regImp <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">1</span>, <span class="at">method =</span> meth, <span class="at">printFlag =</span> F, <span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb638-2"><a href="missing-data.html#cb638-2" aria-hidden="true" tabindex="-1"></a>regImp</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##            age           race           chol            cad            sbp 
+## &quot;norm.predict&quot;      &quot;polyreg&quot; &quot;norm.predict&quot;             &quot;&quot;             &quot;&quot; 
+##            dbp            bmi         gender 
+##             &quot;&quot;             &quot;&quot;             &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>Here, we can see the summary of our imputation model:</p>
+<ol style="list-style-type: decimal">
+<li>Number of multiple imputation<br />
+</li>
+<li>Imputation methods<br />
+</li>
+<li>PredictorMatrix</li>
+</ol>
+<p>We can further assess the full predictor matrix from the model.</p>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="missing-data.html#cb640-1" aria-hidden="true" tabindex="-1"></a>regImp<span class="sc">$</span>predictorMatrix</span></code></pre></div>
+<pre><code>##        age race chol cad sbp dbp bmi gender
+## age      0    1    1   1   1   1   1      1
+## race     1    0    1   1   1   1   1      1
+## chol     1    1    0   1   1   1   1      1
+## cad      1    1    1   0   1   1   1      1
+## sbp      1    1    1   1   0   1   1      1
+## dbp      1    1    1   1   1   0   1      1
+## bmi      1    1    1   1   1   1   0      1
+## gender   1    1    1   1   1   1   1      0</code></pre>
+<p>The predictor matrix denotes the variable to be imputed at the left side and the predictors at the top of the column. 1 indicates a predictor while 0 zero indicates a non-predictor. This predictor matrix can be changed accordingly if needed by changing 1 to 0 (a predictor to a non-predictor) or vise versa. Noted that the diagonal is 0 as the variable is not allowed to impute itself.</p>
+<p>As an example, to impute missing values in age, all of the variables are used as predictors except for age itself as shown in the predictor matrix. So, the outcome variable (<span class="math inline">\(\hat{y}\)</span>) in linear regression equation will be the imputed variable.</p>
+<p><span class="math display">\[
+\hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_kx_k
+\]</span>
+So, the above equation for imputed age variable in the first row of the predictor matrix will be:</p>
+<p><span class="math display">\[
+age = \beta_0 + \beta_1(race) + \beta_2(chol) + \beta_3(cad) + \beta_4(sbp) + \beta_5(dbp) + \beta_6(bmi) + \beta_6(gender)
+\]</span>
+Although it seems that we impute all the missing values in each variable simultaneously, in actuality each imputation model will run separately. So, in our data, on top of the imputation model for age, we have another imputation models for race and chol variables. Fortunately, we do not have to concern much about which variable to be used as a predictor as <code>mice()</code> will automatically select the useful predictors for each variables with missing values. Further information on how <code>mice</code> do this automatic selection can assessed by typing <code>quickpred()</code> in the RStudio console.</p>
+<p>We can asses the imputed dataset as follows:</p>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="missing-data.html#cb642-1" aria-hidden="true" tabindex="-1"></a>coro_regImp <span class="ot">&lt;-</span> <span class="fu">complete</span>(regImp, <span class="dv">1</span>)</span>
+<span id="cb642-2"><a href="missing-data.html#cb642-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coro_regImp)</span></code></pre></div>
+<pre><code>##       age             race         chol           cad           sbp       
+##  Min.   :33.00   chinese:56   Min.   :4.000   cad   : 37   Min.   : 88.0  
+##  1st Qu.:41.32   indian :67   1st Qu.:5.445   no cad:163   1st Qu.:115.0  
+##  Median :47.00   malay  :77   Median :6.092                Median :126.0  
+##  Mean   :47.68                Mean   :6.144                Mean   :130.2  
+##  3rd Qu.:53.38                3rd Qu.:6.774                3rd Qu.:144.0  
+##  Max.   :62.00                Max.   :9.350                Max.   :187.0  
+##       dbp              bmi          gender   
+##  Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median : 80.00   Median :37.80              
+##  Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :120.00   Max.   :45.03</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Stochastic regression imputation</li>
+</ol>
+<p>Stochastic regression imputation is an extension of regression imputation. This method attempts to account for the missing data uncertainty by adding a noise or extra variance. This method only applicable for numerical variable.</p>
+<p>First, we get a model specification.</p>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="missing-data.html#cb644-1" aria-hidden="true" tabindex="-1"></a>ini <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">1</span>, <span class="at">maxit =</span> <span class="dv">0</span>) </span>
+<span id="cb644-2"><a href="missing-data.html#cb644-2" aria-hidden="true" tabindex="-1"></a>ini</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##       age      race      chol       cad       sbp       dbp       bmi    gender 
+##     &quot;pmm&quot; &quot;polyreg&quot;     &quot;pmm&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>Then, we specify the imputation method to stochastic regression (norm.nob) for all numerical variables with missing values (age and chol).</p>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="missing-data.html#cb646-1" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> ini<span class="sc">$</span>method</span>
+<span id="cb646-2"><a href="missing-data.html#cb646-2" aria-hidden="true" tabindex="-1"></a>meth[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;norm.nob&quot;</span></span>
+<span id="cb646-3"><a href="missing-data.html#cb646-3" aria-hidden="true" tabindex="-1"></a>meth</span></code></pre></div>
+<pre><code>##        age       race       chol        cad        sbp        dbp        bmi 
+## &quot;norm.nob&quot;  &quot;polyreg&quot; &quot;norm.nob&quot;         &quot;&quot;         &quot;&quot;         &quot;&quot;         &quot;&quot; 
+##     gender 
+##         &quot;&quot;</code></pre>
+<p>Then, we run <code>mice()</code>.</p>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="missing-data.html#cb648-1" aria-hidden="true" tabindex="-1"></a>srImp <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">1</span>, <span class="at">method =</span> meth, <span class="at">printFlag =</span> F, <span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb648-2"><a href="missing-data.html#cb648-2" aria-hidden="true" tabindex="-1"></a>srImp</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##        age       race       chol        cad        sbp        dbp        bmi 
+## &quot;norm.nob&quot;  &quot;polyreg&quot; &quot;norm.nob&quot;         &quot;&quot;         &quot;&quot;         &quot;&quot;         &quot;&quot; 
+##     gender 
+##         &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>Here is the imputed dataset.</p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="missing-data.html#cb650-1" aria-hidden="true" tabindex="-1"></a>coro_srImp <span class="ot">&lt;-</span> <span class="fu">complete</span>(srImp, <span class="dv">1</span>)</span>
+<span id="cb650-2"><a href="missing-data.html#cb650-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coro_srImp)</span></code></pre></div>
+<pre><code>##       age             race         chol           cad           sbp       
+##  Min.   :31.54   chinese:52   Min.   :4.000   cad   : 37   Min.   : 88.0  
+##  1st Qu.:42.16   indian :70   1st Qu.:5.390   no cad:163   1st Qu.:115.0  
+##  Median :46.70   malay  :78   Median :6.105                Median :126.0  
+##  Mean   :47.46                Mean   :6.219                Mean   :130.2  
+##  3rd Qu.:52.25                3rd Qu.:7.005                3rd Qu.:144.0  
+##  Max.   :66.41                Max.   :9.600                Max.   :187.0  
+##       dbp              bmi          gender   
+##  Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median : 80.00   Median :37.80              
+##  Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :120.00   Max.   :45.03</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Decision tree imputation</li>
+</ol>
+<p>Decision tree or classification and regression tree (CART) is a popular method in machine learning area. This method can be applied to impute a missing values for both numerical and categorical variables.</p>
+<p>First, we get a model specification.</p>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="missing-data.html#cb652-1" aria-hidden="true" tabindex="-1"></a>ini <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">1</span>, <span class="at">maxit =</span> <span class="dv">0</span>) </span>
+<span id="cb652-2"><a href="missing-data.html#cb652-2" aria-hidden="true" tabindex="-1"></a>ini</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##       age      race      chol       cad       sbp       dbp       bmi    gender 
+##     &quot;pmm&quot; &quot;polyreg&quot;     &quot;pmm&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>Then, we specify the imputation methods for all variable with missing values (age, race and chol) to decision tree.</p>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="missing-data.html#cb654-1" aria-hidden="true" tabindex="-1"></a>meth <span class="ot">&lt;-</span> ini<span class="sc">$</span>method</span>
+<span id="cb654-2"><a href="missing-data.html#cb654-2" aria-hidden="true" tabindex="-1"></a>meth[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;cart&quot;</span></span>
+<span id="cb654-3"><a href="missing-data.html#cb654-3" aria-hidden="true" tabindex="-1"></a>meth</span></code></pre></div>
+<pre><code>##    age   race   chol    cad    sbp    dbp    bmi gender 
+## &quot;cart&quot; &quot;cart&quot; &quot;cart&quot;     &quot;&quot;     &quot;&quot;     &quot;&quot;     &quot;&quot;     &quot;&quot;</code></pre>
+<p>Next, we run the imputation model.</p>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="missing-data.html#cb656-1" aria-hidden="true" tabindex="-1"></a>cartImp <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">1</span>, <span class="at">method =</span> meth, <span class="at">printFlag =</span> F, <span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb656-2"><a href="missing-data.html#cb656-2" aria-hidden="true" tabindex="-1"></a>cartImp</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  1 
+## Imputation methods:
+##    age   race   chol    cad    sbp    dbp    bmi gender 
+## &quot;cart&quot; &quot;cart&quot; &quot;cart&quot;     &quot;&quot;     &quot;&quot;     &quot;&quot;     &quot;&quot;     &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>Here is the imputed dataset.</p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="missing-data.html#cb658-1" aria-hidden="true" tabindex="-1"></a>coro_cartImp <span class="ot">&lt;-</span> <span class="fu">complete</span>(cartImp, <span class="dv">1</span>)</span>
+<span id="cb658-2"><a href="missing-data.html#cb658-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coro_cartImp)</span></code></pre></div>
+<pre><code>##       age             race         chol           cad           sbp       
+##  Min.   :33.00   chinese:56   Min.   :4.000   cad   : 37   Min.   : 88.0  
+##  1st Qu.:42.50   indian :70   1st Qu.:5.390   no cad:163   1st Qu.:115.0  
+##  Median :47.00   malay  :74   Median :6.050                Median :126.0  
+##  Mean   :47.92                Mean   :6.085                Mean   :130.2  
+##  3rd Qu.:53.00                3rd Qu.:6.765                3rd Qu.:144.0  
+##  Max.   :62.00                Max.   :9.350                Max.   :187.0  
+##       dbp              bmi          gender   
+##  Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median : 80.00   Median :37.80              
+##  Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :120.00   Max.   :45.03</code></pre>
+</div>
+<div id="multiple-imputation" class="section level3" number="12.4.4">
+<h3><span class="header-section-number">12.4.4</span> Multiple imputation</h3>
+<p>Multiple imputation is an advanced approach to missing data. In this approach, several imputed datasets will be generated. Analyses will be run on each imputed datasets. Then, all the results will be combined into a pooled result. The advantage of multiple imputation is this approach takes into account uncertainty regarding the missing data, by which the single imputation approach may fail to do. Generally, this approach is applicable if the missing data is at least MAR.</p>
+<p>Flow of the multiple imputation is quite similar to the single imputation since we are using the same package. The number of imputed set, <em>m</em> by default is set to 5 in <code>mice()</code>. In general, the higher number of <em>m</em> is better, though this makes the computation longer. For moderate amount of missing data, <em>m</em> between 5 to 20 should be enough. Another recommendation is to set <em>m</em> to the average percentage of missing data. However, for this example we going to run the default values.</p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="missing-data.html#cb660-1" aria-hidden="true" tabindex="-1"></a>miImp <span class="ot">&lt;-</span> <span class="fu">mice</span>(coroNA <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id), <span class="at">m =</span> <span class="dv">5</span>, <span class="at">printFlag =</span> F, <span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb660-2"><a href="missing-data.html#cb660-2" aria-hidden="true" tabindex="-1"></a>miImp</span></code></pre></div>
+<pre><code>## Class: mids
+## Number of multiple imputations:  5 
+## Imputation methods:
+##       age      race      chol       cad       sbp       dbp       bmi    gender 
+##     &quot;pmm&quot; &quot;polyreg&quot;     &quot;pmm&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot; 
+## PredictorMatrix:
+##      age race chol cad sbp dbp bmi gender
+## age    0    1    1   1   1   1   1      1
+## race   1    0    1   1   1   1   1      1
+## chol   1    1    0   1   1   1   1      1
+## cad    1    1    1   0   1   1   1      1
+## sbp    1    1    1   1   0   1   1      1
+## dbp    1    1    1   1   1   0   1      1</code></pre>
+<p>We can see in the result, the number of imputations is 5. We can extract the first imputation set as follows:</p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="missing-data.html#cb662-1" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(miImp, <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb662-2"><a href="missing-data.html#cb662-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##       age             race         chol           cad           sbp       
+##  Min.   :33.00   chinese:50   Min.   :4.000   cad   : 37   Min.   : 88.0  
+##  1st Qu.:43.00   indian :72   1st Qu.:5.170   no cad:163   1st Qu.:115.0  
+##  Median :48.00   malay  :78   Median :5.968                Median :126.0  
+##  Mean   :47.94                Mean   :5.993                Mean   :130.2  
+##  3rd Qu.:53.00                3rd Qu.:6.703                3rd Qu.:144.0  
+##  Max.   :62.00                Max.   :9.350                Max.   :187.0  
+##       dbp              bmi          gender   
+##  Min.   : 56.00   Min.   :28.99   man  :100  
+##  1st Qu.: 72.00   1st Qu.:36.10   woman:100  
+##  Median : 80.00   Median :37.80              
+##  Mean   : 82.31   Mean   :37.45              
+##  3rd Qu.: 92.00   3rd Qu.:39.20              
+##  Max.   :120.00   Max.   :45.03</code></pre>
+<p>Next, we need to check for convergence of the algorithm.</p>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="missing-data.html#cb664-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(miImp)</span></code></pre></div>
+<p><img src="11_missingData_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>The line in the plot should be intermingled and free of any trend. The number of iteration can be further increased to make sure of this.</p>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="missing-data.html#cb665-1" aria-hidden="true" tabindex="-1"></a>miImp2 <span class="ot">&lt;-</span> <span class="fu">mice.mids</span>(miImp, <span class="at">maxit =</span> <span class="dv">35</span>, <span class="at">printFlag =</span> F)</span>
+<span id="cb665-2"><a href="missing-data.html#cb665-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(miImp2)</span></code></pre></div>
+<p><img src="11_missingData_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Once the imputed datasets are obtained, an analysis (for example, a linear regression) can be run as follows:</p>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="missing-data.html#cb666-1" aria-hidden="true" tabindex="-1"></a>lr_mi <span class="ot">&lt;-</span> <span class="fu">with</span>(miImp, <span class="fu">glm</span>(dbp <span class="sc">~</span> age <span class="sc">+</span> race <span class="sc">+</span> chol <span class="sc">+</span> cad <span class="sc">+</span> sbp <span class="sc">+</span> bmi <span class="sc">+</span> gender))</span>
+<span id="cb666-2"><a href="missing-data.html#cb666-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pool</span>(lr_mi) <span class="sc">%&gt;%</span> </span>
+<span id="cb666-3"><a href="missing-data.html#cb666-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">conf.int =</span> T)</span></code></pre></div>
+<pre><code>##          term    estimate   std.error   statistic        df    p.value
+## 1 (Intercept) 25.85805530 13.21741793  1.95636209  34.41840 0.05857610
+## 2         age -0.09649575  0.21229624 -0.45453348  10.34947 0.65882968
+## 3  raceindian -0.07034050  2.57995900 -0.02726419  12.32421 0.97868554
+## 4   racemalay  0.20029789  1.68514315  0.11886105  59.44295 0.90578621
+## 5        chol  1.33244955  0.52966992  2.51562245  89.92925 0.01365737
+## 6   cadno cad -1.43834422  1.43322822 -1.00356956 160.05725 0.31710092
+## 7         sbp  0.51358079  0.03015353 17.03219634 186.95165 0.00000000
+## 8         bmi -0.35959227  0.20258274 -1.77503907 136.19191 0.07812525
+## 9 genderwoman  1.30467626  1.04972267  1.24287709 185.09416 0.21548528
+##        2.5 %      97.5 %
+## 1 -0.9909476 52.70705817
+## 2 -0.5673651  0.37437357
+## 3 -5.6752310  5.53454998
+## 4 -3.1711401  3.57173588
+## 5  0.2801565  2.38474258
+## 6 -4.2688212  1.39213272
+## 7  0.4540959  0.57306569
+## 8 -0.7602069  0.04102233
+## 9 -0.7662831  3.37563562</code></pre>
+<p>We can use <code>mutate_if()</code> from <code>dplyr</code> package to round up the numbers to two decimal points.</p>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="missing-data.html#cb668-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pool</span>(lr_mi) <span class="sc">%&gt;%</span> </span>
+<span id="cb668-2"><a href="missing-data.html#cb668-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb668-3"><a href="missing-data.html#cb668-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb668-4"><a href="missing-data.html#cb668-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##          term estimate std.error statistic     df p.value 2.5 % 97.5 %
+## 1 (Intercept)    25.86     13.22      1.96  34.42    0.06 -0.99  52.71
+## 2         age    -0.10      0.21     -0.45  10.35    0.66 -0.57   0.37
+## 3  raceindian    -0.07      2.58     -0.03  12.32    0.98 -5.68   5.53
+## 4   racemalay     0.20      1.69      0.12  59.44    0.91 -3.17   3.57
+## 5        chol     1.33      0.53      2.52  89.93    0.01  0.28   2.38
+## 6   cadno cad    -1.44      1.43     -1.00 160.06    0.32 -4.27   1.39
+## 7         sbp     0.51      0.03     17.03 186.95    0.00  0.45   0.57
+## 8         bmi    -0.36      0.20     -1.78 136.19    0.08 -0.76   0.04
+## 9 genderwoman     1.30      1.05      1.24 185.09    0.22 -0.77   3.38</code></pre>
+<p><code>mice</code> package has provided an easy flow to run the analysis for multiple imputation:</p>
+<ol style="list-style-type: decimal">
+<li><code>mice()</code>: impute the missing data<br />
+</li>
+<li><code>with()</code>: run a statistical analysis<br />
+</li>
+<li><code>pool()</code>: pool the results</li>
+</ol>
+<p>Additionally, a model comparison can be done as well. There are three methods available for the model comparison:</p>
+<ol style="list-style-type: decimal">
+<li><code>D1()</code>: multivariate Wald test<br />
+</li>
+<li><code>D2()</code>: pools test statistics from each analysis of the imputed datasets<br />
+</li>
+<li><code>D3()</code>: likelihood-ratio test statistics</li>
+</ol>
+<p><code>D2()</code> is less powerful compared to the other two methods.</p>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="missing-data.html#cb670-1" aria-hidden="true" tabindex="-1"></a>lr_mi2 <span class="ot">&lt;-</span> <span class="fu">with</span>(miImp, <span class="fu">glm</span>(dbp <span class="sc">~</span> race <span class="sc">+</span> chol <span class="sc">+</span> cad <span class="sc">+</span> sbp <span class="sc">+</span> bmi <span class="sc">+</span> gender))</span>
+<span id="cb670-2"><a href="missing-data.html#cb670-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">D1</span>(lr_mi, lr_mi2))</span></code></pre></div>
+<pre><code>## 
+## Models:
+##  model                                            formula
+##      1 dbp ~ age + race + chol + cad + sbp + bmi + gender
+##      2       dbp ~ race + chol + cad + sbp + bmi + gender
+## 
+## Comparisons:
+##    test statistic df1 df2 dfcom   p.value      riv
+##  1 ~~ 2 0.2066007   1   4   191 0.6730188 1.379672
+## 
+## Number of imputations:  5   Method D1</code></pre>
+<p>Multivariate Wald test is not significant. Hence, removing age from the model does not reduce its predictive power. We can safely exclude age variable to aim for a parsimonious model.</p>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="missing-data.html#cb672-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">D2</span>(lr_mi, lr_mi2))</span></code></pre></div>
+<pre><code>## 
+## Models:
+##  model                                            formula
+##      1 dbp ~ age + race + chol + cad + sbp + bmi + gender
+##      2       dbp ~ race + chol + cad + sbp + bmi + gender
+## 
+## Comparisons:
+##    test    statistic df1     df2 dfcom p.value       riv
+##  1 ~~ 2 -0.002254427   1 16.1953    NA       1 0.9879772
+## 
+## Number of imputations:  5   Method D2 (wald)</code></pre>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="missing-data.html#cb674-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">D3</span>(lr_mi, lr_mi2))</span></code></pre></div>
+<pre><code>## 
+## Models:
+##  model                                            formula
+##      1 dbp ~ age + race + chol + cad + sbp + bmi + gender
+##      2       dbp ~ race + chol + cad + sbp + bmi + gender
+## 
+## Comparisons:
+##    test statistic df1      df2 dfcom   p.value      riv
+##  1 ~~ 2 0.1946719   1 10.83101   191 0.6677344 1.549127
+## 
+## Number of imputations:  5   Method D3</code></pre>
+<p>Also, we get a similar result from the remaining two methods for the model comparison. However, this may not always be the case. Generally, <code>D1()</code> and <code>D3()</code> are preferred and equally good for a sample size more than 200. However, for a small sample size (n &lt; 200), <code>D1()</code> is better. Besides, <code>D2()</code> should be used with cautious especially in large datasets with many missing values as it may produce a false positive estimate.</p>
+</div>
+</div>
+<div id="presentation-1" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> Presentation</h2>
+<p><code>gtsummary</code> package can be used for all the analyses run on the approaches of handling missing data that we have covered in this chapter. Here is an example to get a nice table using <code>tbl_regression()</code> from a linear regression model run on the multiple imputation approach.</p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="missing-data.html#cb676-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(lr_mi2)</span></code></pre></div>
+<div id="okvtewmmhk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#okvtewmmhk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#okvtewmmhk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#okvtewmmhk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#okvtewmmhk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#okvtewmmhk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#okvtewmmhk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#okvtewmmhk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#okvtewmmhk .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#okvtewmmhk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#okvtewmmhk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#okvtewmmhk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#okvtewmmhk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#okvtewmmhk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#okvtewmmhk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#okvtewmmhk .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#okvtewmmhk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#okvtewmmhk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#okvtewmmhk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#okvtewmmhk .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#okvtewmmhk .gt_left {
+  text-align: left;
+}
+
+#okvtewmmhk .gt_center {
+  text-align: center;
+}
+
+#okvtewmmhk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#okvtewmmhk .gt_font_normal {
+  font-weight: normal;
+}
+
+#okvtewmmhk .gt_font_bold {
+  font-weight: bold;
+}
+
+#okvtewmmhk .gt_font_italic {
+  font-style: italic;
+}
+
+#okvtewmmhk .gt_super {
+  font-size: 65%;
+}
+
+#okvtewmmhk .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">race</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">chinese</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">indian</td>
+<td class="gt_row gt_center">-0.86</td>
+<td class="gt_row gt_center">-4.1, 2.3</td>
+<td class="gt_row gt_center">0.6</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">malay</td>
+<td class="gt_row gt_center">0.73</td>
+<td class="gt_row gt_center">-2.0, 3.5</td>
+<td class="gt_row gt_center">0.6</td></tr>
+    <tr><td class="gt_row gt_left">chol</td>
+<td class="gt_row gt_center">1.3</td>
+<td class="gt_row gt_center">0.29, 2.3</td>
+<td class="gt_row gt_center">0.012</td></tr>
+    <tr><td class="gt_row gt_left">cad</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">cad</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">no cad</td>
+<td class="gt_row gt_center">-1.3</td>
+<td class="gt_row gt_center">-4.0, 1.5</td>
+<td class="gt_row gt_center">0.4</td></tr>
+    <tr><td class="gt_row gt_left">sbp</td>
+<td class="gt_row gt_center">0.51</td>
+<td class="gt_row gt_center">0.45, 0.57</td>
+<td class="gt_row gt_center"><0.001</td></tr>
+    <tr><td class="gt_row gt_left">bmi</td>
+<td class="gt_row gt_center">-0.36</td>
+<td class="gt_row gt_center">-0.77, 0.04</td>
+<td class="gt_row gt_center">0.076</td></tr>
+    <tr><td class="gt_row gt_left">gender</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">man</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">woman</td>
+<td class="gt_row gt_center">1.4</td>
+<td class="gt_row gt_center">-0.67, 3.4</td>
+<td class="gt_row gt_center">0.2</td></tr>
+  </tbody>
+  
+  <tfoot>
+    <tr class="gt_footnotes">
+      <td colspan="4">
+        <p class="gt_footnote">
+          <sup class="gt_footnote_marks">
+            <em>1</em>
+          </sup>
+           
+          CI = Confidence Interval
+          <br />
+        </p>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+<div id="references-4" class="section level2" number="12.6">
+<h2><span class="header-section-number">12.6</span> References</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="survival-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/drkamarul11_missingData.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dataanalysis.pdf", "dataanalysis.epub", "dataanalysis.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

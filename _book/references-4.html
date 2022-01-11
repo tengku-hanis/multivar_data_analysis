@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Data Analysis in Medicine and Health using R</title>
+  <meta name="description" content="References | Data Analysis in Medicine and Health using R" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="References | Data Analysis in Medicine and Health using R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/drki_musa/dataanalysis/" />
+  
+  
+  <meta name="github-repo" content="drkamarul/multivar_data_analysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="References | Data Analysis in Medicine and Health using R" />
+  
+  
+  
+
+<meta name="author" content="Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mukhtar" />
+
+
+<meta name="date" content="2022-01-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="survival-analysis.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Analysis in Medicine and Health using R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html"><i class="fa fa-check"></i><b>1</b> Introduction to R, RStudio and RStudio Cloud</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#rstudio-cloud"><i class="fa fa-check"></i><b>1.1</b> RStudio Cloud</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#the-rstudio-cloud-registration"><i class="fa fa-check"></i><b>1.1.1</b> The RStudio Cloud Registration</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#register-and-log-in"><i class="fa fa-check"></i><b>1.1.2</b> Register and log in</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#point-and-click-r-gui"><i class="fa fa-check"></i><b>1.2</b> Point and click R GUI</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#rstudio-server"><i class="fa fa-check"></i><b>1.3</b> RStudio Server</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-r-and-rstudio-on-your-local-machine"><i class="fa fa-check"></i><b>1.4</b> Installing R and RStudio on Your Local Machine</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-r"><i class="fa fa-check"></i><b>1.4.1</b> Installing R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-rstudio-ide"><i class="fa fa-check"></i><b>1.4.2</b> Installing RStudio IDE</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#checking-r-and-rstudio-installations"><i class="fa fa-check"></i><b>1.4.3</b> Checking R and RStudio Installations</a></li>
+<li class="chapter" data-level="1.4.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installation-of-miktex-texlive-and-mactex"><i class="fa fa-check"></i><b>1.4.4</b> Installation of MiKTeX, TeXLive and MacTex</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#starting-your-rstudio"><i class="fa fa-check"></i><b>1.5</b> Starting your RStudio</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#console-tab"><i class="fa fa-check"></i><b>1.5.1</b> Console tab</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#files-plots-packages-help-and-viewer-pane"><i class="fa fa-check"></i><b>1.5.2</b> Files, Plots, Packages, Help and Viewer Pane</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#environment-history-connection-and-build-pane"><i class="fa fa-check"></i><b>1.5.3</b> Environment, History, Connection and Build Pane</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#source-pane"><i class="fa fa-check"></i><b>1.5.4</b> Source Pane</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html"><i class="fa fa-check"></i><b>2</b> R Scripts and R Packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#open-a-new-r-script"><i class="fa fa-check"></i><b>2.1</b> Open a new R script</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#our-first-r-script"><i class="fa fa-check"></i><b>2.1.1</b> Our first R script</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#function-argument-and-parameters"><i class="fa fa-check"></i><b>2.1.2</b> Function, Argument and Parameters</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#need-more-help"><i class="fa fa-check"></i><b>2.1.3</b> Need more help?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#packages-on-cran"><i class="fa fa-check"></i><b>2.2.1</b> Packages on CRAN</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#check-if-the-package-you-need-is-available-in-your-r-library"><i class="fa fa-check"></i><b>2.2.2</b> Check if the package you need is available in your R library</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#install-an-r-package"><i class="fa fa-check"></i><b>2.2.3</b> Install an R package</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#directory"><i class="fa fa-check"></i><b>2.3</b> Directory</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#starting-your-r-job"><i class="fa fa-check"></i><b>2.3.1</b> Starting your R job</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#create-new-project"><i class="fa fa-check"></i><b>2.3.2</b> Create new project</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#where-is-my-data"><i class="fa fa-check"></i><b>2.3.3</b> Where is my data?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#upload-data-to-rstudio-cloud"><i class="fa fa-check"></i><b>2.4</b> Upload data to RStudio Cloud</a></li>
+<li class="chapter" data-level="2.5" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#more-resources-on-rstudio-cloud"><i class="fa fa-check"></i><b>2.5</b> More resources on RStudio Cloud</a></li>
+<li class="chapter" data-level="2.6" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#need-help"><i class="fa fa-check"></i><b>2.6</b> Need help?</a></li>
+<li class="chapter" data-level="2.7" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#bookdown"><i class="fa fa-check"></i><b>2.7</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rstudio-project.html"><a href="rstudio-project.html"><i class="fa fa-check"></i><b>3</b> RStudio Project</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-project.html"><a href="rstudio-project.html#objectives"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="rstudio-project.html"><a href="rstudio-project.html#dataset-repository-on-github"><i class="fa fa-check"></i><b>3.2</b> Dataset repository on GitHub</a></li>
+<li class="chapter" data-level="3.3" data-path="rstudio-project.html"><a href="rstudio-project.html#rstudio-project-on-rstudio-cloud"><i class="fa fa-check"></i><b>3.3</b> RStudio project on RStudio Cloud</a></li>
+<li class="chapter" data-level="3.4" data-path="rstudio-project.html"><a href="rstudio-project.html#rstudio-project-on-local-machine"><i class="fa fa-check"></i><b>3.4</b> RStudio project on local machine</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#history-and-objectives-of-data-visualization"><i class="fa fa-check"></i><b>4.2</b> History and objectives of Data Visualization</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#ingredients-for-good-graphics"><i class="fa fa-check"></i><b>4.3</b> Ingredients for Good Graphics</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#graphics-packages-in-r"><i class="fa fa-check"></i><b>4.4</b> Graphics Packages in R</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#the-ggplot2-package"><i class="fa fa-check"></i><b>4.5</b> The <strong>ggplot2</strong> Package</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#preparation"><i class="fa fa-check"></i><b>4.6</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-visualization.html"><a href="data-visualization.html#create-a-new-rstudio-project"><i class="fa fa-check"></i><b>4.6.1</b> Create a New RStudio Project</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-visualization.html"><a href="data-visualization.html#important-questions-when-making-graphs"><i class="fa fa-check"></i><b>4.6.2</b> Important Questions when Making Graphs</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-visualization.html"><a href="data-visualization.html#read-data"><i class="fa fa-check"></i><b>4.6.3</b> Read Data</a></li>
+<li class="chapter" data-level="4.6.4" data-path="data-visualization.html"><a href="data-visualization.html#load-the-library"><i class="fa fa-check"></i><b>4.6.4</b> Load the Library</a></li>
+<li class="chapter" data-level="4.6.5" data-path="data-visualization.html"><a href="data-visualization.html#read-dataset"><i class="fa fa-check"></i><b>4.6.5</b> Read Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#basic-plots"><i class="fa fa-check"></i><b>4.7</b> Basic Plots</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#adding-another-variable"><i class="fa fa-check"></i><b>4.8</b> Adding another variable</a></li>
+<li class="chapter" data-level="4.9" data-path="data-visualization.html"><a href="data-visualization.html#making-subplots"><i class="fa fa-check"></i><b>4.9</b> Making Subplots</a></li>
+<li class="chapter" data-level="4.10" data-path="data-visualization.html"><a href="data-visualization.html#overlaying-plots"><i class="fa fa-check"></i><b>4.10</b> Overlaying Plots</a></li>
+<li class="chapter" data-level="4.11" data-path="data-visualization.html"><a href="data-visualization.html#combining-different-plots"><i class="fa fa-check"></i><b>4.11</b> Combining Different Plots</a></li>
+<li class="chapter" data-level="4.12" data-path="data-visualization.html"><a href="data-visualization.html#statistical-transformation"><i class="fa fa-check"></i><b>4.12</b> Statistical Transformation</a></li>
+<li class="chapter" data-level="4.13" data-path="data-visualization.html"><a href="data-visualization.html#customizing-title"><i class="fa fa-check"></i><b>4.13</b> Customizing Title</a></li>
+<li class="chapter" data-level="4.14" data-path="data-visualization.html"><a href="data-visualization.html#adjusting-axes"><i class="fa fa-check"></i><b>4.14</b> Adjusting Axes</a></li>
+<li class="chapter" data-level="4.15" data-path="data-visualization.html"><a href="data-visualization.html#choosing-themes"><i class="fa fa-check"></i><b>4.15</b> Choosing Themes</a></li>
+<li class="chapter" data-level="4.16" data-path="data-visualization.html"><a href="data-visualization.html#saving-plots"><i class="fa fa-check"></i><b>4.16</b> Saving Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#definition-of-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> Definition of data wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#data-wrangling-with-dplyr-package"><i class="fa fa-check"></i><b>5.2</b> Data wrangling with <strong>dplyr</strong> package</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-package"><i class="fa fa-check"></i><b>5.2.1</b> <strong>dplyr</strong> package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#common-procedures-for-doing-data-transformation"><i class="fa fa-check"></i><b>5.3</b> Common procedures for doing data transformation</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#some-dplyr-functions"><i class="fa fa-check"></i><b>5.4</b> Some <strong>dplyr</strong> functions</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#create-a-new-project-or-set-your-working-directory"><i class="fa fa-check"></i><b>5.5</b> Create a new project or set your working directory</a></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-libraries"><i class="fa fa-check"></i><b>5.6</b> Load the libraries</a></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#datasets"><i class="fa fa-check"></i><b>5.7</b> Datasets</a></li>
+<li class="chapter" data-level="5.8" data-path="data-wrangling.html"><a href="data-wrangling.html#select-variables-generate-new-variable-and-rename-variable"><i class="fa fa-check"></i><b>5.8</b> Select variables, generate new variable and rename variable</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="data-wrangling.html"><a href="data-wrangling.html#select-variables-using-dplyrselect"><i class="fa fa-check"></i><b>5.8.1</b> Select variables using <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-wrangling.html"><a href="data-wrangling.html#generate-new-variable-using-mutate"><i class="fa fa-check"></i><b>5.8.2</b> Generate new variable using <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.8.3" data-path="data-wrangling.html"><a href="data-wrangling.html#rename-variable-using-rename"><i class="fa fa-check"></i><b>5.8.3</b> Rename variable using <code>rename()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-wrangling.html"><a href="data-wrangling.html#sorting-data-and-select-observation"><i class="fa fa-check"></i><b>5.9</b> Sorting data and select observation</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="data-wrangling.html"><a href="data-wrangling.html#sorting-data-using-arrange"><i class="fa fa-check"></i><b>5.9.1</b> Sorting data using <code>arrange()</code></a></li>
+<li class="chapter" data-level="5.9.2" data-path="data-wrangling.html"><a href="data-wrangling.html#select-observation-using-filter"><i class="fa fa-check"></i><b>5.9.2</b> Select observation using <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="data-wrangling.html"><a href="data-wrangling.html#group-data-and-get-summary-statistics"><i class="fa fa-check"></i><b>5.10</b> Group data and get summary statistics</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-data-using-group_by"><i class="fa fa-check"></i><b>5.10.1</b> Group data using <code>group_by()</code></a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-wrangling.html"><a href="data-wrangling.html#summary-statistic-using-summarize"><i class="fa fa-check"></i><b>5.10.2</b> Summary statistic using <code>summarize()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="data-wrangling.html"><a href="data-wrangling.html#more-complicated-dplyr-verbs"><i class="fa fa-check"></i><b>5.11</b> More complicated <strong>dplyr</strong> verbs</a></li>
+<li class="chapter" data-level="5.12" data-path="data-wrangling.html"><a href="data-wrangling.html#data-transformation-for-categorical-variables"><i class="fa fa-check"></i><b>5.12</b> Data transformation for categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="data-wrangling.html"><a href="data-wrangling.html#forcats-package"><i class="fa fa-check"></i><b>5.12.1</b> <strong>forcats</strong> package</a></li>
+<li class="chapter" data-level="5.12.2" data-path="data-wrangling.html"><a href="data-wrangling.html#conversion-from-numeric-to-factor-variables"><i class="fa fa-check"></i><b>5.12.2</b> Conversion from numeric to factor variables</a></li>
+<li class="chapter" data-level="5.12.3" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding-variables"><i class="fa fa-check"></i><b>5.12.3</b> Recoding variables</a></li>
+<li class="chapter" data-level="5.12.4" data-path="data-wrangling.html"><a href="data-wrangling.html#changing-the-level-of-categorical-variable"><i class="fa fa-check"></i><b>5.12.4</b> Changing the level of categorical variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="data-wrangling.html"><a href="data-wrangling.html#summary"><i class="fa fa-check"></i><b>5.13</b> Summary</a></li>
+<li class="chapter" data-level="5.14" data-path="data-wrangling.html"><a href="data-wrangling.html#self-practice"><i class="fa fa-check"></i><b>5.14</b> Self-practice</a></li>
+<li class="chapter" data-level="5.15" data-path="data-wrangling.html"><a href="data-wrangling.html#references"><i class="fa fa-check"></i><b>5.15</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#motivation"><i class="fa fa-check"></i><b>6.1</b> Motivation</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#what-is-r-markdown"><i class="fa fa-check"></i><b>6.1.1</b> What is R Markdown?</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#why-should-we-bother-learning-r-markdown"><i class="fa fa-check"></i><b>6.1.2</b> Why should we bother learning R Markdown?</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#sources-to-learn-r-markdown"><i class="fa fa-check"></i><b>6.1.3</b> Sources to learn R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>6.2</b> R Markdown Basics</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#install-rmarkdown-package"><i class="fa fa-check"></i><b>6.2.1</b> Install <code>rmarkdown</code> package</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#install-latex-package-for-pdf"><i class="fa fa-check"></i><b>6.2.2</b> Install LaTeX package for PDF</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#new-.rmd-file"><i class="fa fa-check"></i><b>6.2.3</b> New .Rmd file</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#knit-it"><i class="fa fa-check"></i><b>6.2.4</b> Knit it!</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#yaml-header"><i class="fa fa-check"></i><b>6.2.5</b> YAML header</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>6.2.6</b> Code chunks</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#header-levels"><i class="fa fa-check"></i><b>6.2.7</b> Header levels</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#exercise-1"><i class="fa fa-check"></i><b>6.2.8</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#table"><i class="fa fa-check"></i><b>6.3</b> Table</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#basic-table"><i class="fa fa-check"></i><b>6.3.1</b> Basic table</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#table-from-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Table (from data frame)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#more-on-table"><i class="fa fa-check"></i><b>6.3.3</b> More on table</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#plot-figure-and-image"><i class="fa fa-check"></i><b>6.4</b> Plot, figure and image</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#plot-caption-fig.cap"><i class="fa fa-check"></i><b>6.4.1</b> Plot caption – <code>fig.cap</code></a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#plot-size-fig.heightin-inch"><i class="fa fa-check"></i><b>6.4.2</b> Plot size – <code>fig.height</code>(in inch)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#plot-size-fig.width-in-inch"><i class="fa fa-check"></i><b>6.4.3</b> Plot size – <code>fig.width</code> (in inch)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="r-markdown.html"><a href="r-markdown.html#plot-aspect-ratio-fig.asp"><i class="fa fa-check"></i><b>6.4.4</b> Plot aspect ratio – <code>fig.asp</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="r-markdown.html"><a href="r-markdown.html#image"><i class="fa fa-check"></i><b>6.5</b> Image</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="r-markdown.html"><a href="r-markdown.html#exercise-2"><i class="fa fa-check"></i><b>6.5.1</b> Exercise 2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="r-markdown.html"><a href="r-markdown.html#inline-output"><i class="fa fa-check"></i><b>6.6</b> Inline output</a></li>
+<li class="chapter" data-level="6.7" data-path="r-markdown.html"><a href="r-markdown.html#equation"><i class="fa fa-check"></i><b>6.7</b> Equation</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="r-markdown.html"><a href="r-markdown.html#mathematical-equation"><i class="fa fa-check"></i><b>6.7.1</b> Mathematical equation</a></li>
+<li class="chapter" data-level="6.7.2" data-path="r-markdown.html"><a href="r-markdown.html#inline-equation"><i class="fa fa-check"></i><b>6.7.2</b> Inline equation</a></li>
+<li class="chapter" data-level="6.7.3" data-path="r-markdown.html"><a href="r-markdown.html#display-equation"><i class="fa fa-check"></i><b>6.7.3</b> Display equation</a></li>
+<li class="chapter" data-level="6.7.4" data-path="r-markdown.html"><a href="r-markdown.html#exercise-3"><i class="fa fa-check"></i><b>6.7.4</b> Exercise 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html"><i class="fa fa-check"></i><b>7</b> Exploratory data analysis (EDA)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#motivation-1"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#questions-to-ask-before-making-graphs"><i class="fa fa-check"></i><b>7.2</b> Questions to ask before making graphs</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#eda-using-ggplot2-package"><i class="fa fa-check"></i><b>7.3</b> EDA using ggplot2 package</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#usage-of-ggplot2"><i class="fa fa-check"></i><b>7.3.1</b> Usage of <strong>ggplot2</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#loading-the-library"><i class="fa fa-check"></i><b>7.4</b> Loading the library</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#the-dataset"><i class="fa fa-check"></i><b>7.5</b> The dataset</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.6</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#statistics"><i class="fa fa-check"></i><b>7.6.1</b> Statistics</a></li>
+<li class="chapter" data-level="7.6.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#plots"><i class="fa fa-check"></i><b>7.6.2</b> Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#one-variable-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>7.7</b> One variable: Distribution of a categorical variable</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#bar-chart"><i class="fa fa-check"></i><b>7.7.1</b> Bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#one-variable-distribution-of-a-numerical-variable"><i class="fa fa-check"></i><b>7.8</b> One variable: Distribution of a numerical variable</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#histogram"><i class="fa fa-check"></i><b>7.8.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.8.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#density-curve"><i class="fa fa-check"></i><b>7.8.2</b> Density curve</a></li>
+<li class="chapter" data-level="7.8.3" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#histogram-and-density-curve-together"><i class="fa fa-check"></i><b>7.8.3</b> Histogram and density curve together</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#two-variables-plotting-a-numerical-and-a-categorical-variable"><i class="fa fa-check"></i><b>7.9</b> Two variables: Plotting a numerical and a categorical variable</a>
+<ul>
+<li class="chapter" data-level="7.9.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#overlaying-histogramss-and-boxplot"><i class="fa fa-check"></i><b>7.9.1</b> Overlaying histogramss and boxplot</a></li>
+<li class="chapter" data-level="7.9.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#faceting-the-plots"><i class="fa fa-check"></i><b>7.9.2</b> Faceting the plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.10" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#line-plot"><i class="fa fa-check"></i><b>7.10</b> Line plot</a></li>
+<li class="chapter" data-level="7.11" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#plotting-means-and-error-bars"><i class="fa fa-check"></i><b>7.11</b> Plotting means and error bars</a></li>
+<li class="chapter" data-level="7.12" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#scatterplot-with-fit-line"><i class="fa fa-check"></i><b>7.12</b> Scatterplot with fit line</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>8</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-slr"><i class="fa fa-check"></i><b>8.1</b> Simple linear regression (SLR)</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="linear-regression.html"><a href="linear-regression.html#about-slr"><i class="fa fa-check"></i><b>8.1.1</b> About SLR</a></li>
+<li class="chapter" data-level="8.1.2" data-path="linear-regression.html"><a href="linear-regression.html#analysis"><i class="fa fa-check"></i><b>8.1.2</b> Analysis</a></li>
+<li class="chapter" data-level="8.1.3" data-path="linear-regression.html"><a href="linear-regression.html#data-exploration"><i class="fa fa-check"></i><b>8.1.3</b> Data exploration</a></li>
+<li class="chapter" data-level="8.1.4" data-path="linear-regression.html"><a href="linear-regression.html#univariable"><i class="fa fa-check"></i><b>8.1.4</b> Univariable</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-mlr"><i class="fa fa-check"></i><b>8.2</b> Multiple linear regression (MLR)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="linear-regression.html"><a href="linear-regression.html#about-mlr"><i class="fa fa-check"></i><b>8.2.1</b> About MLR</a></li>
+<li class="chapter" data-level="8.2.2" data-path="linear-regression.html"><a href="linear-regression.html#analysis-1"><i class="fa fa-check"></i><b>8.2.2</b> Analysis</a></li>
+<li class="chapter" data-level="8.2.3" data-path="linear-regression.html"><a href="linear-regression.html#multicollinearity-mc"><i class="fa fa-check"></i><b>8.2.3</b> Multicollinearity, MC</a></li>
+<li class="chapter" data-level="8.2.4" data-path="linear-regression.html"><a href="linear-regression.html#interaction"><i class="fa fa-check"></i><b>8.2.4</b> Interaction, *</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="linear-regression.html"><a href="linear-regression.html#model-fit-assessment-residuals"><i class="fa fa-check"></i><b>8.3</b> Model fit assessment: Residuals</a>
+<ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#histogram-1"><i class="fa fa-check"></i>Histogram</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#scatter-plots"><i class="fa fa-check"></i>Scatter plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="linear-regression.html"><a href="linear-regression.html#interpretation-1"><i class="fa fa-check"></i><b>8.4</b> Interpretation</a></li>
+<li class="chapter" data-level="8.5" data-path="linear-regression.html"><a href="linear-regression.html#model-equation-1"><i class="fa fa-check"></i><b>8.5</b> Model equation</a></li>
+<li class="chapter" data-level="8.6" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>8.6</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html"><i class="fa fa-check"></i><b>9</b> Binary Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#background"><i class="fa fa-check"></i><b>9.1.1</b> Background</a></li>
+<li class="chapter" data-level="9.1.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#objectives-1"><i class="fa fa-check"></i><b>9.1.2</b> Objectives</a></li>
+<li class="chapter" data-level="9.1.3" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#further-readings"><i class="fa fa-check"></i><b>9.1.3</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#dataset"><i class="fa fa-check"></i><b>9.2</b> Dataset</a></li>
+<li class="chapter" data-level="9.3" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#the-logit-and-logistic-models"><i class="fa fa-check"></i><b>9.3</b> The logit and logistic models</a></li>
+<li class="chapter" data-level="9.4" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#prepare-environment-for-analysis"><i class="fa fa-check"></i><b>9.4</b> Prepare environment for analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#creating-a-rstudio-project"><i class="fa fa-check"></i><b>9.4.1</b> Creating a RStudio project</a></li>
+<li class="chapter" data-level="9.4.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#loading-libraries"><i class="fa fa-check"></i><b>9.4.2</b> Loading libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#read-data-1"><i class="fa fa-check"></i><b>9.5</b> Read data</a></li>
+<li class="chapter" data-level="9.6" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#explore-data"><i class="fa fa-check"></i><b>9.6</b> Explore data</a></li>
+<li class="chapter" data-level="9.7" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#estimate-the-regression-parameters"><i class="fa fa-check"></i><b>9.7</b> Estimate the regression parameters</a></li>
+<li class="chapter" data-level="9.8" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#simple-binary-logistic-regression"><i class="fa fa-check"></i><b>9.8</b> Simple binary logistic regression</a></li>
+<li class="chapter" data-level="9.9" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#multiple-binary-logistic-regression"><i class="fa fa-check"></i><b>9.9</b> Multiple binary logistic regression</a></li>
+<li class="chapter" data-level="9.10" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#convert-the-log-odds-to-odds-ratio"><i class="fa fa-check"></i><b>9.10</b> Convert the log odds to odds ratio</a></li>
+<li class="chapter" data-level="9.11" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#making-inference"><i class="fa fa-check"></i><b>9.11</b> Making inference</a></li>
+<li class="chapter" data-level="9.12" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#model-comparison"><i class="fa fa-check"></i><b>9.12</b> Model comparison</a></li>
+<li class="chapter" data-level="9.13" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#adding-an-interaction-term"><i class="fa fa-check"></i><b>9.13</b> Adding an interaction term</a></li>
+<li class="chapter" data-level="9.14" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#prediction-from-binary-logistic-regression"><i class="fa fa-check"></i><b>9.14</b> Prediction from binary logistic regression</a>
+<ul>
+<li class="chapter" data-level="9.14.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#predict-the-log-odds"><i class="fa fa-check"></i><b>9.14.1</b> Predict the log odds</a></li>
+<li class="chapter" data-level="9.14.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#predict-the-probabilities"><i class="fa fa-check"></i><b>9.14.2</b> Predict the probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="9.15" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#model-fitness"><i class="fa fa-check"></i><b>9.15</b> Model fitness</a></li>
+<li class="chapter" data-level="9.16" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#presentation"><i class="fa fa-check"></i><b>9.16</b> Presentation</a></li>
+<li class="chapter" data-level="9.17" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#references-1"><i class="fa fa-check"></i><b>9.17</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>10</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="poisson-regression.html"><a href="poisson-regression.html#introduction-2"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-regression.html"><a href="poisson-regression.html#preliminaries"><i class="fa fa-check"></i><b>10.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-regression.html"><a href="poisson-regression.html#load-libraries"><i class="fa fa-check"></i><b>10.2.1</b> Load libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-regression.html"><a href="poisson-regression.html#simple-poisson-regression-models"><i class="fa fa-check"></i><b>10.3</b> Simple Poisson regression models</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#count-data"><i class="fa fa-check"></i><b>10.3.1</b> Count data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="poisson-regression.html"><a href="poisson-regression.html#rate-data"><i class="fa fa-check"></i><b>10.4</b> Rate data</a></li>
+<li class="chapter" data-level="10.5" data-path="poisson-regression.html"><a href="poisson-regression.html#multiple-poisson-regression-model"><i class="fa fa-check"></i><b>10.5</b> Multiple Poisson regression model</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="poisson-regression.html"><a href="poisson-regression.html#univariable-1"><i class="fa fa-check"></i><b>10.5.1</b> Univariable</a></li>
+<li class="chapter" data-level="10.5.2" data-path="poisson-regression.html"><a href="poisson-regression.html#multivariable-1"><i class="fa fa-check"></i><b>10.5.2</b> Multivariable</a></li>
+<li class="chapter" data-level="10.5.3" data-path="poisson-regression.html"><a href="poisson-regression.html#interaction-1"><i class="fa fa-check"></i><b>10.5.3</b> Interaction</a></li>
+<li class="chapter" data-level="10.5.4" data-path="poisson-regression.html"><a href="poisson-regression.html#final-model"><i class="fa fa-check"></i><b>10.5.4</b> Final model</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="poisson-regression.html"><a href="poisson-regression.html#references-2"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis.html"><a href="survival-analysis.html#introduction-3"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="survival-analysis.html"><a href="survival-analysis.html#background-1"><i class="fa fa-check"></i><b>11.1.1</b> Background</a></li>
+<li class="chapter" data-level="11.1.2" data-path="survival-analysis.html"><a href="survival-analysis.html#types-of-survival-analysis"><i class="fa fa-check"></i><b>11.1.2</b> Types of survival analysis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="survival-analysis.html"><a href="survival-analysis.html#objectives-2"><i class="fa fa-check"></i><b>11.1.3</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="survival-analysis.html"><a href="survival-analysis.html#prepare-environment-for-analysis-1"><i class="fa fa-check"></i><b>11.2</b> Prepare environment for analysis</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="survival-analysis.html"><a href="survival-analysis.html#rstudio-project-1"><i class="fa fa-check"></i><b>11.2.1</b> RStudio project</a></li>
+<li class="chapter" data-level="11.2.2" data-path="survival-analysis.html"><a href="survival-analysis.html#packages-1"><i class="fa fa-check"></i><b>11.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="survival-analysis.html"><a href="survival-analysis.html#data"><i class="fa fa-check"></i><b>11.3</b> Data</a></li>
+<li class="chapter" data-level="11.4" data-path="survival-analysis.html"><a href="survival-analysis.html#exploratory-data"><i class="fa fa-check"></i><b>11.4</b> Exploratory data</a></li>
+<li class="chapter" data-level="11.5" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-survival-estimates"><i class="fa fa-check"></i><b>11.5</b> Kaplan-Meier survival estimates</a></li>
+<li class="chapter" data-level="11.6" data-path="survival-analysis.html"><a href="survival-analysis.html#plot-the-survival-probability"><i class="fa fa-check"></i><b>11.6</b> Plot the survival probability</a></li>
+<li class="chapter" data-level="11.7" data-path="survival-analysis.html"><a href="survival-analysis.html#comparing-kaplan-meier-estimates-across-groups"><i class="fa fa-check"></i><b>11.7</b> Comparing Kaplan-Meier estimates across groups</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#log-rank-test"><i class="fa fa-check"></i><b>11.7.1</b> Log-rank test</a></li>
+<li class="chapter" data-level="11.7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#peto-peto-test"><i class="fa fa-check"></i><b>11.7.2</b> peto-peto test</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="survival-analysis.html"><a href="survival-analysis.html#semi-parametric-models-in-survival-analysis"><i class="fa fa-check"></i><b>11.8</b> Semi-parametric models in survival analysis</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazard-regression"><i class="fa fa-check"></i><b>11.8.1</b> Cox proportional hazard regression</a></li>
+<li class="chapter" data-level="11.8.2" data-path="survival-analysis.html"><a href="survival-analysis.html#advantages-of-the-cox-proportional-hazard-regression"><i class="fa fa-check"></i><b>11.8.2</b> Advantages of the Cox proportional hazard regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="survival-analysis.html"><a href="survival-analysis.html#estimation-from-cox-proportional-hazards-regression"><i class="fa fa-check"></i><b>11.9</b> Estimation from Cox proportional hazards regression</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="survival-analysis.html"><a href="survival-analysis.html#simple-cox-ph-regression"><i class="fa fa-check"></i><b>11.9.1</b> Simple Cox PH regression</a></li>
+<li class="chapter" data-level="11.9.2" data-path="survival-analysis.html"><a href="survival-analysis.html#multiple-cox-ph-regression"><i class="fa fa-check"></i><b>11.9.2</b> Multiple Cox PH regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.10" data-path="survival-analysis.html"><a href="survival-analysis.html#inference"><i class="fa fa-check"></i><b>11.10</b> Inference</a></li>
+<li class="chapter" data-level="11.11" data-path="survival-analysis.html"><a href="survival-analysis.html#adding-interaction-in-the-model"><i class="fa fa-check"></i><b>11.11</b> Adding interaction in the model</a></li>
+<li class="chapter" data-level="11.12" data-path="survival-analysis.html"><a href="survival-analysis.html#the-proportional-hazard-assumption"><i class="fa fa-check"></i><b>11.12</b> The proportional hazard assumption</a>
+<ul>
+<li class="chapter" data-level="11.12.1" data-path="survival-analysis.html"><a href="survival-analysis.html#risk-constant-over-time"><i class="fa fa-check"></i><b>11.12.1</b> Risk constant over time</a></li>
+<li class="chapter" data-level="11.12.2" data-path="survival-analysis.html"><a href="survival-analysis.html#test-for-ph-assumption"><i class="fa fa-check"></i><b>11.12.2</b> Test for PH assumption</a></li>
+<li class="chapter" data-level="11.12.3" data-path="survival-analysis.html"><a href="survival-analysis.html#plots-to-assess-ph-assumption"><i class="fa fa-check"></i><b>11.12.3</b> Plots to assess PH assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="11.13" data-path="survival-analysis.html"><a href="survival-analysis.html#model-checking"><i class="fa fa-check"></i><b>11.13</b> Model checking</a>
+<ul>
+<li class="chapter" data-level="11.13.1" data-path="survival-analysis.html"><a href="survival-analysis.html#prediction-from-cox-ph-model"><i class="fa fa-check"></i><b>11.13.1</b> Prediction from Cox PH model</a></li>
+<li class="chapter" data-level="11.13.2" data-path="survival-analysis.html"><a href="survival-analysis.html#residuas-from-cox-ph-model"><i class="fa fa-check"></i><b>11.13.2</b> Residuas from Cox PH model</a></li>
+<li class="chapter" data-level="11.13.3" data-path="survival-analysis.html"><a href="survival-analysis.html#influential-observations"><i class="fa fa-check"></i><b>11.13.3</b> Influential observations</a></li>
+</ul></li>
+<li class="chapter" data-level="11.14" data-path="survival-analysis.html"><a href="survival-analysis.html#plot-the-adjusted-survival"><i class="fa fa-check"></i><b>11.14</b> Plot the adjusted survival</a></li>
+<li class="chapter" data-level="11.15" data-path="survival-analysis.html"><a href="survival-analysis.html#presentation-and-interpretation"><i class="fa fa-check"></i><b>11.15</b> Presentation and interpretation</a></li>
+<li class="chapter" data-level="11.16" data-path="survival-analysis.html"><a href="survival-analysis.html#references-3"><i class="fa fa-check"></i><b>11.16</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Medicine and Health using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references-4" class="section level1 unnumbered">
+<h1>References</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Everitt, Brian S., and Torsten Hothorn. 2017. <em>HSAUR: A Handbook of Statistical Analyses Using r (1st Edition)</em>. <a href="https://CRAN.R-project.org/package=HSAUR">https://CRAN.R-project.org/package=HSAUR</a>.
+</div>
+<div class="csl-entry">
+Hosmer, David. 2013. <em>Applied Logistic Regression</em>. Hoboken, New Jersey: Wiley.
+</div>
+<div class="csl-entry">
+Kleinbaum, David. 2010. <em>Logistic Regression : A Self-Learning Text</em>. New York: Springer.
+</div>
+<div class="csl-entry">
+Terry M. Therneau, and Patricia M. Grambsch. 2000. <em>Modeling Survival Data: Extending the <span>C</span>ox Model</em>. New York: Springer.
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="survival-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/drkamarul11_References.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dataanalysis.pdf", "dataanalysis.epub", "dataanalysis.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

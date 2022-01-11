@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Linear Regression | Data Analysis in Medicine and Health using R</title>
+  <meta name="description" content="Chapter 8 Linear Regression | Data Analysis in Medicine and Health using R" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Linear Regression | Data Analysis in Medicine and Health using R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/drki_musa/dataanalysis/" />
+  
+  
+  <meta name="github-repo" content="drkamarul/multivar_data_analysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Linear Regression | Data Analysis in Medicine and Health using R" />
+  
+  
+  
+
+<meta name="author" content="Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mukhtar" />
+
+
+<meta name="date" content="2022-01-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-data-analysis-eda.html"/>
+<link rel="next" href="binary-logistic-regression.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Analysis in Medicine and Health using R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html"><i class="fa fa-check"></i><b>1</b> Introduction to R, RStudio and RStudio Cloud</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#rstudio-cloud"><i class="fa fa-check"></i><b>1.1</b> RStudio Cloud</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#the-rstudio-cloud-registration"><i class="fa fa-check"></i><b>1.1.1</b> The RStudio Cloud Registration</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#register-and-log-in"><i class="fa fa-check"></i><b>1.1.2</b> Register and log in</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#point-and-click-r-gui"><i class="fa fa-check"></i><b>1.2</b> Point and click R GUI</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#rstudio-server"><i class="fa fa-check"></i><b>1.3</b> RStudio Server</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-r-and-rstudio-on-your-local-machine"><i class="fa fa-check"></i><b>1.4</b> Installing R and RStudio on Your Local Machine</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-r"><i class="fa fa-check"></i><b>1.4.1</b> Installing R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installing-rstudio-ide"><i class="fa fa-check"></i><b>1.4.2</b> Installing RStudio IDE</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#checking-r-and-rstudio-installations"><i class="fa fa-check"></i><b>1.4.3</b> Checking R and RStudio Installations</a></li>
+<li class="chapter" data-level="1.4.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#installation-of-miktex-texlive-and-mactex"><i class="fa fa-check"></i><b>1.4.4</b> Installation of MiKTeX, TeXLive and MacTex</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#starting-your-rstudio"><i class="fa fa-check"></i><b>1.5</b> Starting your RStudio</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#console-tab"><i class="fa fa-check"></i><b>1.5.1</b> Console tab</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#files-plots-packages-help-and-viewer-pane"><i class="fa fa-check"></i><b>1.5.2</b> Files, Plots, Packages, Help and Viewer Pane</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#environment-history-connection-and-build-pane"><i class="fa fa-check"></i><b>1.5.3</b> Environment, History, Connection and Build Pane</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction-to-r-rstudio-and-rstudio-cloud.html"><a href="introduction-to-r-rstudio-and-rstudio-cloud.html#source-pane"><i class="fa fa-check"></i><b>1.5.4</b> Source Pane</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html"><i class="fa fa-check"></i><b>2</b> R Scripts and R Packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#open-a-new-r-script"><i class="fa fa-check"></i><b>2.1</b> Open a new R script</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#our-first-r-script"><i class="fa fa-check"></i><b>2.1.1</b> Our first R script</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#function-argument-and-parameters"><i class="fa fa-check"></i><b>2.1.2</b> Function, Argument and Parameters</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#need-more-help"><i class="fa fa-check"></i><b>2.1.3</b> Need more help?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#packages-on-cran"><i class="fa fa-check"></i><b>2.2.1</b> Packages on CRAN</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#check-if-the-package-you-need-is-available-in-your-r-library"><i class="fa fa-check"></i><b>2.2.2</b> Check if the package you need is available in your R library</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#install-an-r-package"><i class="fa fa-check"></i><b>2.2.3</b> Install an R package</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#directory"><i class="fa fa-check"></i><b>2.3</b> Directory</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#starting-your-r-job"><i class="fa fa-check"></i><b>2.3.1</b> Starting your R job</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#create-new-project"><i class="fa fa-check"></i><b>2.3.2</b> Create new project</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#where-is-my-data"><i class="fa fa-check"></i><b>2.3.3</b> Where is my data?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#upload-data-to-rstudio-cloud"><i class="fa fa-check"></i><b>2.4</b> Upload data to RStudio Cloud</a></li>
+<li class="chapter" data-level="2.5" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#more-resources-on-rstudio-cloud"><i class="fa fa-check"></i><b>2.5</b> More resources on RStudio Cloud</a></li>
+<li class="chapter" data-level="2.6" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#need-help"><i class="fa fa-check"></i><b>2.6</b> Need help?</a></li>
+<li class="chapter" data-level="2.7" data-path="r-scripts-and-r-packages.html"><a href="r-scripts-and-r-packages.html#bookdown"><i class="fa fa-check"></i><b>2.7</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rstudio-project.html"><a href="rstudio-project.html"><i class="fa fa-check"></i><b>3</b> RStudio Project</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rstudio-project.html"><a href="rstudio-project.html#objectives"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="rstudio-project.html"><a href="rstudio-project.html#dataset-repository-on-github"><i class="fa fa-check"></i><b>3.2</b> Dataset repository on GitHub</a></li>
+<li class="chapter" data-level="3.3" data-path="rstudio-project.html"><a href="rstudio-project.html#rstudio-project-on-rstudio-cloud"><i class="fa fa-check"></i><b>3.3</b> RStudio project on RStudio Cloud</a></li>
+<li class="chapter" data-level="3.4" data-path="rstudio-project.html"><a href="rstudio-project.html#rstudio-project-on-local-machine"><i class="fa fa-check"></i><b>3.4</b> RStudio project on local machine</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#history-and-objectives-of-data-visualization"><i class="fa fa-check"></i><b>4.2</b> History and objectives of Data Visualization</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#ingredients-for-good-graphics"><i class="fa fa-check"></i><b>4.3</b> Ingredients for Good Graphics</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#graphics-packages-in-r"><i class="fa fa-check"></i><b>4.4</b> Graphics Packages in R</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#the-ggplot2-package"><i class="fa fa-check"></i><b>4.5</b> The <strong>ggplot2</strong> Package</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#preparation"><i class="fa fa-check"></i><b>4.6</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-visualization.html"><a href="data-visualization.html#create-a-new-rstudio-project"><i class="fa fa-check"></i><b>4.6.1</b> Create a New RStudio Project</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-visualization.html"><a href="data-visualization.html#important-questions-when-making-graphs"><i class="fa fa-check"></i><b>4.6.2</b> Important Questions when Making Graphs</a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-visualization.html"><a href="data-visualization.html#read-data"><i class="fa fa-check"></i><b>4.6.3</b> Read Data</a></li>
+<li class="chapter" data-level="4.6.4" data-path="data-visualization.html"><a href="data-visualization.html#load-the-library"><i class="fa fa-check"></i><b>4.6.4</b> Load the Library</a></li>
+<li class="chapter" data-level="4.6.5" data-path="data-visualization.html"><a href="data-visualization.html#read-dataset"><i class="fa fa-check"></i><b>4.6.5</b> Read Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#basic-plots"><i class="fa fa-check"></i><b>4.7</b> Basic Plots</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#adding-another-variable"><i class="fa fa-check"></i><b>4.8</b> Adding another variable</a></li>
+<li class="chapter" data-level="4.9" data-path="data-visualization.html"><a href="data-visualization.html#making-subplots"><i class="fa fa-check"></i><b>4.9</b> Making Subplots</a></li>
+<li class="chapter" data-level="4.10" data-path="data-visualization.html"><a href="data-visualization.html#overlaying-plots"><i class="fa fa-check"></i><b>4.10</b> Overlaying Plots</a></li>
+<li class="chapter" data-level="4.11" data-path="data-visualization.html"><a href="data-visualization.html#combining-different-plots"><i class="fa fa-check"></i><b>4.11</b> Combining Different Plots</a></li>
+<li class="chapter" data-level="4.12" data-path="data-visualization.html"><a href="data-visualization.html#statistical-transformation"><i class="fa fa-check"></i><b>4.12</b> Statistical Transformation</a></li>
+<li class="chapter" data-level="4.13" data-path="data-visualization.html"><a href="data-visualization.html#customizing-title"><i class="fa fa-check"></i><b>4.13</b> Customizing Title</a></li>
+<li class="chapter" data-level="4.14" data-path="data-visualization.html"><a href="data-visualization.html#adjusting-axes"><i class="fa fa-check"></i><b>4.14</b> Adjusting Axes</a></li>
+<li class="chapter" data-level="4.15" data-path="data-visualization.html"><a href="data-visualization.html#choosing-themes"><i class="fa fa-check"></i><b>4.15</b> Choosing Themes</a></li>
+<li class="chapter" data-level="4.16" data-path="data-visualization.html"><a href="data-visualization.html#saving-plots"><i class="fa fa-check"></i><b>4.16</b> Saving Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#definition-of-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> Definition of data wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#data-wrangling-with-dplyr-package"><i class="fa fa-check"></i><b>5.2</b> Data wrangling with <strong>dplyr</strong> package</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-package"><i class="fa fa-check"></i><b>5.2.1</b> <strong>dplyr</strong> package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#common-procedures-for-doing-data-transformation"><i class="fa fa-check"></i><b>5.3</b> Common procedures for doing data transformation</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#some-dplyr-functions"><i class="fa fa-check"></i><b>5.4</b> Some <strong>dplyr</strong> functions</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#create-a-new-project-or-set-your-working-directory"><i class="fa fa-check"></i><b>5.5</b> Create a new project or set your working directory</a></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-libraries"><i class="fa fa-check"></i><b>5.6</b> Load the libraries</a></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#datasets"><i class="fa fa-check"></i><b>5.7</b> Datasets</a></li>
+<li class="chapter" data-level="5.8" data-path="data-wrangling.html"><a href="data-wrangling.html#select-variables-generate-new-variable-and-rename-variable"><i class="fa fa-check"></i><b>5.8</b> Select variables, generate new variable and rename variable</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="data-wrangling.html"><a href="data-wrangling.html#select-variables-using-dplyrselect"><i class="fa fa-check"></i><b>5.8.1</b> Select variables using <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-wrangling.html"><a href="data-wrangling.html#generate-new-variable-using-mutate"><i class="fa fa-check"></i><b>5.8.2</b> Generate new variable using <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.8.3" data-path="data-wrangling.html"><a href="data-wrangling.html#rename-variable-using-rename"><i class="fa fa-check"></i><b>5.8.3</b> Rename variable using <code>rename()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-wrangling.html"><a href="data-wrangling.html#sorting-data-and-select-observation"><i class="fa fa-check"></i><b>5.9</b> Sorting data and select observation</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="data-wrangling.html"><a href="data-wrangling.html#sorting-data-using-arrange"><i class="fa fa-check"></i><b>5.9.1</b> Sorting data using <code>arrange()</code></a></li>
+<li class="chapter" data-level="5.9.2" data-path="data-wrangling.html"><a href="data-wrangling.html#select-observation-using-filter"><i class="fa fa-check"></i><b>5.9.2</b> Select observation using <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="data-wrangling.html"><a href="data-wrangling.html#group-data-and-get-summary-statistics"><i class="fa fa-check"></i><b>5.10</b> Group data and get summary statistics</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-data-using-group_by"><i class="fa fa-check"></i><b>5.10.1</b> Group data using <code>group_by()</code></a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-wrangling.html"><a href="data-wrangling.html#summary-statistic-using-summarize"><i class="fa fa-check"></i><b>5.10.2</b> Summary statistic using <code>summarize()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="data-wrangling.html"><a href="data-wrangling.html#more-complicated-dplyr-verbs"><i class="fa fa-check"></i><b>5.11</b> More complicated <strong>dplyr</strong> verbs</a></li>
+<li class="chapter" data-level="5.12" data-path="data-wrangling.html"><a href="data-wrangling.html#data-transformation-for-categorical-variables"><i class="fa fa-check"></i><b>5.12</b> Data transformation for categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="data-wrangling.html"><a href="data-wrangling.html#forcats-package"><i class="fa fa-check"></i><b>5.12.1</b> <strong>forcats</strong> package</a></li>
+<li class="chapter" data-level="5.12.2" data-path="data-wrangling.html"><a href="data-wrangling.html#conversion-from-numeric-to-factor-variables"><i class="fa fa-check"></i><b>5.12.2</b> Conversion from numeric to factor variables</a></li>
+<li class="chapter" data-level="5.12.3" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding-variables"><i class="fa fa-check"></i><b>5.12.3</b> Recoding variables</a></li>
+<li class="chapter" data-level="5.12.4" data-path="data-wrangling.html"><a href="data-wrangling.html#changing-the-level-of-categorical-variable"><i class="fa fa-check"></i><b>5.12.4</b> Changing the level of categorical variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="data-wrangling.html"><a href="data-wrangling.html#summary"><i class="fa fa-check"></i><b>5.13</b> Summary</a></li>
+<li class="chapter" data-level="5.14" data-path="data-wrangling.html"><a href="data-wrangling.html#self-practice"><i class="fa fa-check"></i><b>5.14</b> Self-practice</a></li>
+<li class="chapter" data-level="5.15" data-path="data-wrangling.html"><a href="data-wrangling.html#references"><i class="fa fa-check"></i><b>5.15</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#motivation"><i class="fa fa-check"></i><b>6.1</b> Motivation</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#what-is-r-markdown"><i class="fa fa-check"></i><b>6.1.1</b> What is R Markdown?</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#why-should-we-bother-learning-r-markdown"><i class="fa fa-check"></i><b>6.1.2</b> Why should we bother learning R Markdown?</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#sources-to-learn-r-markdown"><i class="fa fa-check"></i><b>6.1.3</b> Sources to learn R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>6.2</b> R Markdown Basics</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#install-rmarkdown-package"><i class="fa fa-check"></i><b>6.2.1</b> Install <code>rmarkdown</code> package</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#install-latex-package-for-pdf"><i class="fa fa-check"></i><b>6.2.2</b> Install LaTeX package for PDF</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#new-.rmd-file"><i class="fa fa-check"></i><b>6.2.3</b> New .Rmd file</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#knit-it"><i class="fa fa-check"></i><b>6.2.4</b> Knit it!</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#yaml-header"><i class="fa fa-check"></i><b>6.2.5</b> YAML header</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>6.2.6</b> Code chunks</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#header-levels"><i class="fa fa-check"></i><b>6.2.7</b> Header levels</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#exercise-1"><i class="fa fa-check"></i><b>6.2.8</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#table"><i class="fa fa-check"></i><b>6.3</b> Table</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#basic-table"><i class="fa fa-check"></i><b>6.3.1</b> Basic table</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#table-from-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Table (from data frame)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#more-on-table"><i class="fa fa-check"></i><b>6.3.3</b> More on table</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#plot-figure-and-image"><i class="fa fa-check"></i><b>6.4</b> Plot, figure and image</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#plot-caption-fig.cap"><i class="fa fa-check"></i><b>6.4.1</b> Plot caption – <code>fig.cap</code></a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#plot-size-fig.heightin-inch"><i class="fa fa-check"></i><b>6.4.2</b> Plot size – <code>fig.height</code>(in inch)</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#plot-size-fig.width-in-inch"><i class="fa fa-check"></i><b>6.4.3</b> Plot size – <code>fig.width</code> (in inch)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="r-markdown.html"><a href="r-markdown.html#plot-aspect-ratio-fig.asp"><i class="fa fa-check"></i><b>6.4.4</b> Plot aspect ratio – <code>fig.asp</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="r-markdown.html"><a href="r-markdown.html#image"><i class="fa fa-check"></i><b>6.5</b> Image</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="r-markdown.html"><a href="r-markdown.html#exercise-2"><i class="fa fa-check"></i><b>6.5.1</b> Exercise 2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="r-markdown.html"><a href="r-markdown.html#inline-output"><i class="fa fa-check"></i><b>6.6</b> Inline output</a></li>
+<li class="chapter" data-level="6.7" data-path="r-markdown.html"><a href="r-markdown.html#equation"><i class="fa fa-check"></i><b>6.7</b> Equation</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="r-markdown.html"><a href="r-markdown.html#mathematical-equation"><i class="fa fa-check"></i><b>6.7.1</b> Mathematical equation</a></li>
+<li class="chapter" data-level="6.7.2" data-path="r-markdown.html"><a href="r-markdown.html#inline-equation"><i class="fa fa-check"></i><b>6.7.2</b> Inline equation</a></li>
+<li class="chapter" data-level="6.7.3" data-path="r-markdown.html"><a href="r-markdown.html#display-equation"><i class="fa fa-check"></i><b>6.7.3</b> Display equation</a></li>
+<li class="chapter" data-level="6.7.4" data-path="r-markdown.html"><a href="r-markdown.html#exercise-3"><i class="fa fa-check"></i><b>6.7.4</b> Exercise 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html"><i class="fa fa-check"></i><b>7</b> Exploratory data analysis (EDA)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#motivation-1"><i class="fa fa-check"></i><b>7.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#questions-to-ask-before-making-graphs"><i class="fa fa-check"></i><b>7.2</b> Questions to ask before making graphs</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#eda-using-ggplot2-package"><i class="fa fa-check"></i><b>7.3</b> EDA using ggplot2 package</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#usage-of-ggplot2"><i class="fa fa-check"></i><b>7.3.1</b> Usage of <strong>ggplot2</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#loading-the-library"><i class="fa fa-check"></i><b>7.4</b> Loading the library</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#the-dataset"><i class="fa fa-check"></i><b>7.5</b> The dataset</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.6</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#statistics"><i class="fa fa-check"></i><b>7.6.1</b> Statistics</a></li>
+<li class="chapter" data-level="7.6.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#plots"><i class="fa fa-check"></i><b>7.6.2</b> Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#one-variable-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>7.7</b> One variable: Distribution of a categorical variable</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#bar-chart"><i class="fa fa-check"></i><b>7.7.1</b> Bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#one-variable-distribution-of-a-numerical-variable"><i class="fa fa-check"></i><b>7.8</b> One variable: Distribution of a numerical variable</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#histogram"><i class="fa fa-check"></i><b>7.8.1</b> Histogram</a></li>
+<li class="chapter" data-level="7.8.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#density-curve"><i class="fa fa-check"></i><b>7.8.2</b> Density curve</a></li>
+<li class="chapter" data-level="7.8.3" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#histogram-and-density-curve-together"><i class="fa fa-check"></i><b>7.8.3</b> Histogram and density curve together</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#two-variables-plotting-a-numerical-and-a-categorical-variable"><i class="fa fa-check"></i><b>7.9</b> Two variables: Plotting a numerical and a categorical variable</a>
+<ul>
+<li class="chapter" data-level="7.9.1" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#overlaying-histogramss-and-boxplot"><i class="fa fa-check"></i><b>7.9.1</b> Overlaying histogramss and boxplot</a></li>
+<li class="chapter" data-level="7.9.2" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#faceting-the-plots"><i class="fa fa-check"></i><b>7.9.2</b> Faceting the plots</a></li>
+</ul></li>
+<li class="chapter" data-level="7.10" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#line-plot"><i class="fa fa-check"></i><b>7.10</b> Line plot</a></li>
+<li class="chapter" data-level="7.11" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#plotting-means-and-error-bars"><i class="fa fa-check"></i><b>7.11</b> Plotting means and error bars</a></li>
+<li class="chapter" data-level="7.12" data-path="exploratory-data-analysis-eda.html"><a href="exploratory-data-analysis-eda.html#scatterplot-with-fit-line"><i class="fa fa-check"></i><b>7.12</b> Scatterplot with fit line</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>8</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-slr"><i class="fa fa-check"></i><b>8.1</b> Simple linear regression (SLR)</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="linear-regression.html"><a href="linear-regression.html#about-slr"><i class="fa fa-check"></i><b>8.1.1</b> About SLR</a></li>
+<li class="chapter" data-level="8.1.2" data-path="linear-regression.html"><a href="linear-regression.html#analysis"><i class="fa fa-check"></i><b>8.1.2</b> Analysis</a></li>
+<li class="chapter" data-level="8.1.3" data-path="linear-regression.html"><a href="linear-regression.html#data-exploration"><i class="fa fa-check"></i><b>8.1.3</b> Data exploration</a></li>
+<li class="chapter" data-level="8.1.4" data-path="linear-regression.html"><a href="linear-regression.html#univariable"><i class="fa fa-check"></i><b>8.1.4</b> Univariable</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="linear-regression.html"><a href="linear-regression.html#multiple-linear-regression-mlr"><i class="fa fa-check"></i><b>8.2</b> Multiple linear regression (MLR)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="linear-regression.html"><a href="linear-regression.html#about-mlr"><i class="fa fa-check"></i><b>8.2.1</b> About MLR</a></li>
+<li class="chapter" data-level="8.2.2" data-path="linear-regression.html"><a href="linear-regression.html#analysis-1"><i class="fa fa-check"></i><b>8.2.2</b> Analysis</a></li>
+<li class="chapter" data-level="8.2.3" data-path="linear-regression.html"><a href="linear-regression.html#multicollinearity-mc"><i class="fa fa-check"></i><b>8.2.3</b> Multicollinearity, MC</a></li>
+<li class="chapter" data-level="8.2.4" data-path="linear-regression.html"><a href="linear-regression.html#interaction"><i class="fa fa-check"></i><b>8.2.4</b> Interaction, *</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="linear-regression.html"><a href="linear-regression.html#model-fit-assessment-residuals"><i class="fa fa-check"></i><b>8.3</b> Model fit assessment: Residuals</a>
+<ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#histogram-1"><i class="fa fa-check"></i>Histogram</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#scatter-plots"><i class="fa fa-check"></i>Scatter plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="linear-regression.html"><a href="linear-regression.html#interpretation-1"><i class="fa fa-check"></i><b>8.4</b> Interpretation</a></li>
+<li class="chapter" data-level="8.5" data-path="linear-regression.html"><a href="linear-regression.html#model-equation-1"><i class="fa fa-check"></i><b>8.5</b> Model equation</a></li>
+<li class="chapter" data-level="8.6" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>8.6</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html"><i class="fa fa-check"></i><b>9</b> Binary Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#background"><i class="fa fa-check"></i><b>9.1.1</b> Background</a></li>
+<li class="chapter" data-level="9.1.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#objectives-1"><i class="fa fa-check"></i><b>9.1.2</b> Objectives</a></li>
+<li class="chapter" data-level="9.1.3" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#further-readings"><i class="fa fa-check"></i><b>9.1.3</b> Further readings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#dataset"><i class="fa fa-check"></i><b>9.2</b> Dataset</a></li>
+<li class="chapter" data-level="9.3" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#the-logit-and-logistic-models"><i class="fa fa-check"></i><b>9.3</b> The logit and logistic models</a></li>
+<li class="chapter" data-level="9.4" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#prepare-environment-for-analysis"><i class="fa fa-check"></i><b>9.4</b> Prepare environment for analysis</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#creating-a-rstudio-project"><i class="fa fa-check"></i><b>9.4.1</b> Creating a RStudio project</a></li>
+<li class="chapter" data-level="9.4.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#loading-libraries"><i class="fa fa-check"></i><b>9.4.2</b> Loading libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#read-data-1"><i class="fa fa-check"></i><b>9.5</b> Read data</a></li>
+<li class="chapter" data-level="9.6" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#explore-data"><i class="fa fa-check"></i><b>9.6</b> Explore data</a></li>
+<li class="chapter" data-level="9.7" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#estimate-the-regression-parameters"><i class="fa fa-check"></i><b>9.7</b> Estimate the regression parameters</a></li>
+<li class="chapter" data-level="9.8" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#simple-binary-logistic-regression"><i class="fa fa-check"></i><b>9.8</b> Simple binary logistic regression</a></li>
+<li class="chapter" data-level="9.9" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#multiple-binary-logistic-regression"><i class="fa fa-check"></i><b>9.9</b> Multiple binary logistic regression</a></li>
+<li class="chapter" data-level="9.10" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#convert-the-log-odds-to-odds-ratio"><i class="fa fa-check"></i><b>9.10</b> Convert the log odds to odds ratio</a></li>
+<li class="chapter" data-level="9.11" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#making-inference"><i class="fa fa-check"></i><b>9.11</b> Making inference</a></li>
+<li class="chapter" data-level="9.12" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#model-comparison"><i class="fa fa-check"></i><b>9.12</b> Model comparison</a></li>
+<li class="chapter" data-level="9.13" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#adding-an-interaction-term"><i class="fa fa-check"></i><b>9.13</b> Adding an interaction term</a></li>
+<li class="chapter" data-level="9.14" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#prediction-from-binary-logistic-regression"><i class="fa fa-check"></i><b>9.14</b> Prediction from binary logistic regression</a>
+<ul>
+<li class="chapter" data-level="9.14.1" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#predict-the-log-odds"><i class="fa fa-check"></i><b>9.14.1</b> Predict the log odds</a></li>
+<li class="chapter" data-level="9.14.2" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#predict-the-probabilities"><i class="fa fa-check"></i><b>9.14.2</b> Predict the probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="9.15" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#model-fitness"><i class="fa fa-check"></i><b>9.15</b> Model fitness</a></li>
+<li class="chapter" data-level="9.16" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#presentation"><i class="fa fa-check"></i><b>9.16</b> Presentation</a></li>
+<li class="chapter" data-level="9.17" data-path="binary-logistic-regression.html"><a href="binary-logistic-regression.html#references-1"><i class="fa fa-check"></i><b>9.17</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>10</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="poisson-regression.html"><a href="poisson-regression.html#introduction-2"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-regression.html"><a href="poisson-regression.html#preliminaries"><i class="fa fa-check"></i><b>10.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-regression.html"><a href="poisson-regression.html#load-libraries"><i class="fa fa-check"></i><b>10.2.1</b> Load libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-regression.html"><a href="poisson-regression.html#simple-poisson-regression-models"><i class="fa fa-check"></i><b>10.3</b> Simple Poisson regression models</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#count-data"><i class="fa fa-check"></i><b>10.3.1</b> Count data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="poisson-regression.html"><a href="poisson-regression.html#rate-data"><i class="fa fa-check"></i><b>10.4</b> Rate data</a></li>
+<li class="chapter" data-level="10.5" data-path="poisson-regression.html"><a href="poisson-regression.html#multiple-poisson-regression-model"><i class="fa fa-check"></i><b>10.5</b> Multiple Poisson regression model</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="poisson-regression.html"><a href="poisson-regression.html#univariable-1"><i class="fa fa-check"></i><b>10.5.1</b> Univariable</a></li>
+<li class="chapter" data-level="10.5.2" data-path="poisson-regression.html"><a href="poisson-regression.html#multivariable-1"><i class="fa fa-check"></i><b>10.5.2</b> Multivariable</a></li>
+<li class="chapter" data-level="10.5.3" data-path="poisson-regression.html"><a href="poisson-regression.html#interaction-1"><i class="fa fa-check"></i><b>10.5.3</b> Interaction</a></li>
+<li class="chapter" data-level="10.5.4" data-path="poisson-regression.html"><a href="poisson-regression.html#final-model"><i class="fa fa-check"></i><b>10.5.4</b> Final model</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="poisson-regression.html"><a href="poisson-regression.html#references-2"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis.html"><a href="survival-analysis.html#introduction-3"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="survival-analysis.html"><a href="survival-analysis.html#background-1"><i class="fa fa-check"></i><b>11.1.1</b> Background</a></li>
+<li class="chapter" data-level="11.1.2" data-path="survival-analysis.html"><a href="survival-analysis.html#types-of-survival-analysis"><i class="fa fa-check"></i><b>11.1.2</b> Types of survival analysis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="survival-analysis.html"><a href="survival-analysis.html#objectives-2"><i class="fa fa-check"></i><b>11.1.3</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="survival-analysis.html"><a href="survival-analysis.html#prepare-environment-for-analysis-1"><i class="fa fa-check"></i><b>11.2</b> Prepare environment for analysis</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="survival-analysis.html"><a href="survival-analysis.html#rstudio-project-1"><i class="fa fa-check"></i><b>11.2.1</b> RStudio project</a></li>
+<li class="chapter" data-level="11.2.2" data-path="survival-analysis.html"><a href="survival-analysis.html#packages-1"><i class="fa fa-check"></i><b>11.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="survival-analysis.html"><a href="survival-analysis.html#data"><i class="fa fa-check"></i><b>11.3</b> Data</a></li>
+<li class="chapter" data-level="11.4" data-path="survival-analysis.html"><a href="survival-analysis.html#exploratory-data"><i class="fa fa-check"></i><b>11.4</b> Exploratory data</a></li>
+<li class="chapter" data-level="11.5" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-survival-estimates"><i class="fa fa-check"></i><b>11.5</b> Kaplan-Meier survival estimates</a></li>
+<li class="chapter" data-level="11.6" data-path="survival-analysis.html"><a href="survival-analysis.html#plot-the-survival-probability"><i class="fa fa-check"></i><b>11.6</b> Plot the survival probability</a></li>
+<li class="chapter" data-level="11.7" data-path="survival-analysis.html"><a href="survival-analysis.html#comparing-kaplan-meier-estimates-across-groups"><i class="fa fa-check"></i><b>11.7</b> Comparing Kaplan-Meier estimates across groups</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#log-rank-test"><i class="fa fa-check"></i><b>11.7.1</b> Log-rank test</a></li>
+<li class="chapter" data-level="11.7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#peto-peto-test"><i class="fa fa-check"></i><b>11.7.2</b> peto-peto test</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="survival-analysis.html"><a href="survival-analysis.html#semi-parametric-models-in-survival-analysis"><i class="fa fa-check"></i><b>11.8</b> Semi-parametric models in survival analysis</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazard-regression"><i class="fa fa-check"></i><b>11.8.1</b> Cox proportional hazard regression</a></li>
+<li class="chapter" data-level="11.8.2" data-path="survival-analysis.html"><a href="survival-analysis.html#advantages-of-the-cox-proportional-hazard-regression"><i class="fa fa-check"></i><b>11.8.2</b> Advantages of the Cox proportional hazard regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="survival-analysis.html"><a href="survival-analysis.html#estimation-from-cox-proportional-hazards-regression"><i class="fa fa-check"></i><b>11.9</b> Estimation from Cox proportional hazards regression</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="survival-analysis.html"><a href="survival-analysis.html#simple-cox-ph-regression"><i class="fa fa-check"></i><b>11.9.1</b> Simple Cox PH regression</a></li>
+<li class="chapter" data-level="11.9.2" data-path="survival-analysis.html"><a href="survival-analysis.html#multiple-cox-ph-regression"><i class="fa fa-check"></i><b>11.9.2</b> Multiple Cox PH regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.10" data-path="survival-analysis.html"><a href="survival-analysis.html#inference"><i class="fa fa-check"></i><b>11.10</b> Inference</a></li>
+<li class="chapter" data-level="11.11" data-path="survival-analysis.html"><a href="survival-analysis.html#adding-interaction-in-the-model"><i class="fa fa-check"></i><b>11.11</b> Adding interaction in the model</a></li>
+<li class="chapter" data-level="11.12" data-path="survival-analysis.html"><a href="survival-analysis.html#the-proportional-hazard-assumption"><i class="fa fa-check"></i><b>11.12</b> The proportional hazard assumption</a>
+<ul>
+<li class="chapter" data-level="11.12.1" data-path="survival-analysis.html"><a href="survival-analysis.html#risk-constant-over-time"><i class="fa fa-check"></i><b>11.12.1</b> Risk constant over time</a></li>
+<li class="chapter" data-level="11.12.2" data-path="survival-analysis.html"><a href="survival-analysis.html#test-for-ph-assumption"><i class="fa fa-check"></i><b>11.12.2</b> Test for PH assumption</a></li>
+<li class="chapter" data-level="11.12.3" data-path="survival-analysis.html"><a href="survival-analysis.html#plots-to-assess-ph-assumption"><i class="fa fa-check"></i><b>11.12.3</b> Plots to assess PH assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="11.13" data-path="survival-analysis.html"><a href="survival-analysis.html#model-checking"><i class="fa fa-check"></i><b>11.13</b> Model checking</a>
+<ul>
+<li class="chapter" data-level="11.13.1" data-path="survival-analysis.html"><a href="survival-analysis.html#prediction-from-cox-ph-model"><i class="fa fa-check"></i><b>11.13.1</b> Prediction from Cox PH model</a></li>
+<li class="chapter" data-level="11.13.2" data-path="survival-analysis.html"><a href="survival-analysis.html#residuas-from-cox-ph-model"><i class="fa fa-check"></i><b>11.13.2</b> Residuas from Cox PH model</a></li>
+<li class="chapter" data-level="11.13.3" data-path="survival-analysis.html"><a href="survival-analysis.html#influential-observations"><i class="fa fa-check"></i><b>11.13.3</b> Influential observations</a></li>
+</ul></li>
+<li class="chapter" data-level="11.14" data-path="survival-analysis.html"><a href="survival-analysis.html#plot-the-adjusted-survival"><i class="fa fa-check"></i><b>11.14</b> Plot the adjusted survival</a></li>
+<li class="chapter" data-level="11.15" data-path="survival-analysis.html"><a href="survival-analysis.html#presentation-and-interpretation"><i class="fa fa-check"></i><b>11.15</b> Presentation and interpretation</a></li>
+<li class="chapter" data-level="11.16" data-path="survival-analysis.html"><a href="survival-analysis.html#references-3"><i class="fa fa-check"></i><b>11.16</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>12</b> Missing data</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="missing-data.html"><a href="missing-data.html#introduction-4"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="missing-data.html"><a href="missing-data.html#background-2"><i class="fa fa-check"></i><b>12.1.1</b> Background</a></li>
+<li class="chapter" data-level="12.1.2" data-path="missing-data.html"><a href="missing-data.html#objectives-3"><i class="fa fa-check"></i><b>12.1.2</b> Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="missing-data.html"><a href="missing-data.html#preliminaries-1"><i class="fa fa-check"></i><b>12.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="missing-data.html"><a href="missing-data.html#packages-2"><i class="fa fa-check"></i><b>12.2.1</b> Packages</a></li>
+<li class="chapter" data-level="12.2.2" data-path="missing-data.html"><a href="missing-data.html#dataset-1"><i class="fa fa-check"></i><b>12.2.2</b> Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="missing-data.html"><a href="missing-data.html#exploring-missing-data"><i class="fa fa-check"></i><b>12.3</b> Exploring missing data</a></li>
+<li class="chapter" data-level="12.4" data-path="missing-data.html"><a href="missing-data.html#handling-missing-data"><i class="fa fa-check"></i><b>12.4</b> Handling missing data</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="missing-data.html"><a href="missing-data.html#listwise-deletion"><i class="fa fa-check"></i><b>12.4.1</b> Listwise deletion</a></li>
+<li class="chapter" data-level="12.4.2" data-path="missing-data.html"><a href="missing-data.html#simple-imputation"><i class="fa fa-check"></i><b>12.4.2</b> Simple imputation</a></li>
+<li class="chapter" data-level="12.4.3" data-path="missing-data.html"><a href="missing-data.html#single-imputation"><i class="fa fa-check"></i><b>12.4.3</b> Single imputation</a></li>
+<li class="chapter" data-level="12.4.4" data-path="missing-data.html"><a href="missing-data.html#multiple-imputation"><i class="fa fa-check"></i><b>12.4.4</b> Multiple imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="missing-data.html"><a href="missing-data.html#presentation-1"><i class="fa fa-check"></i><b>12.5</b> Presentation</a></li>
+<li class="chapter" data-level="12.6" data-path="missing-data.html"><a href="missing-data.html#references-4"><i class="fa fa-check"></i><b>12.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Medicine and Health using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear-regression" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Linear Regression</h1>
+<ol style="list-style-type: decimal">
+<li><p>A statistical method to model relationship between:</p>
+<ul>
+<li>outcome: numerical variable.</li>
+<li>predictors/independent variables: numerical, categorical variables.</li>
+</ul></li>
+<li><p>A type of Generalized Linear Models (GLMs), which also includes other outcome types, e.g. categorical and count.</p></li>
+<li><p>Basically, the linear relationship is structured as follows,</p></li>
+</ol>
+<p><span class="math display">\[numerical\ outcome = numerical\ predictors + categorical\ predictors\]</span></p>
+<div id="simple-linear-regression-slr" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Simple linear regression (SLR)</h2>
+<div id="about-slr" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> About SLR</h3>
+<ol style="list-style-type: decimal">
+<li><p>Model <em>linear</em> (straight line) relationship between:</p>
+<ul>
+<li>outcome: numerical variable.</li>
+<li>a predictor: numerical variable (only).</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><em>Note</em>: What if the predictor is a categorical variable? Remember, we already handled that with one-way ANOVA.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Formula,
+<span class="math display">\[numerical\ outcome = intercept + coefficient \times numerical\ predictor\]</span>
+in short,
+<span class="math display">\[\hat y = \beta_0 + \beta_1x_1\]</span>
+where <span class="math inline">\(\hat y\)</span> is the predicted value of the outcome y.</li>
+</ol>
+</div>
+<div id="analysis" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Analysis</h3>
+<div id="libraries" class="section level4" number="8.1.2.1">
+<h4><span class="header-section-number">8.1.2.1</span> Libraries</h4>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="linear-regression.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library</span></span>
+<span id="cb231-2"><a href="linear-regression.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb231-3"><a href="linear-regression.html#cb231-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epiDisplay)</span></code></pre></div>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## Loading required package: nnet</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="linear-regression.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;psych&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:epiDisplay&#39;:
+## 
+##     alpha, cs, lookup</code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="linear-regression.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;lattice&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:epiDisplay&#39;:
+## 
+##     dotplot</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="linear-regression.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsq)</span>
+<span id="cb241-2"><a href="linear-regression.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:psych&#39;:
+## 
+##     logit</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="linear-regression.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb245-2"><a href="linear-regression.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.6     v dplyr   1.0.7
+## v tidyr   1.1.4     v stringr 1.4.0
+## v readr   2.1.1     v forcats 0.5.1</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x ggplot2::%+%()   masks psych::%+%()
+## x ggplot2::alpha() masks psych::alpha(), epiDisplay::alpha()
+## x dplyr::filter()  masks stats::filter()
+## x dplyr::lag()     masks stats::lag()
+## x dplyr::recode()  masks car::recode()
+## x dplyr::select()  masks MASS::select()
+## x purrr::some()    masks car::some()</code></pre>
+</div>
+<div id="data-set" class="section level4" number="8.1.2.2">
+<h4><span class="header-section-number">8.1.2.2</span> Data set</h4>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="linear-regression.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
+<span id="cb250-2"><a href="linear-regression.html#cb250-2" aria-hidden="true" tabindex="-1"></a>coronary <span class="ot">=</span> <span class="fu">read.dta</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;coronary.dta&quot;</span>))</span>
+<span id="cb250-3"><a href="linear-regression.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(coronary)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    200 obs. of  9 variables:
+##  $ id    : num  1 14 56 61 62 64 69 108 112 134 ...
+##  $ cad   : Factor w/ 2 levels &quot;no cad&quot;,&quot;cad&quot;: 1 1 1 1 1 1 2 1 1 1 ...
+##  $ sbp   : num  106 130 136 138 115 124 110 112 138 104 ...
+##  $ dbp   : num  68 78 84 100 85 72 80 70 85 70 ...
+##  $ chol  : num  6.57 6.33 5.97 7.04 6.66 ...
+##  $ age   : num  60 34 36 45 53 43 44 50 43 48 ...
+##  $ bmi   : num  38.9 37.8 40.5 37.6 40.3 ...
+##  $ race  : Factor w/ 3 levels &quot;malay&quot;,&quot;chinese&quot;,..: 3 1 1 1 3 1 1 2 2 2 ...
+##  $ gender: Factor w/ 2 levels &quot;woman&quot;,&quot;man&quot;: 1 1 1 1 2 2 2 1 1 2 ...
+##  - attr(*, &quot;datalabel&quot;)= chr &quot;Written by R.              &quot;
+##  - attr(*, &quot;time.stamp&quot;)= chr &quot;&quot;
+##  - attr(*, &quot;formats&quot;)= chr [1:9] &quot;%9.0g&quot; &quot;%9.0g&quot; &quot;%9.0g&quot; &quot;%9.0g&quot; ...
+##  - attr(*, &quot;types&quot;)= int [1:9] 100 108 100 100 100 100 100 108 108
+##  - attr(*, &quot;val.labels&quot;)= chr [1:9] &quot;&quot; &quot;cad&quot; &quot;&quot; &quot;&quot; ...
+##  - attr(*, &quot;var.labels&quot;)= chr [1:9] &quot;id&quot; &quot;cad&quot; &quot;sbp&quot; &quot;dbp&quot; ...
+##  - attr(*, &quot;version&quot;)= int 7
+##  - attr(*, &quot;label.table&quot;)=List of 3
+##   ..$ cad   : Named int [1:2] 1 2
+##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;no cad&quot; &quot;cad&quot;
+##   ..$ race  : Named int [1:3] 1 2 3
+##   .. ..- attr(*, &quot;names&quot;)= chr [1:3] &quot;malay&quot; &quot;chinese&quot; &quot;indian&quot;
+##   ..$ gender: Named int [1:2] 1 2
+##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;woman&quot; &quot;man&quot;</code></pre>
+</div>
+</div>
+<div id="data-exploration" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Data exploration</h3>
+<div id="descriptive-statistics" class="section level4" number="8.1.3.1">
+<h4><span class="header-section-number">8.1.3.1</span> Descriptive statistics</h4>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="linear-regression.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;dbp&quot;</span>)])</span></code></pre></div>
+<pre><code>## 
+## No. of observations = 200
+## 
+##   Var. name obs. mean   median  s.d.   min.   max.  
+## 1 chol      200  6.2    6.19    1.18   4      9.35  
+## 2 dbp       200  82.31  80      12.9   56     120</code></pre>
+</div>
+<div id="plots-1" class="section level4" number="8.1.3.2">
+<h4><span class="header-section-number">8.1.3.2</span> Plots</h4>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="linear-regression.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.hist</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;dbp&quot;</span>)], <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="linear-regression.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb255-2"><a href="linear-regression.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapply</span>(boxplot, coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;dbp&quot;</span>)], </span>
+<span id="cb255-3"><a href="linear-regression.html#cb255-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">colnames</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;dbp&quot;</span>)]))</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre><code>##       chol      dbp      
+## stats numeric,5 numeric,5
+## n     200       200      
+## conf  numeric,2 numeric,2
+## out   9.35      numeric,0
+## group 1         numeric,0
+## names &quot;&quot;        &quot;&quot;</code></pre>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="linear-regression.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="univariable" class="section level3" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> Univariable</h3>
+<p>Fit model,</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="linear-regression.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model: chol ~ dbp</span></span>
+<span id="cb258-2"><a href="linear-regression.html#cb258-2" aria-hidden="true" tabindex="-1"></a>slr_chol <span class="ot">=</span> <span class="fu">glm</span>(chol <span class="sc">~</span> dbp, <span class="at">data =</span> coronary)</span>
+<span id="cb258-3"><a href="linear-regression.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slr_chol)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ dbp, data = coronary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9967  -0.8304  -0.1292   0.7734   2.8470  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 2.995134   0.492092   6.087 5.88e-09 ***
+## dbp         0.038919   0.005907   6.589 3.92e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.154763)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 228.64  on 198  degrees of freedom
+## AIC: 600.34
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="linear-regression.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Confint</span>(slr_chol)  <span class="co"># 95% CI</span></span></code></pre></div>
+<pre><code>##               Estimate      2.5 %     97.5 %
+## (Intercept) 2.99513427 2.03065127 3.95961727
+## dbp         0.03891876 0.02734161 0.05049591</code></pre>
+<p>Important results,</p>
+<ul>
+<li>Coefficient, <span class="math inline">\(\beta\)</span>.</li>
+<li>95% CI.</li>
+<li><em>P</em>-value.</li>
+</ul>
+<p>Obtain <span class="math inline">\(R^2\)</span>, % of variance explained,</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="linear-regression.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsq</span>(slr_chol, <span class="at">adj =</span> T)</span></code></pre></div>
+<pre><code>## [1] 0.1756834</code></pre>
+<p>Scatter plot,</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="linear-regression.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(chol <span class="sc">~</span> dbp, <span class="at">data =</span> coronary)</span>
+<span id="cb264-2"><a href="linear-regression.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(slr_chol)</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>this allows assessment of normality, linearity and equal variance assumptions. We expect eliptical/oval shape (normality), equal scatter of dots on both sides of the prediction line (equal variance). Both these indicate linear relationship between <code>chol</code> and <code>dbp</code>.</p>
+<div id="interpretation" class="section level4" number="8.1.4.1">
+<h4><span class="header-section-number">8.1.4.1</span> Interpretation</h4>
+<ul>
+<li>1mmHg increase in DBP causes 0.04mmol/L increase in cholestrol.</li>
+<li>DBP explains 17.6% variance in cholestrol.</li>
+</ul>
+</div>
+<div id="model-equation" class="section level4" number="8.1.4.2">
+<h4><span class="header-section-number">8.1.4.2</span> Model equation</h4>
+<p><span class="math display">\[chol = 3.0 + 0.04\times dbp\]</span></p>
+</div>
+</div>
+</div>
+<div id="multiple-linear-regression-mlr" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Multiple linear regression (MLR)</h2>
+<div id="about-mlr" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> About MLR</h3>
+<ol style="list-style-type: decimal">
+<li><p>Model <em>linear</em> relationship between:</p>
+<ul>
+<li>outcome: numerical variable.</li>
+<li>predictors: numerical, categorical variables.</li>
+</ul></li>
+</ol>
+<blockquote>
+<p><em>Note</em>: MLR is a term that refers to linear regression with two or more <em>numerical</em> variables. Whenever we have both numerical and categorical variables, the proper term for the regression model is <em>General Linear Model</em>. However, we will use the term MLR in this workshop.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Formula,
+<span class="math display">\[\begin{aligned}
+numerical\ outcome = &amp;\ intercept + coefficients \times numerical\ predictors \\
+&amp; + coefficients \times categorical\ predictors
+\end{aligned}\]</span>
+in a shorter form,
+<span class="math display">\[\hat y = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_kx_k\]</span>
+where we have <em>k</em> predictors.</li>
+</ol>
+<p>Whenever the predictor is a categorical variable with more than two levels, we use dummy variable(s). This can be easily specified in R using <code>factor()</code> if the variable is not yet properly specified as such. There is no problem with binary categorical variable.</p>
+<p>For a categorical variable with more than two levels, the number of dummy variables (i.e. once turned into several binary variables) equals number of levels minus one. For example, whenever we have four levels, we will obtain three dummy (binary) variables.</p>
+</div>
+<div id="analysis-1" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Analysis</h3>
+<div id="review-data-set" class="section level4" number="8.2.2.1">
+<h4><span class="header-section-number">8.2.2.1</span> Review data set</h4>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="linear-regression.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
+<span id="cb265-2"><a href="linear-regression.html#cb265-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(coronary)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    200 obs. of  9 variables:
+##  $ id    : num  1 14 56 61 62 64 69 108 112 134 ...
+##  $ cad   : Factor w/ 2 levels &quot;no cad&quot;,&quot;cad&quot;: 1 1 1 1 1 1 2 1 1 1 ...
+##  $ sbp   : num  106 130 136 138 115 124 110 112 138 104 ...
+##  $ dbp   : num  68 78 84 100 85 72 80 70 85 70 ...
+##  $ chol  : num  6.57 6.33 5.97 7.04 6.66 ...
+##  $ age   : num  60 34 36 45 53 43 44 50 43 48 ...
+##  $ bmi   : num  38.9 37.8 40.5 37.6 40.3 ...
+##  $ race  : Factor w/ 3 levels &quot;malay&quot;,&quot;chinese&quot;,..: 3 1 1 1 3 1 1 2 2 2 ...
+##  $ gender: Factor w/ 2 levels &quot;woman&quot;,&quot;man&quot;: 1 1 1 1 2 2 2 1 1 2 ...
+##  - attr(*, &quot;datalabel&quot;)= chr &quot;Written by R.              &quot;
+##  - attr(*, &quot;time.stamp&quot;)= chr &quot;&quot;
+##  - attr(*, &quot;formats&quot;)= chr [1:9] &quot;%9.0g&quot; &quot;%9.0g&quot; &quot;%9.0g&quot; &quot;%9.0g&quot; ...
+##  - attr(*, &quot;types&quot;)= int [1:9] 100 108 100 100 100 100 100 108 108
+##  - attr(*, &quot;val.labels&quot;)= chr [1:9] &quot;&quot; &quot;cad&quot; &quot;&quot; &quot;&quot; ...
+##  - attr(*, &quot;var.labels&quot;)= chr [1:9] &quot;id&quot; &quot;cad&quot; &quot;sbp&quot; &quot;dbp&quot; ...
+##  - attr(*, &quot;version&quot;)= int 7
+##  - attr(*, &quot;label.table&quot;)=List of 3
+##   ..$ cad   : Named int [1:2] 1 2
+##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;no cad&quot; &quot;cad&quot;
+##   ..$ race  : Named int [1:3] 1 2 3
+##   .. ..- attr(*, &quot;names&quot;)= chr [1:3] &quot;malay&quot; &quot;chinese&quot; &quot;indian&quot;
+##   ..$ gender: Named int [1:2] 1 2
+##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;woman&quot; &quot;man&quot;</code></pre>
+<p>We exclude <code>id</code>, <code>cad</code> and <code>age</code> from our data for the purpose of this analysis, keeping only <code>sbp , dbp, bmi, race</code> and <code>gender</code>. We will add <code>age</code> later in the exercise.</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="linear-regression.html#cb267-1" aria-hidden="true" tabindex="-1"></a>coronary <span class="ot">&lt;-</span> coronary <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>id, <span class="sc">-</span>cad, <span class="sc">-</span>age)</span>
+<span id="cb267-2"><a href="linear-regression.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="co"># remove id, cad, age from our data since we&#39;re not going to use them,</span></span>
+<span id="cb267-3"><a href="linear-regression.html#cb267-3" aria-hidden="true" tabindex="-1"></a><span class="co"># easier to specifiy multivariable model.</span></span></code></pre></div>
+</div>
+<div id="data-exploration-1" class="section level4" number="8.2.2.2">
+<h4><span class="header-section-number">8.2.2.2</span> Data exploration</h4>
+<div id="descriptive-statistics-1" class="section level5" number="8.2.2.2.1">
+<h5><span class="header-section-number">8.2.2.2.1</span> Descriptive statistics</h5>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="linear-regression.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;sbp&quot;</span>, <span class="st">&quot;dbp&quot;</span>, <span class="st">&quot;bmi&quot;</span>)])</span></code></pre></div>
+<pre><code>## 
+## No. of observations = 200
+## 
+##   Var. name obs. mean   median  s.d.   min.   max.  
+## 1 chol      200  6.2    6.19    1.18   4      9.35  
+## 2 sbp       200  130.18 126     19.81  88     187   
+## 3 dbp       200  82.31  80      12.9   56     120   
+## 4 bmi       200  37.45  37.8    2.68   28.99  45.03</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="linear-regression.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">codebook</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;race&quot;</span>, <span class="st">&quot;gender&quot;</span>)])</span></code></pre></div>
+<pre><code>## 
+##  
+##  
+## race      :    
+##         Frequency Percent
+## malay          73    36.5
+## chinese        64    32.0
+## indian         63    31.5
+## 
+##  ================== 
+## gender    :    
+##       Frequency Percent
+## woman       100      50
+## man         100      50
+## 
+##  ==================</code></pre>
+</div>
+<div id="plots-2" class="section level5" number="8.2.2.2.2">
+<h5><span class="header-section-number">8.2.2.2.2</span> Plots</h5>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="linear-regression.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(coronary)</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="linear-regression.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.hist</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;sbp&quot;</span>, <span class="st">&quot;dbp&quot;</span>, <span class="st">&quot;bmi&quot;</span>)])</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="linear-regression.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb274-2"><a href="linear-regression.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapply</span>(boxplot, coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;sbp&quot;</span>, <span class="st">&quot;dbp&quot;</span>, <span class="st">&quot;bmi&quot;</span>)], </span>
+<span id="cb274-3"><a href="linear-regression.html#cb274-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">colnames</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;chol&quot;</span>, <span class="st">&quot;sbp&quot;</span>, <span class="st">&quot;dbp&quot;</span>, <span class="st">&quot;bmi&quot;</span>)]))</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
+<pre><code>##       chol      sbp       dbp       bmi      
+## stats numeric,5 numeric,5 numeric,5 numeric,5
+## n     200       200       200       200      
+## conf  numeric,2 numeric,2 numeric,2 numeric,2
+## out   9.35      numeric,0 numeric,0 numeric,8
+## group 1         numeric,0 numeric,0 numeric,8
+## names &quot;&quot;        &quot;&quot;        &quot;&quot;        &quot;&quot;</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="linear-regression.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb276-2"><a href="linear-regression.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb276-3"><a href="linear-regression.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(chol <span class="sc">~</span> race, <span class="at">data =</span> coronary)</span>
+<span id="cb276-4"><a href="linear-regression.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(chol <span class="sc">~</span> gender, <span class="at">data =</span> coronary)</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-11-4.png" width="672" /></p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="linear-regression.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="variable-selection" class="section level4" number="8.2.2.3">
+<h4><span class="header-section-number">8.2.2.3</span> Variable selection</h4>
+</div>
+<div id="slr" class="section level4" number="8.2.2.4">
+<h4><span class="header-section-number">8.2.2.4</span> slr</h4>
+<p>We want to choose only variables with <em>P</em>-values &lt; 0.25 to be included in MLR. Obtaining the <em>P</em>-values for each variable is easy by LR test,</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="linear-regression.html#cb278-1" aria-hidden="true" tabindex="-1"></a>slr_chol0 <span class="ot">=</span> <span class="fu">glm</span>(chol <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> coronary)</span>
+<span id="cb278-2"><a href="linear-regression.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slr_chol0)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ 1, data = coronary)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.19854  -0.80854  -0.01104   0.69021   3.15146  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  6.19854    0.08369   74.06   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.400874)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 278.77  on 199  degrees of freedom
+## AIC: 637.99
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div id="multivariable" class="section level5" number="8.2.2.4.1">
+<h5><span class="header-section-number">8.2.2.4.1</span> Multivariable</h5>
+<p>Perform MLR with <em>all</em> selected variables,</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="linear-regression.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all</span></span>
+<span id="cb280-2"><a href="linear-regression.html#cb280-2" aria-hidden="true" tabindex="-1"></a>mlr_chol <span class="ot">=</span> <span class="fu">glm</span>(chol <span class="sc">~</span> sbp <span class="sc">+</span> dbp <span class="sc">+</span> bmi <span class="sc">+</span> race, <span class="at">data =</span> coronary)</span>
+<span id="cb280-3"><a href="linear-regression.html#cb280-3" aria-hidden="true" tabindex="-1"></a><span class="co">#mlr_chol = glm(chol ~ ., data = coronary)  # shortcut</span></span>
+<span id="cb280-4"><a href="linear-regression.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlr_chol)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ sbp + dbp + bmi + race, data = coronary)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.17751  -0.73860  -0.02674   0.63163   2.90926  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  4.842338   1.265149   3.827 0.000175 ***
+## sbp          0.000975   0.006990   0.139 0.889210    
+## dbp          0.028350   0.010327   2.745 0.006615 ** 
+## bmi         -0.038537   0.028170  -1.368 0.172879    
+## racechinese  0.354039   0.183169   1.933 0.054710 .  
+## raceindian   0.716327   0.200346   3.575 0.000441 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.089387)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 211.34  on 194  degrees of freedom
+## AIC: 592.61
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="linear-regression.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsq</span>(mlr_chol, <span class="at">adj =</span> T)</span></code></pre></div>
+<pre><code>## [1] 0.2223518</code></pre>
+<p>Focus on,</p>
+<ul>
+<li>Coefficients, <span class="math inline">\(\beta\)</span>s.</li>
+<li>95% CI.</li>
+<li><em>P</em>-values.</li>
+</ul>
+<p>For model fit,</p>
+<ul>
+<li><span class="math inline">\(R^2\)</span> – % of variance explained by the model.</li>
+<li>Akaike Information Criterion, AIC – for comparison with other models. This is not useful alone, but for comparison with other models. The model with the lowest AIC is the best model.</li>
+</ul>
+<p>Looking at all these results, we choose:</p>
+<blockquote>
+<p><code>chol ~ dbp + race</code></p>
+</blockquote>
+<p>which has the lowest AIC.</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="linear-regression.html#cb284-1" aria-hidden="true" tabindex="-1"></a>mlr_chol1 <span class="ot">=</span> <span class="fu">glm</span>(chol <span class="sc">~</span> dbp <span class="sc">+</span> race, <span class="at">data =</span> coronary)</span>
+<span id="cb284-2"><a href="linear-regression.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlr_chol1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ dbp + race, data = coronary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1378  -0.7068  -0.0289   0.5997   2.7778  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 3.298028   0.486213   6.783 1.36e-10 ***
+## dbp         0.031108   0.006104   5.096 8.14e-07 ***
+## racechinese 0.359964   0.182149   1.976 0.049534 *  
+## raceindian  0.713690   0.190883   3.739 0.000243 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.088777)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 213.40  on 196  degrees of freedom
+## AIC: 590.55
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>Our chosen model:</p>
+<blockquote>
+<p><code>mlr_chol1: chol ~ dbp + race</code></p>
+</blockquote>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="linear-regression.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlr_chol1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ dbp + race, data = coronary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1378  -0.7068  -0.0289   0.5997   2.7778  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 3.298028   0.486213   6.783 1.36e-10 ***
+## dbp         0.031108   0.006104   5.096 8.14e-07 ***
+## racechinese 0.359964   0.182149   1.976 0.049534 *  
+## raceindian  0.713690   0.190883   3.739 0.000243 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.088777)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 213.40  on 196  degrees of freedom
+## AIC: 590.55
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="linear-regression.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Confint</span>(mlr_chol1)  <span class="co"># 95% CI of the coefficients</span></span></code></pre></div>
+<pre><code>##               Estimate       2.5 %     97.5 %
+## (Intercept) 3.29802826 2.345067995 4.25098852
+## dbp         0.03110811 0.019143668 0.04307255
+## racechinese 0.35996365 0.002958566 0.71696873
+## raceindian  0.71369024 0.339566932 1.08781356</code></pre>
+<p>Compare this model with the no-variable model and all-variable model by LR test and AIC comparison,</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="linear-regression.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LR test</span></span>
+<span id="cb290-2"><a href="linear-regression.html#cb290-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(slr_chol0, mlr_chol1, <span class="at">test =</span> <span class="st">&quot;LRT&quot;</span>)  <span class="co"># sig. better than no var at all!</span></span></code></pre></div>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model 1: chol ~ 1
+## Model 2: chol ~ dbp + race
+##   Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+## 1       199     278.77                          
+## 2       196     213.40  3   65.373 5.755e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="linear-regression.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model with no var at all is called Null Model</span></span>
+<span id="cb292-2"><a href="linear-regression.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mlr_chol, mlr_chol1, <span class="at">test =</span> <span class="st">&quot;LRT&quot;</span>)  <span class="co"># no sig. dif with all vars model,</span></span></code></pre></div>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model 1: chol ~ sbp + dbp + bmi + race
+## Model 2: chol ~ dbp + race
+##   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
+## 1       194     211.34                     
+## 2       196     213.40 -2  -2.0593   0.3886</code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="linear-regression.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model with 2 vars (dbp &amp; race) is just as good as full model (with all the vars)</span></span>
+<span id="cb294-2"><a href="linear-regression.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="co"># model with all vars is called Saturated Model</span></span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="linear-regression.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AIC</span></span>
+<span id="cb295-2"><a href="linear-regression.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(slr_chol0, mlr_chol1, mlr_chol)</span></code></pre></div>
+<pre><code>##           df      AIC
+## slr_chol0  2 637.9921
+## mlr_chol1  5 590.5459
+## mlr_chol   7 592.6065</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="linear-regression.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="co"># our final model has the lowest AIC</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="multicollinearity-mc" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Multicollinearity, MC</h3>
+<p>Multicollinearity is the problem of repetitive/redundant variables – high correlations between predictors. MC is checked by Variance Inflation Factor (VIF). VIF &gt; 10 indicates MC problem.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="linear-regression.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mlr_chol1)  <span class="co"># all &lt; 10</span></span></code></pre></div>
+<pre><code>##          GVIF Df GVIF^(1/(2*Df))
+## dbp  1.132753  1        1.064309
+## race 1.132753  2        1.031653</code></pre>
+</div>
+<div id="interaction" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Interaction, *</h3>
+<p>Interaction is the predictor variable combination that requires interpretation of regression coefficients separately based on the levels of the predictor (e.g. separate analysis for each race group, Malay vs Chinese vs Indian). This makes interpreting our analysis complicated. So, most of the time, we pray not to have interaction in our regression model.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="linear-regression.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(chol <span class="sc">~</span> dbp<span class="sc">*</span>race, <span class="at">data =</span> coronary))  <span class="co"># dbp*race not sig.</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ dbp * race, data = coronary)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.10485  -0.77524  -0.02423   0.58059   2.74380  
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      2.11114    0.92803   2.275 0.024008 *  
+## dbp              0.04650    0.01193   3.897 0.000134 ***
+## racechinese      1.95576    1.28477   1.522 0.129572    
+## raceindian       2.41530    1.25766   1.920 0.056266 .  
+## dbp:racechinese -0.02033    0.01596  -1.273 0.204376    
+## dbp:raceindian  -0.02126    0.01529  -1.391 0.165905    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.087348)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 210.95  on 194  degrees of freedom
+## AIC: 592.23
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="linear-regression.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in R, it is easy to fit interaction by *</span></span>
+<span id="cb302-2"><a href="linear-regression.html#cb302-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dbp*race will automatically include all vars involved i.e. equal to</span></span>
+<span id="cb302-3"><a href="linear-regression.html#cb302-3" aria-hidden="true" tabindex="-1"></a><span class="co"># glm(chol ~ dbp + race + dbp:race, data = coronary)</span></span>
+<span id="cb302-4"><a href="linear-regression.html#cb302-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use : to just include just the interaction</span></span></code></pre></div>
+<p>There is no interaction here because the included interaction term was insignificant.</p>
+</div>
+</div>
+<div id="model-fit-assessment-residuals" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Model fit assessment: Residuals</h2>
+<div id="histogram-1" class="section level3 unnumbered">
+<h3>Histogram</h3>
+<p>Raw residuals: Normality assumption.</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="linear-regression.html#cb303-1" aria-hidden="true" tabindex="-1"></a>rraw_chol <span class="ot">=</span> <span class="fu">resid</span>(mlr_chol1)  <span class="co"># unstandardized</span></span>
+<span id="cb303-2"><a href="linear-regression.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.hist</span>(rraw_chol)</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="scatter-plots" class="section level3 unnumbered">
+<h3>Scatter plots</h3>
+<p>Standardized residuals vs Standardized predicted values: Overall – normality, linearity and equal variance assumptions.</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="linear-regression.html#cb304-1" aria-hidden="true" tabindex="-1"></a>rstd_chol <span class="ot">=</span> <span class="fu">rstandard</span>(mlr_chol1)  <span class="co"># standardized residuals</span></span>
+<span id="cb304-2"><a href="linear-regression.html#cb304-2" aria-hidden="true" tabindex="-1"></a>pstd_chol <span class="ot">=</span> <span class="fu">scale</span>(<span class="fu">predict</span>(mlr_chol1))  <span class="co"># standardized predicted values</span></span>
+<span id="cb304-3"><a href="linear-regression.html#cb304-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rstd_chol <span class="sc">~</span> pstd_chol, <span class="at">xlab =</span> <span class="st">&quot;Std predicted&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Std residuals&quot;</span>)</span>
+<span id="cb304-4"><a href="linear-regression.html#cb304-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>)  <span class="co"># normal, linear, equal variance</span></span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+The dots should form elliptical/oval shape (normality) and scattered roughly equal above and below the zero line (equal variance). Both these indicate linearity.</p>
+<p>Raw residuals vs Numerical predictor by each predictors: Linearity assumption.</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="linear-regression.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rraw_chol <span class="sc">~</span> coronary<span class="sc">$</span>dbp, <span class="at">xlab =</span> <span class="st">&quot;DBP&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Raw Residuals&quot;</span>)</span>
+<span id="cb305-2"><a href="linear-regression.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span></code></pre></div>
+<p><img src="07_linear2_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+</div>
+<div id="interpretation-1" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Interpretation</h2>
+<p>Now we have decided on our final model, rename the model,</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="linear-regression.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rename the selected model</span></span>
+<span id="cb306-2"><a href="linear-regression.html#cb306-2" aria-hidden="true" tabindex="-1"></a>mlr_chol_final <span class="ot">=</span> mlr_chol1</span></code></pre></div>
+<p>and interpret the model,</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="linear-regression.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlr_chol_final)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = chol ~ dbp + race, data = coronary)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1378  -0.7068  -0.0289   0.5997   2.7778  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 3.298028   0.486213   6.783 1.36e-10 ***
+## dbp         0.031108   0.006104   5.096 8.14e-07 ***
+## racechinese 0.359964   0.182149   1.976 0.049534 *  
+## raceindian  0.713690   0.190883   3.739 0.000243 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 1.088777)
+## 
+##     Null deviance: 278.77  on 199  degrees of freedom
+## Residual deviance: 213.40  on 196  degrees of freedom
+## AIC: 590.55
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="linear-regression.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Confint</span>(mlr_chol_final)  <span class="co"># 95% CI of the coefficients</span></span></code></pre></div>
+<pre><code>##               Estimate       2.5 %     97.5 %
+## (Intercept) 3.29802826 2.345067995 4.25098852
+## dbp         0.03110811 0.019143668 0.04307255
+## racechinese 0.35996365 0.002958566 0.71696873
+## raceindian  0.71369024 0.339566932 1.08781356</code></pre>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="linear-regression.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsq</span>(mlr_chol_final, <span class="at">adj =</span> T)</span></code></pre></div>
+<pre><code>## [1] 0.2227869</code></pre>
+<ul>
+<li>1mmHg increase in DBP causes 0.03mmol/L increase in cholestrol, controlling for the effect of race.</li>
+<li>Being Chinese causes 0.36mmol/L increase in cholestrol in comparison to Malay, controlling for the effect of DBP.</li>
+<li>Being Indian causes 0.71mmol/L increase in cholestrol in comparison to Malay, controlling for the effect of DBP.</li>
+<li>DBP and race explains 22.3% variance in cholestrol.</li>
+</ul>
+<p>Turn the results into data frames results using <code>broom</code>,</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="linear-regression.html#cb313-1" aria-hidden="true" tabindex="-1"></a>tib_mlr <span class="ot">=</span> <span class="fu">tidy</span>(mlr_chol_final, <span class="at">conf.int =</span> T); tib_mlr</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)   3.30     0.486        6.78 1.36e-10  2.35       4.25  
+## 2 dbp           0.0311   0.00610      5.10 8.14e- 7  0.0191     0.0431
+## 3 racechinese   0.360    0.182        1.98 4.95e- 2  0.00296    0.717 
+## 4 raceindian    0.714    0.191        3.74 2.43e- 4  0.340      1.09</code></pre>
+<p>Display the results using <code>kable</code> in a nice table,</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="linear-regression.html#cb315-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tib_mlr)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">3.2980283</td>
+<td align="right">0.4862132</td>
+<td align="right">6.783091</td>
+<td align="right">0.0000000</td>
+<td align="right">2.3450680</td>
+<td align="right">4.2509885</td>
+</tr>
+<tr class="even">
+<td align="left">dbp</td>
+<td align="right">0.0311081</td>
+<td align="right">0.0061044</td>
+<td align="right">5.095998</td>
+<td align="right">0.0000008</td>
+<td align="right">0.0191437</td>
+<td align="right">0.0430726</td>
+</tr>
+<tr class="odd">
+<td align="left">racechinese</td>
+<td align="right">0.3599636</td>
+<td align="right">0.1821488</td>
+<td align="right">1.976207</td>
+<td align="right">0.0495342</td>
+<td align="right">0.0029586</td>
+<td align="right">0.7169687</td>
+</tr>
+<tr class="even">
+<td align="left">raceindian</td>
+<td align="right">0.7136902</td>
+<td align="right">0.1908827</td>
+<td align="right">3.738893</td>
+<td align="right">0.0002425</td>
+<td align="right">0.3395669</td>
+<td align="right">1.0878136</td>
+</tr>
+</tbody>
+</table>
+<p>We can export the results into a .csv file for use later (e.g. to prepare a table for journal articles etc.),</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="linear-regression.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tib_mlr, <span class="st">&quot;mlr_final.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="model-equation-1" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Model equation</h2>
+<p>Cholestrol level in mmol/L can be predicted by its predictors as given by,
+<span class="math display">\[chol = 3.30 + 0.03\times dbp + 0.36\times race\ (chinese) + 0.71\times race\ (indian)\]</span></p>
+</div>
+<div id="prediction" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> Prediction</h2>
+<p>It is easy to predict in R using our fitted model above. First we view the predicted values for our sample,</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="linear-regression.html#cb317-1" aria-hidden="true" tabindex="-1"></a>coronary<span class="sc">$</span>pred_chol <span class="ot">=</span> <span class="fu">predict</span>(mlr_chol_final)</span>
+<span id="cb317-2"><a href="linear-regression.html#cb317-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coronary)</span></code></pre></div>
+<pre><code>##   sbp dbp   chol  bmi   race gender pred_chol
+## 1 106  68 6.5725 38.9 indian  woman  6.127070
+## 2 130  78 6.3250 37.8  malay  woman  5.724461
+## 3 136  84 5.9675 40.5  malay  woman  5.911109
+## 4 138 100 7.0400 37.6  malay  woman  6.408839
+## 5 115  85 6.6550 40.3 indian    man  6.655908
+## 6 124  72 5.9675 37.6  malay    man  5.537812</code></pre>
+<p>Now let us try predicting for any values for <code>dbp</code> and <code>race</code>,</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="linear-regression.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(coronary[<span class="fu">c</span>(<span class="st">&quot;dbp&quot;</span>, <span class="st">&quot;race&quot;</span>)])</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    200 obs. of  2 variables:
+##  $ dbp : num  68 78 84 100 85 72 80 70 85 70 ...
+##  $ race: Factor w/ 3 levels &quot;malay&quot;,&quot;chinese&quot;,..: 3 1 1 1 3 1 1 2 2 2 ...</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="linear-regression.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple, dbp = 90, race = indian</span></span>
+<span id="cb321-2"><a href="linear-regression.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mlr_chol_final, <span class="fu">list</span>(<span class="at">dbp =</span> <span class="dv">90</span>, <span class="at">race =</span> <span class="st">&quot;indian&quot;</span>))</span></code></pre></div>
+<pre><code>##        1 
+## 6.811448</code></pre>
+<p>More data points</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="linear-regression.html#cb323-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">dbp =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">90</span>, <span class="dv">90</span>), <span class="at">race =</span> <span class="fu">c</span>(<span class="st">&quot;malay&quot;</span>, <span class="st">&quot;chinese&quot;</span>, <span class="st">&quot;indian&quot;</span>))</span>
+<span id="cb323-2"><a href="linear-regression.html#cb323-2" aria-hidden="true" tabindex="-1"></a>new_data</span></code></pre></div>
+<pre><code>##   dbp    race
+## 1  90   malay
+## 2  90 chinese
+## 3  90  indian</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="linear-regression.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(mlr_chol_final, new_data)</span></code></pre></div>
+<pre><code>##        1        2        3 
+## 6.097758 6.457722 6.811448</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="linear-regression.html#cb327-1" aria-hidden="true" tabindex="-1"></a>new_data<span class="sc">$</span>pred_chol <span class="ot">=</span> <span class="fu">predict</span>(mlr_chol_final, new_data)</span>
+<span id="cb327-2"><a href="linear-regression.html#cb327-2" aria-hidden="true" tabindex="-1"></a>new_data</span></code></pre></div>
+<pre><code>##   dbp    race pred_chol
+## 1  90   malay  6.097758
+## 2  90 chinese  6.457722
+## 3  90  indian  6.811448</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="linear-regression.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:car&quot;</span>, <span class="at">unload=</span><span class="cn">TRUE</span>)</span>
+<span id="cb329-2"><a href="linear-regression.html#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:epiDisplay&quot;</span>, <span class="at">unload=</span><span class="cn">TRUE</span>)</span>
+<span id="cb329-3"><a href="linear-regression.html#cb329-3" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:psych&quot;</span>, <span class="at">unload=</span><span class="cn">TRUE</span>)</span>
+<span id="cb329-4"><a href="linear-regression.html#cb329-4" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:rsq&quot;</span>, <span class="at">unload=</span><span class="cn">TRUE</span>)</span>
+<span id="cb329-5"><a href="linear-regression.html#cb329-5" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:MASS&quot;</span>, <span class="at">unload=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning: &#39;MASS&#39; namespace cannot be unloaded:
+##   namespace &#39;MASS&#39; is imported by &#39;lme4&#39; so cannot be unloaded</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-data-analysis-eda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="binary-logistic-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/drkamarul07_linear2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["dataanalysis.pdf", "dataanalysis.epub", "dataanalysis.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
