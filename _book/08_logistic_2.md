@@ -138,13 +138,6 @@ library(tidyverse)
 
 ```r
 library(gtsummary)
-```
-
-```
-## #Uighur
-```
-
-```r
 library(broom)
 library(LogisticDx)
 ```
@@ -216,41 +209,136 @@ fatal %>%
   as_hux_table()
 ```
 
-<!--html_preserve--><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-5">
-<caption style="caption-side: top; text-align: center;">(#tab:unnamed-chunk-5) </caption><col><col><tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Characteristic</strong></p>
-</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>N = 226</strong></p>
-</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">sex</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">male</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">97 (43%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">female</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">129 (57%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">alive or dead</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">alive</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">171 (76%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">dead</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">55 (24%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">earliest Glasgow Coma Scale</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">15.0 (10.0, 15.0)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">earliest systolic BP (mmHg)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">161 (143, 187)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">diabetes (yes or no)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">138 (61%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age in years</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">61 (52, 69)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Ischaemic Stroke or Haemorrhagic</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Ischaemic Stroke</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">149 (66%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Haemorrhagic</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">77 (34%)</td></tr>
-<tr>
-<td colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">n (%); Median (IQR)</td></tr>
-</table>
-<!--/html_preserve-->
+```{=latex}
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+\captionsetup{justification=centering,singlelinecheck=off}
+\caption{(\#tab:unnamed-chunk-5) }
+ \setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l}
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Characteristic}
+ \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} \textbf{N = 226}
+ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} sex \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} male \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 97 (43\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} female \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 129 (57\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} alive or dead \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} alive \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 171 (76\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} dead \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 55 (24\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} earliest Glasgow Coma Scale \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 15.0 (10.0, 15.0) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} earliest systolic BP (mmHg) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 161 (143, 187) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} diabetes (yes or no) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 138 (61\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} age in years \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 61 (52, 69) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Ischaemic Stroke or Haemorrhagic \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} Ischaemic Stroke \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 149 (66\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} Haemorrhagic \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 77 (34\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\arrayrulecolor{black}
+
+\multicolumn{2}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} n (\%); Median (IQR) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
+
+\end{table}
+ 
+```
 
 or to get summary statistics for each status category:
 
@@ -261,36 +349,127 @@ fatal %>%
   as_hux_table()
 ```
 
-<!--html_preserve--><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-6">
-<caption style="caption-side: top; text-align: center;">(#tab:unnamed-chunk-6) </caption><col><col><col><tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>Characteristic</strong></p>
-</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>alive</strong>, N = 171</p>
-</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><p><strong>dead</strong>, N = 55</p>
-</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">sex</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">male</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">81 (47%)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">16 (29%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">female</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">90 (53%)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">39 (71%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">earliest Glasgow Coma Scale</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">15.0 (14.0, 15.0)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8.0 (5.0, 11.0)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">earliest systolic BP (mmHg)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">160 (143, 186)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">162 (140, 199)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">diabetes (yes or no)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">100 (58%)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">38 (69%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age in years</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">61 (53, 68)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">62 (50, 73)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Ischaemic Stroke or Haemorrhagic</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Ischaemic Stroke</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">132 (77%)</td><td style="vertical-align: top; text-align: center; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">17 (31%)</td></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 15pt; font-weight: normal;">Haemorrhagic</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">39 (23%)</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">38 (69%)</td></tr>
-<tr>
-<td colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">n (%); Median (IQR)</td></tr>
-</table>
-<!--/html_preserve-->
+```{=latex}
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+\captionsetup{justification=centering,singlelinecheck=off}
+\caption{(\#tab:unnamed-chunk-6) }
+ \setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} \textbf{Characteristic}
+ \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} \textbf{alive}, N = 171
+ \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} \textbf{dead}, N = 55
+ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} sex \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} male \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 81 (47\%) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 16 (29\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} female \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 90 (53\%) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 39 (71\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} earliest Glasgow Coma Scale \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 15.0 (14.0, 15.0) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 8.0 (5.0, 11.0) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} earliest systolic BP (mmHg) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 160 (143, 186) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 162 (140, 199) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} diabetes (yes or no) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 100 (58\%) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 38 (69\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} age in years \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 61 (53, 68) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 62 (50, 73) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Ischaemic Stroke or Haemorrhagic \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} Ischaemic Stroke \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 132 (77\%) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 17 (31\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{15pt} Haemorrhagic \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 39 (23\%) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} 38 (69\%) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\arrayrulecolor{black}
+
+\multicolumn{3}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} n (\%); Median (IQR) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
+
+\end{table}
+ 
+```
 
 
 
@@ -754,7 +933,7 @@ fit_m <- gof(fatal_mv2,
 ## Setting direction: controls < cases
 ```
 
-<img src="08_logistic_2_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](08_logistic_2_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 The area under the curve is $87.2\%$. The values of above 80 are considered to have good discriminating effect. 
 
 
@@ -789,395 +968,28 @@ This is the table for adjusted log odds ratio:
 tbl_regression(fatal_mv2)
 ```
 
-```{=html}
-<div id="coxtqcdgqq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#coxtqcdgqq .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#coxtqcdgqq .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#coxtqcdgqq .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#coxtqcdgqq .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#coxtqcdgqq .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#coxtqcdgqq .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#coxtqcdgqq .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#coxtqcdgqq .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#coxtqcdgqq .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#coxtqcdgqq .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#coxtqcdgqq .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#coxtqcdgqq .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#coxtqcdgqq .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#coxtqcdgqq .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#coxtqcdgqq .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#coxtqcdgqq .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#coxtqcdgqq .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#coxtqcdgqq .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#coxtqcdgqq .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#coxtqcdgqq .gt_left {
-  text-align: left;
-}
-
-#coxtqcdgqq .gt_center {
-  text-align: center;
-}
-
-#coxtqcdgqq .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#coxtqcdgqq .gt_font_normal {
-  font-weight: normal;
-}
-
-#coxtqcdgqq .gt_font_bold {
-  font-weight: bold;
-}
-
-#coxtqcdgqq .gt_font_italic {
-  font-style: italic;
-}
-
-#coxtqcdgqq .gt_super {
-  font-size: 65%;
-}
-
-#coxtqcdgqq .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>log(OR)</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">earliest Glasgow Coma Scale</td>
-<td class="gt_row gt_center">-0.34</td>
-<td class="gt_row gt_center">-0.45, -0.24</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">Ischaemic Stroke or Haemorrhagic</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Ischaemic Stroke</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Haemorrhagic</td>
-<td class="gt_row gt_center">1.2</td>
-<td class="gt_row gt_center">0.38, 2.1</td>
-<td class="gt_row gt_center">0.004</td></tr>
-    <tr><td class="gt_row gt_left">age in years</td>
-<td class="gt_row gt_center">0.02</td>
-<td class="gt_row gt_center">0.00, 0.05</td>
-<td class="gt_row gt_center">0.11</td></tr>
-  </tbody>
-  
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="4">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          OR = Odds Ratio, CI = Confidence Interval
-          <br />
-        </p>
-      </td>
-    </tr>
-  </tfoot>
-</table>
-</div>
 ```
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## http://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+```
+
+
+\begin{tabular}{l|l|l|l}
+\hline
+**Characteristic** & **log(OR)** & **95\% CI** & **p-value**\\
+\hline
+earliest Glasgow Coma Scale & -0.34 & -0.45, -0.24 & <0.001\\
+\hline
+Ischaemic Stroke or Haemorrhagic &  &  & \\
+\hline
+Ischaemic Stroke &  &  & \\
+\hline
+Haemorrhagic & 1.2 & 0.38, 2.1 & 0.004\\
+\hline
+age in years & 0.02 & 0.00, 0.05 & 0.11\\
+\hline
+\end{tabular}
 
 And this is the table for adjusted odds ratio:
 
@@ -1186,395 +998,28 @@ And this is the table for adjusted odds ratio:
 tbl_regression(fatal_mv2, exponentiate = TRUE)
 ```
 
-```{=html}
-<div id="lqqsiuikmm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#lqqsiuikmm .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#lqqsiuikmm .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#lqqsiuikmm .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#lqqsiuikmm .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#lqqsiuikmm .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#lqqsiuikmm .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#lqqsiuikmm .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#lqqsiuikmm .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#lqqsiuikmm .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#lqqsiuikmm .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#lqqsiuikmm .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#lqqsiuikmm .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#lqqsiuikmm .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#lqqsiuikmm .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqqsiuikmm .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lqqsiuikmm .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#lqqsiuikmm .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#lqqsiuikmm .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lqqsiuikmm .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#lqqsiuikmm .gt_left {
-  text-align: left;
-}
-
-#lqqsiuikmm .gt_center {
-  text-align: center;
-}
-
-#lqqsiuikmm .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#lqqsiuikmm .gt_font_normal {
-  font-weight: normal;
-}
-
-#lqqsiuikmm .gt_font_bold {
-  font-weight: bold;
-}
-
-#lqqsiuikmm .gt_font_italic {
-  font-style: italic;
-}
-
-#lqqsiuikmm .gt_super {
-  font-size: 65%;
-}
-
-#lqqsiuikmm .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>OR</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">earliest Glasgow Coma Scale</td>
-<td class="gt_row gt_center">0.71</td>
-<td class="gt_row gt_center">0.64, 0.79</td>
-<td class="gt_row gt_center"><0.001</td></tr>
-    <tr><td class="gt_row gt_left">Ischaemic Stroke or Haemorrhagic</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Ischaemic Stroke</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center">—</td>
-<td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Haemorrhagic</td>
-<td class="gt_row gt_center">3.40</td>
-<td class="gt_row gt_center">1.46, 7.97</td>
-<td class="gt_row gt_center">0.004</td></tr>
-    <tr><td class="gt_row gt_left">age in years</td>
-<td class="gt_row gt_center">1.02</td>
-<td class="gt_row gt_center">1.00, 1.05</td>
-<td class="gt_row gt_center">0.11</td></tr>
-  </tbody>
-  
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="4">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          OR = Odds Ratio, CI = Confidence Interval
-          <br />
-        </p>
-      </td>
-    </tr>
-  </tfoot>
-</table>
-</div>
 ```
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## http://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+```
+
+
+\begin{tabular}{l|l|l|l}
+\hline
+**Characteristic** & **OR** & **95\% CI** & **p-value**\\
+\hline
+earliest Glasgow Coma Scale & 0.71 & 0.64, 0.79 & <0.001\\
+\hline
+Ischaemic Stroke or Haemorrhagic &  &  & \\
+\hline
+Ischaemic Stroke &  &  & \\
+\hline
+Haemorrhagic & 3.40 & 1.46, 7.97 & 0.004\\
+\hline
+age in years & 1.02 & 1.00, 1.05 & 0.11\\
+\hline
+\end{tabular}
 
 ## References
 

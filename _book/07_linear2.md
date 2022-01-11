@@ -191,7 +191,7 @@ summ(coronary[c("chol", "dbp")])
 multi.hist(coronary[c("chol", "dbp")], ncol = 2)
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 ```r
 par(mfrow = c(1, 2))
@@ -199,7 +199,7 @@ mapply(boxplot, coronary[c("chol", "dbp")],
        main = colnames(coronary[c("chol", "dbp")]))
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-4-2.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-4-2.pdf)<!-- --> 
 
 ```
 ##       chol      dbp      
@@ -286,7 +286,7 @@ plot(chol ~ dbp, data = coronary)
 abline(slr_chol)
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 this allows assessment of normality, linearity and equal variance assumptions. We expect eliptical/oval shape (normality), equal scatter of dots on both sides of the prediction line (equal variance). Both these indicate linear relationship between `chol` and `dbp`.
 
@@ -414,13 +414,13 @@ codebook(coronary[c("race", "gender")])
 plot(coronary)
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 ```r
 multi.hist(coronary[c("chol", "sbp", "dbp", "bmi")])
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-11-2.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-11-2.pdf)<!-- --> 
 
 ```r
 par(mfrow = c(2, 2))
@@ -428,7 +428,7 @@ mapply(boxplot, coronary[c("chol", "sbp", "dbp", "bmi")],
        main = colnames(coronary[c("chol", "sbp", "dbp", "bmi")]))
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-11-3.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-11-3.pdf)<!-- --> 
 
 ```
 ##       chol      sbp       dbp       bmi      
@@ -447,7 +447,7 @@ boxplot(chol ~ race, data = coronary)
 boxplot(chol ~ gender, data = coronary)
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-11-4.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-11-4.pdf)<!-- --> 
 
 ```r
 par(mfrow = c(1, 1))
@@ -760,7 +760,7 @@ rraw_chol = resid(mlr_chol1)  # unstandardized
 multi.hist(rraw_chol)
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 ### Scatter plots {-}
 Standardized residuals vs Standardized predicted values: Overall -- normality, linearity and equal variance assumptions.
@@ -772,7 +772,7 @@ plot(rstd_chol ~ pstd_chol, xlab = "Std predicted", ylab = "Std residuals")
 abline(0, 0)  # normal, linear, equal variance
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 The dots should form elliptical/oval shape (normality) and scattered roughly equal above and below the zero line (equal variance). Both these indicate linearity.
 
 Raw residuals vs Numerical predictor by each predictors: Linearity assumption.
@@ -782,7 +782,7 @@ plot(rraw_chol ~ coronary$dbp, xlab = "DBP", ylab = "Raw Residuals")
 abline(0, 0)
 ```
 
-<img src="07_linear2_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+![](07_linear2_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 ## Interpretation
 Now we have decided on our final model, rename the model,
@@ -871,13 +871,19 @@ knitr::kable(tib_mlr)
 ```
 
 
-
-|term        |  estimate| std.error| statistic|   p.value|  conf.low| conf.high|
-|:-----------|---------:|---------:|---------:|---------:|---------:|---------:|
-|(Intercept) | 3.2980283| 0.4862132|  6.783091| 0.0000000| 2.3450680| 4.2509885|
-|dbp         | 0.0311081| 0.0061044|  5.095998| 0.0000008| 0.0191437| 0.0430726|
-|racechinese | 0.3599636| 0.1821488|  1.976207| 0.0495342| 0.0029586| 0.7169687|
-|raceindian  | 0.7136902| 0.1908827|  3.738893| 0.0002425| 0.3395669| 1.0878136|
+\begin{tabular}{l|r|r|r|r|r|r}
+\hline
+term & estimate & std.error & statistic & p.value & conf.low & conf.high\\
+\hline
+(Intercept) & 3.2980283 & 0.4862132 & 6.783091 & 0.0000000 & 2.3450680 & 4.2509885\\
+\hline
+dbp & 0.0311081 & 0.0061044 & 5.095998 & 0.0000008 & 0.0191437 & 0.0430726\\
+\hline
+racechinese & 0.3599636 & 0.1821488 & 1.976207 & 0.0495342 & 0.0029586 & 0.7169687\\
+\hline
+raceindian & 0.7136902 & 0.1908827 & 3.738893 & 0.0002425 & 0.3395669 & 1.0878136\\
+\hline
+\end{tabular}
 
 We can export the results into a .csv file for use later (e.g. to prepare a table for journal articles etc.),
 

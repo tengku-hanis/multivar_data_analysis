@@ -500,7 +500,7 @@ ggplot(data = pep) +
   geom_bar(mapping = aes(x = outcome)) 
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
 
 But we can also pass the `aes()` to ggplot
 
@@ -510,7 +510,7 @@ ggplot(data = pep, mapping = aes(x = outcome)) +
   geom_bar()
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 Combining **dplyr** and **ggplot** (both are packages inside the **tidyverse** metapackage)
 
@@ -540,7 +540,7 @@ ggplot(pep_age, mapping = aes(x = outcome, y = mean_age)) +
   geom_col()
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
 
 **dplyr** and **ggplot** in action:
 
@@ -553,7 +553,7 @@ pep %>% group_by(outcome) %>%
   ylab("Mean age (Years)")
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 Excellent resource from this website <http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/>. It is a must go to website!!
 
@@ -575,7 +575,7 @@ ggplot(data = pep, mapping = aes(x = systolic)) +
   ggtitle("Systolic BP distribution")
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 
 **ggplot2** has lots of flexibility and personalization. For example, the histogram above is very plain. We can improve it by setting the line color and fill color, the theme, the size, the symbols and many other parameters. 
@@ -595,7 +595,7 @@ ggplot(data = pep, mapping = aes(x = diastolic)) +
        caption = "Source : Peptic ulcer disease data")
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ### Histogram and density curve together
 
@@ -613,7 +613,7 @@ ggplot(pep, mapping = aes(x = diastolic)) +
   theme_bw()
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 ## Two variables: Plotting a numerical and a categorical variable
 
@@ -645,7 +645,7 @@ box_age <- ggplot(data = pep, aes(x = outcome, y = age)) +
 hist_age |  box_age
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 ## Three variables: Plotting a numerical and two categorical variables
 
 It is hard to visualize three variables in a single histogram plot. Perhaps we can use `facet_.()` function to split the plots. 
@@ -670,7 +670,7 @@ ggplot(data = pep, aes(x = age, fill = gender)) +
   facet_wrap( ~ outcome)
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 
 And the summary statistics for the plots are
 
@@ -724,7 +724,7 @@ gapminder %>% filter(continent == "Asia") %>%
   geom_line(show.legend = FALSE)
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
 
 
 And the summary statistics
@@ -781,7 +781,7 @@ gap_continent %>%
   coord_flip()
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
 
 
 ## Scatterplot with fit line
@@ -811,7 +811,7 @@ pep_fit
 ## `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 Now, let us see if the patterns are similar for men and women. We will use `facet_wrap()` to split the plots based on variable gender
 
@@ -824,7 +824,7 @@ pep_fit + facet_grid(. ~ gender)
 ## `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="06_EDA_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+![](06_EDA_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
 
 References:
 

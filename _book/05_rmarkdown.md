@@ -119,15 +119,23 @@ becomes:
 ```
 
 
-
-| Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species |
-|------------:|-----------:|------------:|-----------:|:-------|
-|          5.1|         3.5|          1.4|         0.2|setosa  |
-|          4.9|         3.0|          1.4|         0.2|setosa  |
-|          4.7|         3.2|          1.3|         0.2|setosa  |
-|          4.6|         3.1|          1.5|         0.2|setosa  |
-|          5.0|         3.6|          1.4|         0.2|setosa  |
-|          5.4|         3.9|          1.7|         0.4|setosa  |
+\begin{tabular}{r|r|r|r|l}
+\hline
+Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
+\hline
+5.1 & 3.5 & 1.4 & 0.2 & setosa\\
+\hline
+4.9 & 3.0 & 1.4 & 0.2 & setosa\\
+\hline
+4.7 & 3.2 & 1.3 & 0.2 & setosa\\
+\hline
+4.6 & 3.1 & 1.5 & 0.2 & setosa\\
+\hline
+5.0 & 3.6 & 1.4 & 0.2 & setosa\\
+\hline
+5.4 & 3.9 & 1.7 & 0.4 & setosa\\
+\hline
+\end{tabular}
 
 ### More on table
 You can explore the following packages for table:
@@ -147,10 +155,7 @@ plot(pressure)
 
 becomes:
 
-<div class="figure">
-<img src="05_rmarkdown_files/figure-html/unnamed-chunk-4-1.png" alt="Sample caption" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-4)Sample caption</p>
-</div>
+![(\#fig:unnamed-chunk-4)Sample caption](05_rmarkdown_files/figure-latex/unnamed-chunk-4-1.pdf) 
 
 ### Plot size -- `fig.height`(in inch)
 
@@ -162,10 +167,7 @@ plot(pressure)
 
 becomes:
 
-<div class="figure">
-<img src="05_rmarkdown_files/figure-html/unnamed-chunk-6-1.png" alt="Sample caption" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-6)Sample caption</p>
-</div>
+![(\#fig:unnamed-chunk-6)Sample caption](05_rmarkdown_files/figure-latex/unnamed-chunk-6-1.pdf) 
 
 ### Plot size -- `fig.width` (in inch)
 
@@ -177,10 +179,7 @@ plot(pressure)
 
 becomes:
 
-<div class="figure">
-<img src="05_rmarkdown_files/figure-html/unnamed-chunk-8-1.png" alt="Sample caption" width="288" />
-<p class="caption">(\#fig:unnamed-chunk-8)Sample caption</p>
-</div>
+![(\#fig:unnamed-chunk-8)Sample caption](05_rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf) 
 
 ### Plot aspect ratio -- `fig.asp`
 
@@ -192,10 +191,7 @@ plot(pressure)
 
 becomes:
 
-<div class="figure">
-<img src="05_rmarkdown_files/figure-html/unnamed-chunk-10-1.png" alt="Sample caption" width="288" />
-<p class="caption">(\#fig:unnamed-chunk-10)Sample caption</p>
-</div>
+![(\#fig:unnamed-chunk-10)Sample caption](05_rmarkdown_files/figure-latex/unnamed-chunk-10-1.pdf) 
 
 ## Image
 To add image is as simple as:

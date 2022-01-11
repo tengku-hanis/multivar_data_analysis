@@ -293,7 +293,7 @@ ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 Now, we can see 
 
@@ -325,7 +325,7 @@ ggplot(data = gapminder) +
                            colour = continent))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
 
 What can you see from the scatterplot? You may notice that
 
@@ -345,7 +345,7 @@ ggplot(data = gapminder) +
                            size = gdpPercap))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 *ggplot2* will automatically assign a unique level of the aesthetic (here a unique color) to each unique value of the variable, a process known as scaling. *ggplot2* will also add a legend that explains which levels correspond to which values. The plot suggests that with higher gdpPerCap, there is also longer lifeExp. 
 
@@ -359,7 +359,7 @@ ggplot(data = gapminder) +
                            shape = continent))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 But, see what will happen if we set the colour and shape like below but outside the `aes` parentheses. For example, let set the parameter colour to `blue`
 
@@ -370,7 +370,7 @@ ggplot(data = gapminder) +
              colour = 'blue')
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 
 And then parameter shape to plus (which is represented by number 3).  
@@ -383,7 +383,7 @@ ggplot(data = gapminder) +
              shape = 3)
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
 
 We may wonder what number corresponds to what type of shape. We can type $?pch$. And we will see in the Viewer pane, the explanation about the shape available in R. It also shows what number that corresponds to what shape.
 
@@ -404,7 +404,7 @@ ggplot(data = gapminder) +
   facet_wrap(~ continent, nrow = 3)
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 Now, what happen if we change the value for the `nrow`
 
@@ -415,7 +415,7 @@ ggplot(data = gapminder) +
   facet_wrap(~ continent, nrow = 2)
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 ## Overlaying Plots
 
@@ -429,7 +429,7 @@ ggplot(data = gapminder) +
   geom_point(mapping = aes(x = gdpPercap, y = lifeExp))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
  
 
 This is a smooth line plot
@@ -444,7 +444,7 @@ ggplot(data = gapminder) +
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 And we can regenerate the smooth plot based on continent using the `linetype()`. We will also use `log(gdpPercap)` to reduce the skewness of the data.
 
@@ -460,7 +460,7 @@ ggplot(data = gapminder) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 Another smooth plot but setting the parameter for colour
 
@@ -476,7 +476,7 @@ ggplot(data = gapminder) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 
 ## Combining Different Plots
@@ -494,7 +494,7 @@ ggplot(data = gapminder) +
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 The codes above show duplication or repetition. To avoid this, we can pass the mapping to `ggplot()`. 
 
@@ -510,7 +510,7 @@ ggplot(data = gapminder,
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 And we can expand this to make scatterplot shows different colour for continent
  
@@ -526,7 +526,7 @@ ggplot(data = gapminder,
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 
 Or expand this to make the smooth plot shows different colour for continent
 
@@ -542,7 +542,7 @@ ggplot(data = gapminder,
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 Or both the scatterplot and the smoothplot
 
@@ -558,7 +558,7 @@ ggplot(data = gapminder,
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
 
 
 ## Statistical Transformation
@@ -571,7 +571,7 @@ ggplot(data = gapminder) +
   geom_bar(mapping = aes(x = continent))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
 
 If we want the y-axis to show proportion, we can use these codes
 
@@ -582,7 +582,7 @@ ggplot(data = gapminder) +
                          group = 1))
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
 
 
 ## Customizing Title
@@ -605,7 +605,7 @@ mypop
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 You will notice that there is no title in the plot. So we will add a title to the plot.
 
@@ -619,7 +619,7 @@ mypop +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
 
 To make the title appear in multiple lines, we can add `\n`
 
@@ -633,7 +633,7 @@ mypop + ggtitle("GDP (in log) and life expectancy:
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 
 ## Adjusting Axes
@@ -654,7 +654,7 @@ mypop +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
 
 And we can label the x-axis and y-axis
 
@@ -671,7 +671,7 @@ mypop +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
 
 ## Choosing Themes
 
@@ -687,7 +687,7 @@ mypop +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-31-1.pdf)<!-- --> 
 
 This is the classic theme
 
@@ -701,7 +701,7 @@ mypop +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
 
 
 
@@ -735,7 +735,7 @@ myplot
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03_data_visualization_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+![](03_data_visualization_files/figure-latex/unnamed-chunk-33-1.pdf)<!-- --> 
 
 
 We now can see a nice plot. And next, we want to save the plot (currently on the screen) to these formats:
@@ -762,7 +762,7 @@ ggsave(plot = myplot,
 ```
 
 ```
-## Saving 7 x 5 in image
+## Saving 6.5 x 4.5 in image
 ```
 
 ```
@@ -775,7 +775,7 @@ ggsave(plot = myplot,
 ```
 
 ```
-## Saving 7 x 5 in image
+## Saving 6.5 x 4.5 in image
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
@@ -785,7 +785,7 @@ ggsave(plot = myplot,
 ```
 
 ```
-## Saving 7 x 5 in image
+## Saving 6.5 x 4.5 in image
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
